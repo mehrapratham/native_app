@@ -1,0 +1,39 @@
+*{
+	box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+body, html{
+	height: 100%;
+}
+
+
+
+#root,#root > div{
+	height: 100%;
+
+}
+#root{
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6f3615+0,ef6337+72 */
+background: #6f3615; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #6f3615 0%, #ef6337 72%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #6f3615 0%,#ef6337 72%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #6f3615 0%,#ef6337 72%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6f3615', endColorstr='#ef6337',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+#root > div{
+	max-width: 500px;
+	margin: auto;
+}
+#root > div{
+	
+}
+input:focus{
+	outline: none;
+	border-color: blue;
+	transition: all ease-out 0.3s 0s;
+}
