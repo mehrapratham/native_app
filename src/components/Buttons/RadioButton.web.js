@@ -8,15 +8,15 @@ export default class SelectBox extends React.Component{
 	render(){
 		return(
 			<View >
-				{this.props.list.map((item,key) => {
+				{this.props.list && this.props.list.map((item,key) => {
 					return(
-						<View key={key} style={{marginBottom: 10,backgroundColor: '#fff',borderRadius: 5,height: 50,backgroundColor: '#fff',justifyContent: 'center',paddingLeft: 15}}>
-						<Text>
-							<input type="radio" name="common" style={{height: 20,width: 20}} value={item} onChange={this.onChange.bind(this)}/>
-							<Text style={{fontSize: 20}}> {item}</Text>
-						</Text>
+						<View style={{marginBottom: 10,backgroundColor: '#fff',borderRadius: 5,height: 50,backgroundColor: '#fff',justifyContent: 'center',paddingLeft: 15}}>
+							<Text>
+								<input type="radio" name="common" style={{height: 20,width: 20}} value={item} onChange={this.onChange.bind(this)}/>
+								<Text style={{fontSize: 20}}> {item}</Text>
+							</Text>
 						</View>
-					)
+				)
 				})}
 			</View>
 		)

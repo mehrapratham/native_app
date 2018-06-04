@@ -5,7 +5,7 @@ var {height, width} = Dimensions.get('window');
 width = width - 40;
 export default class SelectBox extends React.Component{
   onChange(event){
-    console.log(event)
+    console.log(event,111111111111111)
     this.props.onValueChange(event)
   }
 	render(){		
@@ -16,8 +16,9 @@ export default class SelectBox extends React.Component{
               selectedValue={this.props.selectedValue}
               onValueChange={this.onChange.bind(this)}
               style={styles.container}
+              placeholder={this.props.placeholder}
+              placeholderStyle={{color: "#646262"}}
             >
-              {/*<Picker.Item label={this.props.placeholder} value="" />*/}
               {this.props.list && this.props.list.map((item, key) => {
               	return <Picker.Item label={item} value={item} key={key}/>
               })}

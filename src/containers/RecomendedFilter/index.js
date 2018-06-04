@@ -3,15 +3,36 @@ import { View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-export default class RecomendedFilter extends React.Component{
+import {getVehicleFilters} from '../../actions/VehicleForm'
+import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
+import { connect } from 'react-redux'
+class RecomendedFilter extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			list: ['F323-23', 'F323-23 high milage', 'stp32-2323']
+			selectedFilterType: '',
+			vehicleData: {},
+			loader: false
 		}
+	}
+	async componentDidMount(){
+		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
+		console.log(data, 12345);
+		this.setState({vehicleData: data,loader: true})
+		if (data) {
+			this.props.dispatch(getVehicleFilters(data.make,data.model)).then(res => {
+				this.setState({ loader: false})
+			})
+		}
+		
 	}
 	onButtonPress() {
 		console.log(this.props)
+		let vehicleData = this.state.vehicleData
+		vehicleData.filterType = this.state.selectedFilterType
+		console.log(vehicleData,222)
+		let data = JSON.stringify(vehicleData)
+  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
 	  	this.props.history.push('/address');
 	}
 	onButtonPress2() {
@@ -20,8 +41,13 @@ export default class RecomendedFilter extends React.Component{
 	}
 	onChange(event){
 		console.log(event)
+		this.setState({ selectedFilterType: event });
 	}
+	
 	render(){
+		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
+		console.log(this.props)
+		console.log(this.state.selectedFilterType)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -33,7 +59,8 @@ export default class RecomendedFilter extends React.Component{
 					<Text style={styles.heading}>Recomended filter For Nissan Sentra 2013</Text>
 				</View>
 				<View style={styles.list}>
-					<RadioButton list={this.state.list} onSelectValue={this.onChange.bind(this)}/>
+					{filters && filters.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
+					<RadioButton list={filters && filters} onSelectValue={this.onChange.bind(this)}/>
 				</View>
 				<View style={styles.view}>
 					<Image source={require('../../img/oil.png')} style={styles.img}/>
@@ -44,6 +71,15 @@ export default class RecomendedFilter extends React.Component{
 			</View>
 		)
 	}
+}
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(RecomendedFilter);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
 }
 const styles = StyleSheet.create({
 	container: {

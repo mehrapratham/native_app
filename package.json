@@ -17,8 +17,11 @@
     "react-native-web": "^0.7.3",
     "react-router-dom": "^4.2.2",
     "react-router-native": "^4.2.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.4",
-    "timekit-sdk": "^1.16.0"
+    "redux-thunk": "^2.3.0",
+    "timekit-sdk": "^1.16.0",
+    "apollo-fetch": "^0.7.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {

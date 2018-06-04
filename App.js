@@ -1,7 +1,13 @@
 import React from 'react'
 import Tranzoil from './src/App'
-export default class NativeApp extends React.Component {
+import { Provider } from 'react-redux';
+import store from './src/store';
+export default class App extends React.Component {
   render() {
-    return <Tranzoil />
+    return (
+        <Provider store={store}>
+            <Tranzoil />
+        </Provider>
+    );
   }
 }

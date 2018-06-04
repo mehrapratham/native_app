@@ -9,12 +9,13 @@ export default class InputBox extends React.Component{
 	render(){
 		return(
 			<TextInput
-              	placeholder={this.props.placeholder}
-              	underlineColorAndroid="#d6edf8"
-              	placeholderTextColor="#000"
-              	style={styles.container}
-                onChangeText={this.onChange.bind(this)}
-	        />
+      	placeholder={this.props.placeholder}
+      	underlineColorAndroid="#d6edf8"
+      	placeholderTextColor="#646262"
+      	style={styles.container}
+        onChangeText={this.onChange.bind(this)}
+        type={this.props.type}
+	    />
 		)
 	}
 }

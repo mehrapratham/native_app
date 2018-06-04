@@ -5,7 +5,6 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 
 export default class Login extends React.Component{
 	onButtonPress() {
-		console.log(this.props)
 	  	this.props.history.push('/vehicle-form');
 	}
 	render(){

@@ -11,7 +11,7 @@ export default class SelectBox extends React.Component{
 	render(){
 		return(
 			<RadioGroup style={styles.container} highlightColor="#fff" onSelect= {(index, value) => this.onChange(index, value)}>
-				{this.props.list.map((item,key) => {
+				{this.props.list && this.props.list.map((item,key) => {
 					return(
 						<RadioButton value={item} key={key} style={{marginBottom: 10,backgroundColor: '#fff',height: 50,borderRadius: 5,alignItems: 'center'}}>
 				          <Text>{item}</Text>

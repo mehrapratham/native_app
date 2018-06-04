@@ -4,19 +4,40 @@ import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-export default class PaymentInfo extends React.Component{
+import {saveToLocalStorage} from '../../components/localStorage'
+import { connect } from 'react-redux'
+class Address extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			address: {
+				street: '',
+				city: '',
+				zip: '',
+				state: ''
+			}
+		}
+	}
+
 	onButtonPress() {
 		console.log(this.props)
+		let data = JSON.stringify(this.state.address)
+  		this.props.dispatch(saveToLocalStorage('addressData' , data))
 	  	this.props.history.push('/time-slot');
 	}
 	onButtonPress2() {
 		console.log(this.props)
 	  	this.props.history.push('/recomended-filter');
 	}
-	onChangeText(event){
+	onChangeText(key,event){
 		console.log(event)
+	    let { address } = this.state;
+	    address[key] = event;
+		this.setState({ address })
+
 	}
 	render(){
+		console.log(this.state.address)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -29,20 +50,20 @@ export default class PaymentInfo extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<View style={styles.address}>
-						<InputBox placeholder="Street" onChange={this.onChangeText.bind(this)}/>
+						<InputBox placeholder="Street" onChange={this.onChangeText.bind(this,'street')}/>
 					</View>
 					<View style={styles.address}>
-						<InputBox placeholder="City" onChange={this.onChangeText.bind(this)}/>
+						<InputBox placeholder="City" onChange={this.onChangeText.bind(this,'city')}/>
 					</View>
 					<View style={styles.text}>
 						<View style={styles.text2}>
 							<View style={styles.text3}>
-								<InputBox placeholder="Zip" onChange={this.onChangeText.bind(this)}/>
+								<InputBox placeholder="Zip" onChange={this.onChangeText.bind(this,'zip')}/>
 							</View>
 						</View>
 						<View style={styles.text4}>
 							<View style={styles.text3}>
-								<InputBox placeholder="State" onChange={this.onChangeText.bind(this)}/>
+								<InputBox placeholder="State" onChange={this.onChangeText.bind(this,'state')}/>
 							</View>
 						</View>
 					</View>
@@ -55,6 +76,15 @@ export default class PaymentInfo extends React.Component{
 			</View>
 		)
 	}
+}
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(Address);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
 }
 const styles = StyleSheet.create({
   container: {

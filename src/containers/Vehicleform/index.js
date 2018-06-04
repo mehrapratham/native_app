@@ -4,33 +4,59 @@ import SelectBox from '../../components/SelectBox'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-
-export default class Vehicleform extends React.Component{
+import { connect } from 'react-redux'
+import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
+import {saveToLocalStorage} from '../../components/localStorage'
+class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			yearlist: [2018, 2019, 2020],
 			makelist: ['BMW', 'Audi', 'Bentlay', 'Farari'],
 			modellist: [2018, 2019, 2020],
-			selected1: 1
+			selected1: 1,
+
+			vehicle: {
+				year: '',
+				make: '',
+				model: '',
+				mileage: ''
+			}
 		}
 	}
-	onValueChange(value: string) {
-	    this.setState({
-	      selected1: value
-	    });
-	    console.log(value)
+	componentWillMount(){
+		
+		this.props.dispatch(getVehicleYears())
+		.then(res=>{
+			console.log(res)
+		})
+		
+	}
+	onValueChange(key, event) {
+		const { vehicle } = this.state;
+		vehicle[key] = event;
+	    this.setState({vehicle});
+	    if(key == 'year'){
+	    	this.props.dispatch(getVehicleMakes(event))
+	    }
+	    if(key == 'make'){
+	    	this.props.dispatch(getVehicleModels(event))
+	    }
+
 	  }
   	onButtonPress() {
+  		let data = JSON.stringify(this.state.vehicle)
+  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
 	  	this.props.history.push('/recomended-oil');
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/');
 	}
-	onChangeText(event){
-		console.log(event)
-	}
+
 	render(){
+		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
+		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
+		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -42,10 +68,10 @@ export default class Vehicleform extends React.Component{
 					<Text style={styles.heading}>Enter Vehicle Details</Text>
 				</View>
 				<View style={styles.view}>
-					<SelectBox placeholder="Year" list={this.state.yearlist} selectedValue={this.state.selected1} onValueChange={this.onValueChange.bind(this)}/>
-					<SelectBox placeholder="Make" list={this.state.makelist} selectedValue={this.state.selected1} onValueChange={this.onValueChange.bind(this)}/>
-					<SelectBox placeholder="Model" list={this.state.modellist} selectedValue={this.state.selected1} onValueChange={this.onValueChange.bind(this)}/>
-					<InputBox placeholder="Mileage" onChange={this.onChangeText.bind(this)} />
+					<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
+					<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
+					<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
+					<InputBox type='number' placeholder="Mileage" onChange={this.onValueChange.bind(this, 'mileage')} />
 				</View>
 				<View style={styles.lasts}>
 					<TouchableOpacity style={styles.arrow} onPress={this.onButtonPress.bind(this)}>
@@ -56,6 +82,17 @@ export default class Vehicleform extends React.Component{
 		)
 	}
 }
+
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(Vehicleform);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
