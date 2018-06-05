@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-fetch": "^0.7.0",
     "expo": "^25.0.0",
+    "moment": "^2.22.2",
     "native-base": "^2.4.5",
     "react": "^16.4.0",
     "react-art": "^16.4.0",
@@ -20,8 +22,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.4",
     "redux-thunk": "^2.3.0",
-    "timekit-sdk": "^1.16.0",
-    "apollo-fetch": "^0.7.0"
+    "timekit-sdk": "^1.16.0"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {

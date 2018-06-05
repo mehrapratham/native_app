@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES } from '../types'
+import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY } from '../types'
 
 export const getVehicleYears = () => {
 let query = {query: '{ years }'}
@@ -109,6 +109,39 @@ console.log(query)
          data: res.data.data.filters
        })
        return res.data
+     })
+     .catch(function(error) {
+       dispatch({
+         type: HAS_ERROR,
+         data: error,
+       })
+       return error
+     })
+ }
+}
+export const getAvailability = (data) => {
+ return dispatch => {
+   dispatch({
+     type: GET_AVAILABILITY,
+     data: data
+   })
+   return data
+ }
+}
+export const confirmOrder = (data) => {
+  console.log(data)
+let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id, make, oilType, filterType, street, mileage, time, message, city, zip, state, date}}'}
+console.log(query)
+ return dispatch => {
+   return axios
+     .post(`${GRAPHQL_URL}`, query)
+     .then(res => {
+      console.log(res.data.data.createServiceAppointment,234543)
+       // dispatch({
+       //   type: GET_VEHICLE_FILTER_TYPES,
+       //   data: res.data
+       // })
+       return res.data.data.createServiceAppointment
      })
      .catch(function(error) {
        dispatch({

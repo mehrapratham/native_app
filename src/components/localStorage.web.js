@@ -1,6 +1,5 @@
 export const saveToLocalStorage = (key, data) => {
    return dispatch => {
-     console.log('hihihih')
      localStorage.setItem(key, data)
    }
 }
@@ -10,5 +9,11 @@ export const getFromLocalStorage = (key) => {
 
      let data = localStorage.getItem(key);
      return JSON.parse(data);
+   }
+}
+
+export const removeLocalStorage = (key) => {
+   return dispatch => {
+     localStorage.removeItem(key)
    }
 }

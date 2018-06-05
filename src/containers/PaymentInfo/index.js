@@ -4,7 +4,13 @@ import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-export default class PaymentInfo extends React.Component{
+import { connect } from 'react-redux'
+import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+class PaymentInfo extends React.Component{
+	componentWillMount()	{
+		this.props.dispatch(removeLocalStorage('vehicleData'))
+		this.props.dispatch(removeLocalStorage('addressData'))
+	}
 	onButtonPress() {
 		console.log(this.props)
 	  	this.props.history.push('/final-screen');
@@ -13,6 +19,7 @@ export default class PaymentInfo extends React.Component{
 		console.log(this.props)
 	  	this.props.history.push('/summary');
 	}
+
 	onChangeText(event){
 		console.log(event)
 	}
@@ -53,6 +60,16 @@ export default class PaymentInfo extends React.Component{
 			</View>
 		)
 	}
+}
+
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(PaymentInfo);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
 }
 const styles = StyleSheet.create({
   container: {

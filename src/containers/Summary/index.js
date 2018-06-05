@@ -3,16 +3,67 @@ import { View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-export default class RecomendedOil extends React.Component{
+import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+import { connect } from 'react-redux'
+import moment from 'moment'	
+import {confirmOrder} from '../../actions/VehicleForm'
+var timekit = require('timekit-sdk');
+class Summary extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			vehicleData: {},
+			addressData: {}
+		}
+	}
+	async componentWillMount(){
+		timekit.configure({
+		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
+		 
+		})
+
+		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
+		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
+		this.setState({ vehicleData,addressData })
+	}
 	onButtonPress() {
-		console.log(this.props)
-	  	this.props.history.push('/payment-info');
+		const { vehicleData, addressData } = this.state;
+		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'"}'
+		this.props.dispatch(confirmOrder(data)).then(res =>{
+			let confirmOrder = JSON.stringify(res)
+			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
+			return res
+		})
+
+
+		let bookingData = {
+							start : vehicleData.timeslot.start, 
+							end: vehicleData.timeslot.end, 
+							what: 'test', 
+							description: 'hi, this is description', 
+							resource_id: '286d96b5-567d-4eb3-b34a-dd085a25185d',
+							graph: 'confirm_decline',
+							customer: {
+								name: "Pratham",
+    							email: "mehrapratham01@gmail.com",
+							},
+							where: "Courthouse, Hill Valley, CA 95420, USA"
+						}
+		timekit.createBooking(bookingData).then(res=>{
+			console.log(res)
+		})
+		this.props.history.push('/payment-info');
 	}
 	onButtonPress2() {
-		console.log(this.props)
 	  	this.props.history.push('/time-slot');
 	}
+	formatDate(date){
+		if (date) {
+			return (moment(date.start).format('hh')+ ':' +moment(date.start).format('mm') +' '+ moment(date.start).format('a')+ ' - ' + moment(date.end).format('hh')+ ':' +moment(date.end).format('mm') + ' ' + moment(date.start).format('a'))
+		}
+	}
 	render(){
+		const { vehicleData,addressData } = this.state;
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -25,19 +76,19 @@ export default class RecomendedOil extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<View style={styles.left}>
-						<Text>Oil type: 5w30</Text>
+						<Text>Oil type: {vehicleData.oilType}</Text>
 					</View>
 					<View style={styles.left}>
-						<Text>filter type: stp32323</Text>
+						<Text>filter type: {vehicleData.filterType}</Text>
 					</View>
 					<View style={styles.left}>
-						<Text>Nissan sentra 2013</Text>
+						<Text>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 					</View>
 					<View style={styles.left}>
-						<Text>Time: 4/23 8:00-9:00 am</Text>
+						<Text>Time: {vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text>
 					</View>
 					<View style={styles.left}>
-						<Text>Address: 2323 23st, Mill Creek WA, 99233</Text>
+						<Text>Address: {addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text>
 					</View>
 				</View>
 				<View style={styles.view}>
@@ -46,6 +97,15 @@ export default class RecomendedOil extends React.Component{
 			</View>
 		)
 	}
+}
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(Summary);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
 }
 const styles = StyleSheet.create({
 	container: {
