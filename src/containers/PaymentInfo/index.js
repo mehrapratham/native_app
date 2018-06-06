@@ -6,6 +6,9 @@ import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
+import PaymentForm from './PaymentForm'
+
 class PaymentInfo extends React.Component{
 	componentWillMount()	{
 		this.props.dispatch(removeLocalStorage('vehicleData'))
@@ -23,6 +26,10 @@ class PaymentInfo extends React.Component{
 	onChangeText(event){
 		console.log(event)
 	}
+	handleSubmit(e){
+		e.preventDefault()
+		console.log('hihih')
+	}
 	render(){
 		return(
 			<View style={styles.container}>
@@ -35,6 +42,9 @@ class PaymentInfo extends React.Component{
 					<Text style={styles.heading}>Payment Info</Text>
 				</View>
 				<View style={styles.view}>
+					<View style={{width: '100%'}}>
+					    <PaymentForm />
+					</View>
 					<View style={styles.payment}>
 						<InputBox placeholder="Name" onChange={this.onChangeText.bind(this)}/>
 					</View>

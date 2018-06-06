@@ -1,8 +1,8 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 54623,
-  "expoServerNgrokUrl": "https://ky-rhu.lovetrivedi.tranzoil.exp.direct",
-  "packagerNgrokUrl": "https://packager.ky-rhu.lovetrivedi.tranzoil.exp.direct",
-  "ngrokPid": 54642
+  "packagerPid": 56484,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
