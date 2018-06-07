@@ -72,7 +72,7 @@ button {
 form {
   margin-bottom: 40px;
   padding-bottom: 40px;
-  border-bottom: 3px solid #e6ebf1;
+  /*border-bottom: 3px solid #e6ebf1;*/
 }
 
 button:hover {
@@ -83,11 +83,15 @@ button:hover {
   box-shadow: 0 7px 14px rgba(50, 50, 93, .10), 0 3px 6px rgba(0, 0, 0, .08);
 }
 
+button[disabled]{
+	pointer-events: none;
+	background: #a7abd2;
+}
 .StripeElement {
   display: block;
   margin: 10px 0 20px 0;
   max-width: 500px;
-  padding: 10px 14px;
+  padding: 14.5px 14px;
   box-shadow: rgba(50, 50, 93, 0.14902) 0px 1px 3px, rgba(0, 0, 0, 0.0196078) 0px 1px 0px;
   border-radius: 4px;
   background: white;
@@ -97,4 +101,7 @@ button:hover {
   box-shadow: rgba(50, 50, 93, 0.109804) 0px 4px 6px, rgba(0, 0, 0, 0.0784314) 0px 1px 3px;
   -webkit-transition: all 150ms ease;
   transition: all 150ms ease;
+}
+label + button{
+  width: 100%
 }

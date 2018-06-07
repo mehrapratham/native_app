@@ -92,7 +92,7 @@ class TimeSlot extends React.Component{
 				<View style={styles.oilss}>
 					
 					<View style={styles.left}>
-						<TouchableOpacity style={styles.row} onClick={this.prevDate.bind(this)}>
+						<TouchableOpacity style={styles.row} onPress={this.prevDate.bind(this)}>
 							<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
 						</TouchableOpacity>
 						<View style={styles.row}>
