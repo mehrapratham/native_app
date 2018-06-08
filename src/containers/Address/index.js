@@ -4,7 +4,7 @@ import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-import {saveToLocalStorage} from '../../components/localStorage'
+import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
 class Address extends React.Component{
 	constructor(){
@@ -17,6 +17,15 @@ class Address extends React.Component{
 				state: ''
 			}
 		}
+	}
+	async componentWillMount(){
+		let data = await this.props.dispatch(getFromLocalStorage('addressData'))
+		console.log(data,12345)
+		if(data){
+			this.setState({ address: data })
+		}
+		
+
 	}
 
 	onButtonPress() {
@@ -50,20 +59,20 @@ class Address extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<View style={styles.address}>
-						<InputBox placeholder="Street" onChange={this.onChangeText.bind(this,'street')}/>
+						<InputBox placeholder="Street" value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')}/>
 					</View>
 					<View style={styles.address}>
-						<InputBox placeholder="City" onChange={this.onChangeText.bind(this,'city')}/>
+						<InputBox placeholder="City" value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')}/>
 					</View>
 					<View style={styles.text}>
 						<View style={styles.text2}>
 							<View style={styles.text3}>
-								<InputBox placeholder="Zip" onChange={this.onChangeText.bind(this,'zip')}/>
+								<InputBox placeholder="Zip" value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')}/>
 							</View>
 						</View>
 						<View style={styles.text4}>
 							<View style={styles.text3}>
-								<InputBox placeholder="State" onChange={this.onChangeText.bind(this,'state')}/>
+								<InputBox placeholder="State" value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')}/>
 							</View>
 						</View>
 					</View>

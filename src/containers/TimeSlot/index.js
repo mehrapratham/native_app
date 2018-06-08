@@ -16,12 +16,13 @@ class TimeSlot extends React.Component{
 		this.state = {
 			filterTime: moment().format(),
 			loading: false,
-			selectedTime: '',
+			selectedTime: {},
 			vehicleData: {},
 		}
 	}
 	
 	async componentWillMount(){
+
 		timekit.configure({
 		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
 		 
@@ -36,12 +37,19 @@ class TimeSlot extends React.Component{
 			this.props.dispatch(getAvailability(res.data))
 			this.setState({loading: false})
 		})
+
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
-			this.setState({ vehicleData: vehicleData })
+		console.log(vehicleData,12345)
+		this.setState({ vehicleData: vehicleData })
+		if (vehicleData && vehicleData.timeslot) {
+			console.log(vehicleData.timeslot,'timeslot')
+			this.setState({selectedTime: vehicleData.timeslot})
+		}
 
 	}
 	onButtonPress() {
 		let vehicleData = this.state.vehicleData
+		console.log(vehicleData)
 		vehicleData.timeslot = this.state.selectedTime
 		let data = JSON.stringify(vehicleData)
   		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
@@ -75,6 +83,7 @@ class TimeSlot extends React.Component{
 		this.setState({filterTime})
 	}
 	render(){
+		console.log(this.state.selectedTime,111111111)
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		return(
 			
@@ -110,8 +119,9 @@ class TimeSlot extends React.Component{
 					}
 
 					{curAvailbility && curAvailbility.map((item, index)=>{
-						return  <TouchableOpacity style={this.state.selectedTime == item ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
-									<Text style={this.state.selectedTime == item ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
+						console.log(this.state.selectedTime, item)
+						return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
+									<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
 								</TouchableOpacity>
 						})
 					}

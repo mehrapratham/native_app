@@ -8,7 +8,7 @@ export default class InputBox extends React.Component{
 	}
 	render(){
 		return(
-			<input type={this.props.type} placeholder={this.props.placeholder} style={{paddingLeft: 10, paddingRight: 10, width: '100%', height: 50, fontSize: 20, borderRadius: 5, border: 'none'}} onChange={this.onChange.bind(this)}/>
+			<input type={this.props.type} value={this.props.value} placeholder={this.props.placeholder} style={{paddingLeft: 10, paddingRight: 10, width: '100%', height: 50, fontSize: 20, borderRadius: 5, border: 'none'}} onChange={this.onChange.bind(this)}/>
 		)
 	}
 }
