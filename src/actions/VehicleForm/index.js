@@ -131,7 +131,7 @@ export const getAvailability = (data) => {
 }
 export const confirmOrder = (data) => {
   console.log(data)
-let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id, make, oilType, filterType, street, mileage, time, message, city, zip, state, date}}'}
+let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id, make, oilType, filterType, model, street, mileage, time, message, city, zip, state, date}}'}
 console.log(query)
  return dispatch => {
    return axios

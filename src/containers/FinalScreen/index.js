@@ -2,8 +2,24 @@ import React from 'react';
 import { View, Text, StyleSheet} from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
-export default class RecomendedOil extends React.Component{
+import { connect } from 'react-redux'
+import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+class FinalStep extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      orderData: {}
+    }
+  }
+  async componentWillMount(){
+    let orderData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+    this.setState({ orderData : orderData })
+  }
+
 	render(){
+    console.log(this.state.orderData)
+    let {orderData} = this.state;
 		return(
 			<View style={styles.container}>
 				<View style={styles.view}>
@@ -11,19 +27,19 @@ export default class RecomendedOil extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<View style={styles.arrow}>
-						<Text>Oil type: 5w30</Text>
+						<Text>Oil type: {orderData.oilType}</Text>
 					</View>
 					<View style={styles.arrow}>
-						<Text>filter type: stp32323</Text>
+						<Text>filter type: {orderData.filterType}</Text>
 					</View>
 					<View style={styles.arrow}>
-						<Text>Nissan sentra 2013</Text>
+						<Text>{orderData.make + ' ' +orderData.model + ' ' +orderData.year}</Text>
 					</View>
 					<View style={styles.arrow}>
-						<Text>Time: 4/23 8:00-9:00 am</Text>
+						<Text>Time: {orderData.date + ' ' + orderData.time}</Text>
 					</View>
 					<View style={styles.arrow}>
-						<Text>Address: 2323 23st, Mill Creek WA, 99233</Text>
+						<Text>Address: {orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}</Text>
 					</View>
 				</View>
 				<View style={styles.view}>
@@ -31,13 +47,25 @@ export default class RecomendedOil extends React.Component{
 						<Text style={styles.text2}>Sign up and create Profile and recieve 50% off next oil change</Text>
 					</View>
 					<View style={styles.text}> 
-						<ConfirmButton label="Confirm order" />
+						<ConfirmButton label="Sign Up" />
 					</View>
 				</View>
 			</View>
 		)
 	}
 }
+
+export default connect(state => ({
+  // vehicleForm: state.vehicleForm,
+}, mapDispatch))(FinalStep);
+
+
+const mapDispatch = (dispatch) => {
+   const allActionProps = Object.assign({}, dispatch);
+   return allActionProps;
+}
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

@@ -10,7 +10,7 @@ export default class SelectBox extends React.Component{
 			<select style={{padding: 10, width: '100%', height: 50, fontSize: 20, marginBottom: 10, borderRadius: 0}} onChange={this.onChange.bind(this)}>
 				<option>{this.props.placeholder}</option>
 				{this.props.list && this.props.list.map((item, key) =>{
-              	return <option value={item}>{item}</option>
+              	return <option value={item} key={key}>{item}</option>
               })}
 			</select>
 		)
