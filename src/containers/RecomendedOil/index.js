@@ -43,6 +43,9 @@ class RecomendedOil extends React.Component{
 	}
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
+		const {vehicleData} = this.state;
+		console.log(this.props)
+		console.log(this.state.vehicleData,44444)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -51,7 +54,7 @@ class RecomendedOil extends React.Component{
 					</TouchableOpacity>
 				</View>
 				<View style={styles.view}>
-					<Text style={styles.heading}>Recomended oil For Nissan Sentra 2013</Text>
+					<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 				</View>
 				<View style={styles.radiobttn}>
 					{types && types.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}

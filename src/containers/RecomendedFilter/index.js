@@ -47,6 +47,7 @@ class RecomendedFilter extends React.Component{
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		console.log(this.props)
+		const {vehicleData} = this.state;
 		console.log(this.state.selectedFilterType)
 		return(
 			<View style={styles.container}>
@@ -56,7 +57,7 @@ class RecomendedFilter extends React.Component{
 					</TouchableOpacity>
 				</View>
 				<View style={styles.view}>
-					<Text style={styles.heading}>Recomended filter For Nissan Sentra 2013</Text>
+					<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 				</View>
 				<View style={styles.list}>
 					{filters && filters.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
