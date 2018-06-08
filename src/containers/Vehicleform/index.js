@@ -7,6 +7,7 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
+import { IsValidForm } from '../../components/Common/validation'
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -20,19 +21,18 @@ class Vehicleform extends React.Component{
 				make: '',
 				model: '',
 				mileage: ''
-			}
+			},
+			errors:{}
 		}
 	}
 	 async componentWillMount(){
 		
 		this.props.dispatch(getVehicleYears())
-		.then(res=>{
-			console.log(res)
-		})
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		console.log(data, 12345);
-		if (data) {
+		if (data != null) {
+			console.log(data, 9876)
 			this.setState({vehicle: data});
 			if (data.year) {
 				this.props.dispatch(getVehicleMakes(data.year))
@@ -41,10 +41,9 @@ class Vehicleform extends React.Component{
 				this.props.dispatch(getVehicleModels(data.make))
 			}
 		}
-		
-		
 	}
 	onValueChange(key, event) {
+		console.log(key, event, 567)
 		const { vehicle } = this.state;
 		vehicle[key] = event;
 	    this.setState({vehicle});
@@ -57,9 +56,14 @@ class Vehicleform extends React.Component{
 
 	  }
   	onButtonPress() {
-  		let data = JSON.stringify(this.state.vehicle)
-  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-	  	this.props.history.push('/recomended-oil');
+  		let fields = ['year', 'make', 'model', 'mileage']
+      	let formValidation = IsValidForm(fields, this.state.vehicle)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		let data = JSON.stringify(this.state.vehicle)
+	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+		  	this.props.history.push('/recomended-oil');
+      	}
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/');
@@ -69,6 +73,7 @@ class Vehicleform extends React.Component{
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
+		console.log(this.state.vehicle,987)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>

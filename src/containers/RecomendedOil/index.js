@@ -5,7 +5,6 @@ import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getVehicleTypes} from '../../actions/VehicleForm'
-
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
 class RecomendedOil extends React.Component{
 	constructor(props){
@@ -13,29 +12,32 @@ class RecomendedOil extends React.Component{
 		this.state = {
 			selectedOilType: '',
 			vehicleData: {},
-			loader: false
+			loading: false,
+			errors: {}
 		}
 	}
 	async componentDidMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		console.log(data, 12345);
-		this.setState({vehicleData: data,loader: true})
+		this.setState({vehicleData: data,loading: true})
 		if (data.oilType) {
 			this.setState({selectedOilType: data.oilType})
 		}
 		if (data) {
 			this.props.dispatch(getVehicleTypes(data.make,data.model)).then(res => {
-				this.setState({ loader: false})
+				this.setState({ loading: false})
 			})
 		}
 	}
 	onButtonPress() {
-		let vehicleData = this.state.vehicleData
-		vehicleData.oilType = this.state.selectedOilType
-		let data = JSON.stringify(vehicleData)
-  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-	  	this.props.history.push('/recomended-filter');
+		if(this.state.selectedOilType){
+			let vehicleData = this.state.vehicleData
+			vehicleData.oilType = this.state.selectedOilType
+			let data = JSON.stringify(vehicleData)
+	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+		  	this.props.history.push('/recomended-filter');
+		}
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/vehicle-form');
@@ -60,8 +62,12 @@ class RecomendedOil extends React.Component{
 				<View style={styles.view}>
 					<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 				</View>
+				{this.state.loading && <View style={styles.loading}>
+					<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+				</View>
+				}
 				<View style={styles.radiobttn}>
-					{types && types.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
+					{types && types.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
 					<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
 				</View>
 				<View style={styles.view}>
@@ -117,5 +123,13 @@ const styles = StyleSheet.create({
 	},
 	oil: {
 		width: 30
+	},
+	loading :{
+		justifyContent: 'center',
+		padding: 10,
+		alignItems: 'center'
+	},
+	innerLoader :{
+		width: 80
 	}
 })

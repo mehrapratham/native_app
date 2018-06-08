@@ -7,7 +7,7 @@ import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import SelectBox from '../../components/SelectBox'
 import {createToken} from '../../actions/VehicleForm'
 import { connect } from 'react-redux'
-
+import { IsValidForm } from '../../components/Common/validation'
 class PaymentForm extends React.Component{
 
 	constructor() {
@@ -21,7 +21,8 @@ class PaymentForm extends React.Component{
 	    	},
 	    	yearList: ["2019","2020","2021","2022","2023"],
 	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"],
-	    	loading: true
+	    	loading: false,
+	    	error: {}
 	    };
 	}
 
@@ -35,21 +36,24 @@ class PaymentForm extends React.Component{
 	}
 	onSubmit(){
 		console.log('hi')
-		this.setState({loading: true})
-		let {cardDetail} = this.state;
-		let data = {
-			"card[number]": cardDetail.card_number,
-			"card[cvc]": cardDetail.card_cvc,
-			"card[exp_month]": cardDetail.card_exp_month,
-			"card[exp_year]": cardDetail.card_exp_year,
-			"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
-		}
-
-		this.props.dispatch(createToken(data)).then(res=>{
-			this.props.payAmount(res.id)
-			this.setState({loading: false})
-		})
-
+		let fields = ['card_number', 'card_cvc', 'card_exp_month', 'card_exp_year']
+      	let formValidation = IsValidForm(fields, this.state.cardDetail)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		this.setState({loading: true})
+			let {cardDetail} = this.state;
+			let data = {
+				"card[number]": cardDetail.card_number,
+				"card[cvc]": cardDetail.card_cvc,
+				"card[exp_month]": cardDetail.card_exp_month,
+				"card[exp_year]": cardDetail.card_exp_year,
+				"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
+			}
+			this.props.dispatch(createToken(data)).then(res=>{
+				this.props.payAmount(res.id)
+				this.setState({loading: false})
+			})
+      	}	
 	}
 
 	render(){
@@ -69,7 +73,7 @@ class PaymentForm extends React.Component{
 					<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={4}/>
 				</View>
 				<View style={{flex: 1,justifyContent: 'flex-end'}}>
-					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)}/>
+					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)} disabled={this.state.loading}/>
 				</View>
 			</View>
 		)

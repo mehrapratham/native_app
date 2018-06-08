@@ -12,32 +12,34 @@ class RecomendedFilter extends React.Component{
 		this.state = {
 			selectedFilterType: '',
 			vehicleData: {},
-			loader: false
+			loading: false
 		}
 	}
 	async componentDidMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		console.log(data, 12345);
-		this.setState({vehicleData: data,loader: true})
+		this.setState({vehicleData: data,loading: true})
 		if (data.filterType) {
 			console.log(data.filterType,'filterType')
 			this.setState({selectedFilterType: data.filterType})
 		}
 		if (data) {
 			this.props.dispatch(getVehicleFilters(data.make,data.model)).then(res => {
-				this.setState({ loader: false})
+				this.setState({ loading: false})
 			})
 		}
 		
 	}
 	onButtonPress() {
-		console.log(this.props)
-		let vehicleData = this.state.vehicleData
-		vehicleData.filterType = this.state.selectedFilterType
-		console.log(vehicleData,222)
-		let data = JSON.stringify(vehicleData)
-  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-	  	this.props.history.push('/address');
+		if(this.state.selectedFilterType){
+			console.log(this.props)
+			let vehicleData = this.state.vehicleData
+			vehicleData.filterType = this.state.selectedFilterType
+			console.log(vehicleData,222)
+			let data = JSON.stringify(vehicleData)
+	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+		  	this.props.history.push('/address');
+	  	}
 	}
 	onButtonPress2() {
 		console.log(this.props)
@@ -63,8 +65,12 @@ class RecomendedFilter extends React.Component{
 				<View style={styles.view}>
 					<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 				</View>
+				{this.state.loading && <View style={styles.loading}>
+					<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+				</View>
+				}
 				<View style={styles.list}>
-					{filters && filters.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
+					{filters && filters.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
 					<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
 				</View>
 				<View style={styles.view}>
@@ -117,6 +123,14 @@ const styles = StyleSheet.create({
 	},
 	leftArrow: {
 	  	margin: 24
+	},
+	loading :{
+		justifyContent: 'center',
+		padding: 10,
+		alignItems: 'center'
+	},
+	innerLoader :{
+		width: 80
 	}
 	
 })

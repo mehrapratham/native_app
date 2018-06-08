@@ -6,6 +6,7 @@ import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
+import { IsValidForm } from '../../components/Common/validation'
 class Address extends React.Component{
 	constructor(){
 		super();
@@ -15,7 +16,8 @@ class Address extends React.Component{
 				city: '',
 				zip: '',
 				state: ''
-			}
+			},
+			errors:{}
 		}
 	}
 	async componentWillMount(){
@@ -24,15 +26,19 @@ class Address extends React.Component{
 		if(data){
 			this.setState({ address: data })
 		}
-		
-
 	}
 
 	onButtonPress() {
-		console.log(this.props)
-		let data = JSON.stringify(this.state.address)
-  		this.props.dispatch(saveToLocalStorage('addressData' , data))
-	  	this.props.history.push('/time-slot');
+		let fields = ['street', 'city', 'zip', 'state']
+      	let formValidation = IsValidForm(fields, this.state.address)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		console.log(this.props)
+			let data = JSON.stringify(this.state.address)
+	  		this.props.dispatch(saveToLocalStorage('addressData' , data))
+		  	this.props.history.push('/time-slot');
+      	}
+		
 	}
 	onButtonPress2() {
 		console.log(this.props)

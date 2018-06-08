@@ -8,7 +8,6 @@ import {getAvailability} from '../../actions/VehicleForm'
 import moment from 'moment'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
 var timekit = require('timekit-sdk');
-console.log(timekit);
 class TimeSlot extends React.Component{
 
 	constructor(){
@@ -39,21 +38,20 @@ class TimeSlot extends React.Component{
 		})
 
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
-		console.log(vehicleData,12345)
 		this.setState({ vehicleData: vehicleData })
 		if (vehicleData && vehicleData.timeslot) {
-			console.log(vehicleData.timeslot,'timeslot')
 			this.setState({selectedTime: vehicleData.timeslot})
 		}
 
 	}
 	onButtonPress() {
-		let vehicleData = this.state.vehicleData
-		console.log(vehicleData)
-		vehicleData.timeslot = this.state.selectedTime
-		let data = JSON.stringify(vehicleData)
-  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-	  	this.props.history.push('/summary');
+		if(this.state.selectedTime.start){
+			let vehicleData = this.state.vehicleData
+			vehicleData.timeslot = this.state.selectedTime
+			let data = JSON.stringify(vehicleData)
+	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+		  	this.props.history.push('/summary');
+		}
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/address');
@@ -83,7 +81,6 @@ class TimeSlot extends React.Component{
 		this.setState({filterTime})
 	}
 	render(){
-		console.log(this.state.selectedTime,111111111)
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		return(
 			
@@ -119,7 +116,6 @@ class TimeSlot extends React.Component{
 					}
 
 					{curAvailbility && curAvailbility.map((item, index)=>{
-						console.log(this.state.selectedTime, item)
 						return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
 									<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
 								</TouchableOpacity>
@@ -128,11 +124,11 @@ class TimeSlot extends React.Component{
 					</ScrollView>					
 				</View>
 				<View style={styles.row2}>
-					<View style={styles.bottom}>
+					{/*<View style={styles.bottom}>
 						<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
 							<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
 						</TouchableOpacity>
-					</View>
+					</View>*/}
 					<View style={styles.bottom2}>
 						<TouchableOpacity onPress={this.onButtonPress.bind(this)} >
 							<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />

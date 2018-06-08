@@ -5,7 +5,7 @@ export default class ConfirmButton extends React.Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<TouchableOpacity style={styles.view} onPress={this.props.onButtonPress} disabled={this.props.disabled}>
+				<TouchableOpacity style={this.props.disabled ? styles.viewDisable : styles.view} onPress={this.props.onButtonPress} disabled={this.props.disabled}>
 					<Text style={styles.arrow}>{this.props.label}</Text>
 				</TouchableOpacity>
 			</View>
@@ -22,6 +22,14 @@ const styles = StyleSheet.create({
   	backgroundColor: '#21409a',
   	height: 40,
   	borderRadius: 5
+  },
+  viewDisable : {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#21409a',
+    height: 40,
+    borderRadius: 5,
+    opacity: 0.5
   },
   arrow: {
   	color: '#fff'

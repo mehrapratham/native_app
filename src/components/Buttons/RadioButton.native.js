@@ -9,8 +9,9 @@ export default class SelectBox extends React.Component{
 	}
 
 	render(){
+		let selectedIndex = this.props.value && this.props.list && this.props.list.findIndex(item=> item == this.props.value)
 		return(
-			<RadioGroup style={styles.container} highlightColor="#fff" onSelect= {(index, value) => this.onChange(index, value)}>
+			<RadioGroup style={styles.container} selectedIndex={selectedIndex} highlightColor="#fff" onSelect= {(index, value) => this.onChange(index, value)}>
 				{this.props.list && this.props.list.map((item,key) => {
 					return(
 						<RadioButton value={item} key={key} style={{marginBottom: 10,backgroundColor: '#fff',height: 50,borderRadius: 5,alignItems: 'center'}}>
@@ -24,6 +25,6 @@ export default class SelectBox extends React.Component{
 }
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: "100%"
   }
 });

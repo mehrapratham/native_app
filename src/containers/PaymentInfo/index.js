@@ -31,6 +31,7 @@ class PaymentInfo extends React.Component{
 
 	payAmount(token){
 		let amount = 4000;
+		console.log(amount,22222)
 		this.props.dispatch(payAmount(token, amount)).then(res=>{
            this.props.history.push('/final-screen')
         })

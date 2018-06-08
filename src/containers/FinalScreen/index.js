@@ -16,6 +16,9 @@ class FinalStep extends React.Component{
     let orderData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
     this.setState({ orderData : orderData })
   }
+  onButtonPress(){
+    this.props.history.push('/')
+  }
 
 	render(){
     console.log(this.state.orderData)
@@ -47,7 +50,7 @@ class FinalStep extends React.Component{
 						<Text style={styles.text2}>Sign up and create Profile and recieve 50% off next oil change</Text>
 					</View>
 					<View style={styles.text}> 
-						<ConfirmButton label="Sign Up" />
+						<ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)}/>
 					</View>
 				</View>
 			</View>
