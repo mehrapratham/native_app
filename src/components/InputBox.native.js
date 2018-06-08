@@ -15,6 +15,7 @@ export default class InputBox extends React.Component{
       	style={styles.container}
         onChangeText={this.onChange.bind(this)}
         type={this.props.type}
+        maxLength={this.props.maxLength}
 	    />
 		)
 	}

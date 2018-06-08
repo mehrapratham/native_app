@@ -20,7 +20,8 @@ class PaymentForm extends React.Component{
 	    		'card_exp_year': ''
 	    	},
 	    	yearList: ["2019","2020","2021","2022","2023"],
-	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"]
+	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"],
+	    	loading: true
 	    };
 	}
 
@@ -34,16 +35,19 @@ class PaymentForm extends React.Component{
 	}
 	onSubmit(){
 		console.log('hi')
+		this.setState({loading: true})
+		let {cardDetail} = this.state;
 		let data = {
-			"card[number]": '4242424242424242',
-			"card[cvc]": '123',
-			"card[exp_month]": '03',
-			"card[exp_year]": '43',
+			"card[number]": cardDetail.card_number,
+			"card[cvc]": cardDetail.card_cvc,
+			"card[exp_month]": cardDetail.card_exp_month,
+			"card[exp_year]": cardDetail.card_exp_year,
 			"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
 		}
 
 		this.props.dispatch(createToken(data)).then(res=>{
 			this.props.payAmount(res.id)
+			this.setState({loading: false})
 		})
 
 	}
@@ -51,37 +55,23 @@ class PaymentForm extends React.Component{
 	render(){
 		const{ cardDetail, yearList, monthList } = this.state;
 		return(
-				<View>
-					<View style={styles.address}>
-						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')}/>
-					</View>
-					
-					{/*<View style={styles.text}>
-						<View style={styles.text2}>
-							<View style={styles.text3}>
-								<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
-							</View>
-						</View>
-						<View style={styles.text4}>
-							<View style={styles.text3}>
-								<SelectBox placeholder="YY" list={yearList} selectedValue="2" onValueChange={this.onValueChange.bind(this,'card[exp_year]')}/>
-							</View>
-						</View>
-					</View>*/}
-					<View>
-						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
-					</View>
-					<View>
-						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
-					</View>
-					<View style={styles.address}>
-						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')}/>
-					</View>
-					<View style={{flex: 1,justifyContent: 'flex-end'}}>
-						<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)}/>
-					</View>
+			<View>
+				<View style={styles.address}>
+					<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16}/>
 				</View>
-
+				<View>
+					<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
+				</View>
+				<View>
+					<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
+				</View>
+				<View style={styles.address}>
+					<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={4}/>
+				</View>
+				<View style={{flex: 1,justifyContent: 'flex-end'}}>
+					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)}/>
+				</View>
+			</View>
 		)
 	}
 }

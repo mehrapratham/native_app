@@ -5,7 +5,7 @@ export default class ConfirmButton extends React.Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<TouchableOpacity style={styles.view} onPress={this.props.onButtonPress}>
+				<TouchableOpacity style={styles.view} onPress={this.props.onButtonPress} disabled={this.props.disabled}>
 					<Text style={styles.arrow}>{this.props.label}</Text>
 				</TouchableOpacity>
 			</View>
