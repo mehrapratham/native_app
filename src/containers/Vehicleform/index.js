@@ -6,7 +6,7 @@ import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
-import {saveToLocalStorage} from '../../components/localStorage'
+import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -14,7 +14,6 @@ class Vehicleform extends React.Component{
 			yearlist: [2018, 2019, 2020],
 			makelist: ['BMW', 'Audi', 'Bentlay', 'Farari'],
 			modellist: [2018, 2019, 2020],
-			selected1: 1,
 
 			vehicle: {
 				year: '',
@@ -24,12 +23,25 @@ class Vehicleform extends React.Component{
 			}
 		}
 	}
-	componentWillMount(){
+	 async componentWillMount(){
 		
 		this.props.dispatch(getVehicleYears())
 		.then(res=>{
 			console.log(res)
 		})
+		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
+
+		console.log(data, 12345);
+		if (data) {
+			this.setState({vehicle: data});
+			if (data.year) {
+				this.props.dispatch(getVehicleMakes(data.year))
+			}
+			if (data.make) {
+				this.props.dispatch(getVehicleModels(data.make))
+			}
+		}
+		
 		
 	}
 	onValueChange(key, event) {
@@ -71,7 +83,7 @@ class Vehicleform extends React.Component{
 					<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
 					<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
 					<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
-					<InputBox type='number' placeholder="Mileage" onChange={this.onValueChange.bind(this, 'mileage')} />
+					<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} />
 				</View>
 				<View style={styles.lasts}>
 					<TouchableOpacity style={styles.arrow} onPress={this.onButtonPress.bind(this)}>

@@ -38,11 +38,7 @@ class PaymentInfo extends React.Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
+				
 				<View style={styles.arrow}>
 					<Text style={styles.heading}>Payment Info</Text>
 				</View>

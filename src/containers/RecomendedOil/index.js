@@ -21,6 +21,9 @@ class RecomendedOil extends React.Component{
 
 		console.log(data, 12345);
 		this.setState({vehicleData: data,loader: true})
+		if (data.oilType) {
+			this.setState({selectedOilType: data.oilType})
+		}
 		if (data) {
 			this.props.dispatch(getVehicleTypes(data.make,data.model)).then(res => {
 				this.setState({ loader: false})
@@ -46,6 +49,7 @@ class RecomendedOil extends React.Component{
 		const {vehicleData} = this.state;
 		console.log(this.props)
 		console.log(this.state.vehicleData,44444)
+		console.log(this.state.selectedOilType,9999)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -58,7 +62,7 @@ class RecomendedOil extends React.Component{
 				</View>
 				<View style={styles.radiobttn}>
 					{types && types.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
-					<RadioButton list={types} onSelectValue={this.onChange.bind(this)}/>
+					<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
 				</View>
 				<View style={styles.view}>
 					<Image source={require('../../img/oil.png')} style={styles.img}/>

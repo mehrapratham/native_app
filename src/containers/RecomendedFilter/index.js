@@ -19,6 +19,10 @@ class RecomendedFilter extends React.Component{
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		console.log(data, 12345);
 		this.setState({vehicleData: data,loader: true})
+		if (data.filterType) {
+			console.log(data.filterType,'filterType')
+			this.setState({selectedFilterType: data.filterType})
+		}
 		if (data) {
 			this.props.dispatch(getVehicleFilters(data.make,data.model)).then(res => {
 				this.setState({ loader: false})
@@ -48,7 +52,7 @@ class RecomendedFilter extends React.Component{
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		console.log(this.props)
 		const {vehicleData} = this.state;
-		console.log(this.state.selectedFilterType)
+		console.log(this.state.selectedFilterType,2222)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -61,7 +65,7 @@ class RecomendedFilter extends React.Component{
 				</View>
 				<View style={styles.list}>
 					{filters && filters.length == 0 && !this.state.loader && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
-					<RadioButton list={filters && filters} onSelectValue={this.onChange.bind(this)}/>
+					<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
 				</View>
 				<View style={styles.view}>
 					<Image source={require('../../img/oil.png')} style={styles.img}/>
