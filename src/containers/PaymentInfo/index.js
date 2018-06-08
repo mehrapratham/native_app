@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
 import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
 import PaymentForm from './PaymentForm'
+import {payAmount} from '../../actions/VehicleForm'
 
 class PaymentInfo extends React.Component{
 	componentWillMount()	{
@@ -26,9 +27,13 @@ class PaymentInfo extends React.Component{
 	onChangeText(event){
 		console.log(event)
 	}
-	handleSubmit(e){
-		e.preventDefault()
-		console.log('hihih')
+
+
+	payAmount(token){
+		let amount = 4000;
+		this.props.dispatch(payAmount(token, amount)).then(res=>{
+           this.props.history.push('/final-screen')
+        })
 	}
 	render(){
 		return(
@@ -42,10 +47,10 @@ class PaymentInfo extends React.Component{
 					<Text style={styles.heading}>Payment Info</Text>
 				</View>
 				<View style={styles.view}>
-					<View style={{width: '100%'}}>
-					    <PaymentForm />
+					<View style={{width: '100%',flex: 1}}>
+					    <PaymentForm payAmount={this.payAmount.bind(this)}/>
 					</View>
-					<View style={styles.payment}>
+					{/*<View style={styles.payment}>
 						<InputBox placeholder="Name" onChange={this.onChangeText.bind(this)}/>
 					</View>
 					<View style={styles.payment}>
@@ -62,11 +67,11 @@ class PaymentInfo extends React.Component{
 								<InputBox placeholder="Exp" onChange={this.onChangeText.bind(this)}/>
 							</View>
 						</View>
-					</View>
+					</View>*/}
 				</View>
-				<View style={styles.view}>
+				{/*<View style={styles.view}>
 					<ConfirmButton label="Confirm order" onButtonPress={this.onButtonPress.bind(this)}/>
-				</View>
+				</View>*/}
 			</View>
 		)
 	}
@@ -86,7 +91,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   view: {
-  	flex: 1,
+  	flex: 2,
   	justifyContent: 'center',
   	alignItems: 'center',
   	width: '100%',
