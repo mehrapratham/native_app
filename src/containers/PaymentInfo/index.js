@@ -9,37 +9,36 @@ import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../c
 import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
 import PaymentForm from './PaymentForm'
 import {payAmount} from '../../actions/VehicleForm'
+var timekit = require('timekit-sdk');
 
 class PaymentInfo extends React.Component{
 	componentWillMount()	{
+		timekit.configure({
+		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
+		})
 		this.props.dispatch(removeLocalStorage('vehicleData'))
 		this.props.dispatch(removeLocalStorage('addressData'))
 	}
 	onButtonPress() {
-		console.log(this.props)
 	  	this.props.history.push('/final-screen');
 	}
 	onButtonPress2() {
-		console.log(this.props)
 	  	this.props.history.push('/summary');
 	}
 
-	onChangeText(event){
-		console.log(event)
-	}
-
-
 	payAmount(token){
-		let amount = 4000;
-		console.log(amount,22222)
+		let amount = 5000;
+		let bookingData = this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
 		this.props.dispatch(payAmount(token, amount)).then(res=>{
+			timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
+				this.props.dispatch(removeLocalStorage('currentBookingDetail'))
+			})
            this.props.history.push('/final-screen')
         })
 	}
 	render(){
 		return(
 			<View style={styles.container}>
-				
 				<View style={styles.arrow}>
 					<Text style={styles.heading}>Payment Info</Text>
 				</View>
@@ -47,28 +46,7 @@ class PaymentInfo extends React.Component{
 					<View style={{width: '100%',flex: 1}}>
 					    <PaymentForm payAmount={this.payAmount.bind(this)}/>
 					</View>
-					{/*<View style={styles.payment}>
-						<InputBox placeholder="Name" onChange={this.onChangeText.bind(this)}/>
-					</View>
-					<View style={styles.payment}>
-						<InputBox placeholder="Card number" onChange={this.onChangeText.bind(this)}/>
-					</View>
-					<View style={styles.row}>
-						<View style={styles.cw}>
-							<View style={styles.placeholder}>
-								<InputBox placeholder="Cw" onChange={this.onChangeText.bind(this)}/>
-							</View>
-						</View>
-						<View style={styles.last}>
-							<View style={styles.placeholder}>
-								<InputBox placeholder="Exp" onChange={this.onChangeText.bind(this)}/>
-							</View>
-						</View>
-					</View>*/}
 				</View>
-				{/*<View style={styles.view}>
-					<ConfirmButton label="Confirm order" onButtonPress={this.onButtonPress.bind(this)}/>
-				</View>*/}
 			</View>
 		)
 	}

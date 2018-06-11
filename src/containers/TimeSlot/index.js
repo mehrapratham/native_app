@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import {getAvailability} from '../../actions/VehicleForm'
 import moment from 'moment'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
+import ArrowButton from '../../components/Buttons/ArrowButton'
 var timekit = require('timekit-sdk');
 class TimeSlot extends React.Component{
 
@@ -21,7 +22,6 @@ class TimeSlot extends React.Component{
 	}
 	
 	async componentWillMount(){
-
 		timekit.configure({
 		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
 		 
@@ -59,7 +59,6 @@ class TimeSlot extends React.Component{
 	booking(item){
 		this.setState({ selectedTime: item })
 	}
-
 
 	filterDate(date){
 		 if (date && moment(this.state.filterTime).format('M') == moment(date.start).format('M') && moment(this.state.filterTime).date() == moment(date.start).date()) {
@@ -130,9 +129,7 @@ class TimeSlot extends React.Component{
 						</TouchableOpacity>
 					</View>*/}
 					<View style={styles.bottom2}>
-						<TouchableOpacity onPress={this.onButtonPress.bind(this)} >
-							<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-						</TouchableOpacity>
+						<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
 					</View>
 				</View>
 			</View>

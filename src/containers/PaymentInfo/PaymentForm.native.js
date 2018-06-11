@@ -21,7 +21,7 @@ class PaymentForm extends React.Component{
 	    	},
 	    	yearList: ["2019","2020","2021","2022","2023"],
 	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"],
-	    	loading: false,
+	    	loading: true,
 	    	error: {}
 	    };
 	}
@@ -29,13 +29,20 @@ class PaymentForm extends React.Component{
 
 	onValueChange(key,event){
 		const{ cardDetail } = this.state;
-		console.log(event)
 		cardDetail[key] = event;
 	    this.setState({cardDetail});
 
+	    let fields = ['card_number', 'card_cvc', 'card_exp_month', 'card_exp_year']
+      	let formValidation = IsValidForm(fields, this.state.cardDetail)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		this.setState({loading: false})
+      	}
+      	else{
+      		this.setState({loading: true})
+      	}
 	}
 	onSubmit(){
-		console.log('hi')
 		let fields = ['card_number', 'card_cvc', 'card_exp_month', 'card_exp_year']
       	let formValidation = IsValidForm(fields, this.state.cardDetail)
       	this.setState({ errors: formValidation.errors })
@@ -70,7 +77,7 @@ class PaymentForm extends React.Component{
 					<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
 				</View>
 				<View style={styles.address}>
-					<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={4}/>
+					<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3}/>
 				</View>
 				<View style={{flex: 1,justifyContent: 'flex-end'}}>
 					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)} disabled={this.state.loading}/>

@@ -7,6 +7,7 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
 import { IsValidForm } from '../../components/Common/validation'
+import ArrowButton from '../../components/Buttons/ArrowButton'
 class Address extends React.Component{
 	constructor(){
 		super();
@@ -17,42 +18,48 @@ class Address extends React.Component{
 				zip: '',
 				state: ''
 			},
-			errors:{}
+			errors:{},
+			loading: true
 		}
 	}
 	async componentWillMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('addressData'))
-		console.log(data,12345)
 		if(data){
 			this.setState({ address: data })
 		}
 	}
 
 	onButtonPress() {
+		this.setState({loading: true})
 		let fields = ['street', 'city', 'zip', 'state']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
-      		console.log(this.props)
 			let data = JSON.stringify(this.state.address)
 	  		this.props.dispatch(saveToLocalStorage('addressData' , data))
+			this.setState({loading: false})
 		  	this.props.history.push('/time-slot');
       	}
 		
 	}
 	onButtonPress2() {
-		console.log(this.props)
 	  	this.props.history.push('/recomended-filter');
 	}
 	onChangeText(key,event){
-		console.log(event)
 	    let { address } = this.state;
 	    address[key] = event;
 		this.setState({ address })
-
+		let fields = ['street', 'city', 'zip', 'state']
+      	let formValidation = IsValidForm(fields, this.state.address)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		this.setState({loading: false})
+      	}
+      	else{
+      		this.setState({loading: true})
+      	}
 	}
 	render(){
-		console.log(this.state.address)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -84,9 +91,7 @@ class Address extends React.Component{
 					</View>
 				</View>
 				<View style={styles.text5}>
-					<TouchableOpacity style={styles.arrows} onPress={this.onButtonPress.bind(this)}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-					</TouchableOpacity>
+					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
 				</View>
 			</View>
 		)

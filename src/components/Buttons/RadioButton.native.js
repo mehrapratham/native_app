@@ -4,12 +4,12 @@ import { RadioGroup, RadioButton } from 'react-native-flexi-radio-button'
 
 export default class SelectBox extends React.Component{
 	onChange(index,value){
-		console.log(index,value)
 		this.props.onSelectValue(value)
 	}
 
 	render(){
-		let selectedIndex = this.props.value && this.props.list && this.props.list.findIndex(item=> item == this.props.value)
+		let selectedIndex = this.props.value && this.props.list && this.props.list.findIndex(item=> item == this.props.value) || ''
+		console.log(selectedIndex, 'console here')
 		return(
 			<RadioGroup style={styles.container} selectedIndex={selectedIndex} highlightColor="#fff" onSelect= {(index, value) => this.onChange(index, value)}>
 				{this.props.list && this.props.list.map((item,key) => {

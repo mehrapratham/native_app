@@ -4,13 +4,19 @@ import {Icon} from 'native-base'
 export default class FontAwesomeIcon extends React.Component{
 	render(){
 		return(
-			<Icon name={this.props.nativeBaseIconName} style={styles.container}/>
+			<Icon name={this.props.nativeBaseIconName} style={this.props.disabled ? styles.iconDisabled : styles.icon}/>
 		)
 	}
 }
 const styles = StyleSheet.create({
-  container: {
+  icon: {
     color: '#d6edf8',
-    fontSize: 22
+    fontSize: 22,
+    opacity: 1
   },
+  iconDisabled: {
+  	color: '#a4a4a4',
+    fontSize: 22,
+    opacity: 0.8
+  }
 })

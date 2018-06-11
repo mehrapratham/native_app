@@ -6,6 +6,7 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import {getVehicleFilters} from '../../actions/VehicleForm'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
+import ArrowButton from '../../components/Buttons/ArrowButton'
 class RecomendedFilter extends React.Component{
 	constructor(props){
 		super(props)
@@ -17,10 +18,8 @@ class RecomendedFilter extends React.Component{
 	}
 	async componentDidMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
-		console.log(data, 12345);
 		this.setState({vehicleData: data,loading: true})
 		if (data.filterType) {
-			console.log(data.filterType,'filterType')
 			this.setState({selectedFilterType: data.filterType})
 		}
 		if (data) {
@@ -32,29 +31,23 @@ class RecomendedFilter extends React.Component{
 	}
 	onButtonPress() {
 		if(this.state.selectedFilterType){
-			console.log(this.props)
 			let vehicleData = this.state.vehicleData
 			vehicleData.filterType = this.state.selectedFilterType
-			console.log(vehicleData,222)
 			let data = JSON.stringify(vehicleData)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
 		  	this.props.history.push('/address');
 	  	}
 	}
 	onButtonPress2() {
-		console.log(this.props)
 	  	this.props.history.push('/recomended-oil');
 	}
 	onChange(event){
-		console.log(event)
 		this.setState({ selectedFilterType: event });
 	}
 	
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
-		console.log(this.props)
 		const {vehicleData} = this.state;
-		console.log(this.state.selectedFilterType,2222)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -75,9 +68,7 @@ class RecomendedFilter extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<Image source={require('../../img/oil.png')} style={styles.img}/>
-					<TouchableOpacity style={styles.arrow} onPress={this.onButtonPress.bind(this)}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-					</TouchableOpacity>
+					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedFilterType == ''} />
 				</View>
 			</View>
 		)

@@ -20,7 +20,6 @@ class _CardForm extends React.Component {
         this.props.stripe
           .createToken()
           .then(async(payload) => {
-            console.log('[token]', payload)
              if (payload.token) {
               let response = await this.props.payAmount(payload.token.id)
               if (response) {

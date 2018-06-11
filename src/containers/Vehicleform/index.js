@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { IsValidForm } from '../../components/Common/validation'
+
+import ArrowButton from '../../components/Buttons/ArrowButton'
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -22,7 +24,8 @@ class Vehicleform extends React.Component{
 				model: '',
 				mileage: ''
 			},
-			errors:{}
+			errors:{},
+			loading: true
 		}
 	}
 	 async componentWillMount(){
@@ -30,9 +33,7 @@ class Vehicleform extends React.Component{
 		this.props.dispatch(getVehicleYears())
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
-		console.log(data, 12345);
 		if (data != null) {
-			console.log(data, 9876)
 			this.setState({vehicle: data});
 			if (data.year) {
 				this.props.dispatch(getVehicleMakes(data.year))
@@ -43,7 +44,6 @@ class Vehicleform extends React.Component{
 		}
 	}
 	onValueChange(key, event) {
-		console.log(key, event, 567)
 		const { vehicle } = this.state;
 		vehicle[key] = event;
 	    this.setState({vehicle});
@@ -54,14 +54,26 @@ class Vehicleform extends React.Component{
 	    	this.props.dispatch(getVehicleModels(event))
 	    }
 
+	    let fields = ['year', 'make', 'model', 'mileage']
+      	let formValidation = IsValidForm(fields, this.state.vehicle)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		this.setState({loading: false})
+      	}
+      	else{
+      		this.setState({loading: true})
+      	}
+
 	  }
   	onButtonPress() {
+  		this.setState({loading: true})
   		let fields = ['year', 'make', 'model', 'mileage']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
       		let data = JSON.stringify(this.state.vehicle)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+  			this.setState({loading: false})
 		  	this.props.history.push('/recomended-oil');
       	}
 	}
@@ -73,7 +85,6 @@ class Vehicleform extends React.Component{
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
-		console.log(this.state.vehicle,987)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -91,9 +102,7 @@ class Vehicleform extends React.Component{
 					<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} />
 				</View>
 				<View style={styles.lasts}>
-					<TouchableOpacity style={styles.arrow} onPress={this.onButtonPress.bind(this)}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-					</TouchableOpacity>
+					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
 				</View>
 			</View>
 		)

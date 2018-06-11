@@ -6,6 +6,7 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getVehicleTypes} from '../../actions/VehicleForm'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
+import ArrowButton from '../../components/Buttons/ArrowButton'
 class RecomendedOil extends React.Component{
 	constructor(props){
 		super(props)
@@ -18,8 +19,6 @@ class RecomendedOil extends React.Component{
 	}
 	async componentDidMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
-
-		console.log(data, 12345);
 		this.setState({vehicleData: data,loading: true})
 		if (data.oilType) {
 			this.setState({selectedOilType: data.oilType})
@@ -43,15 +42,11 @@ class RecomendedOil extends React.Component{
 	  	this.props.history.push('/vehicle-form');
 	}
 	onChange(event){
-		console.log(event)
 		this.setState({ selectedOilType: event });
 	}
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
-		console.log(this.props)
-		console.log(this.state.vehicleData,44444)
-		console.log(this.state.selectedOilType,9999)
 		return(
 			<View style={styles.container}>
 				<View style={styles.leftArrow}>
@@ -72,9 +67,7 @@ class RecomendedOil extends React.Component{
 				</View>
 				<View style={styles.view}>
 					<Image source={require('../../img/oil.png')} style={styles.img}/>
-					<TouchableOpacity  style={styles.enter} onPress={this.onButtonPress.bind(this)}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-					</TouchableOpacity>
+					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedOilType == ''} />
 				</View>
 			</View>
 		)

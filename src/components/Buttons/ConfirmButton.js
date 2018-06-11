@@ -26,10 +26,9 @@ const styles = StyleSheet.create({
   viewDisable : {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#21409a',
+    backgroundColor: '#c8cae7',
     height: 40,
-    borderRadius: 5,
-    opacity: 0.5
+    borderRadius: 5
   },
   arrow: {
   	color: '#fff'

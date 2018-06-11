@@ -37,20 +37,21 @@ class Summary extends React.Component{
 
 
 		let bookingData = {
-							start : vehicleData.timeslot.start, 
-							end: vehicleData.timeslot.end, 
-							what: 'test', 
-							description: 'hi, this is description', 
-							resource_id: '286d96b5-567d-4eb3-b34a-dd085a25185d',
-							graph: 'confirm_decline',
-							customer: {
-								name: "Pratham",
-    							email: "mehrapratham01@gmail.com",
-							},
-							where: "Courthouse, Hill Valley, CA 95420, USA"
-						}
+			start : vehicleData.timeslot.start, 
+			end: vehicleData.timeslot.end, 
+			what: 'test', 
+			description: 'hi, this is description', 
+			resource_id: '286d96b5-567d-4eb3-b34a-dd085a25185d',
+			graph: 'confirm_decline',
+			customer: {
+				name: vehicleData.make + ' ' +vehicleData.model,
+				email: "mehrapratham01@gmail.com",
+			},
+			where: "Courthouse, Hill Valley, CA 95420, USA"
+		}
 		timekit.createBooking(bookingData).then(res=>{
-			console.log(res)
+			let bookingDetail = JSON.stringify(res.data)
+			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
 		this.props.history.push('/payment-info');
 	}

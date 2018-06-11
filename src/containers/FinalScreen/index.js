@@ -21,7 +21,6 @@ class FinalStep extends React.Component{
   }
 
 	render(){
-    console.log(this.state.orderData)
     let {orderData} = this.state;
 		return(
 			<View style={styles.container}>
