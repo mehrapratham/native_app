@@ -19,7 +19,7 @@ class App extends React.Component{
     
   }
   render(){
-    console.log()
+    console.disableYellowBox = true;
     let child = (
       <Router>
         <Switch>

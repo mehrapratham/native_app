@@ -19,6 +19,9 @@ export default class ReactNativeDrawer extends React.Component {
         this.setState({ isOpened: true })
       }
     };
+    goToLogin(){
+      this.props.history.push('/')
+    }
   render() {
     return (
       <View style={{flex: 1}}>
@@ -34,7 +37,7 @@ export default class ReactNativeDrawer extends React.Component {
         <View style={{flex: 1}}>
           <div className={this.state.isOpened ? "menuOverlay opened" : 'menuOverlay'} onClick={this.closeDrawer}></div>
           <div className={this.state.isOpened ? 'sideMenu opened' : 'sideMenu'}>
-            <MenuItem />
+            <MenuItem goToLogin={this.goToLogin.bind(this)}/>
           </div>
           {this.props.child}
         </View>

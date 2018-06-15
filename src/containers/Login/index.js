@@ -56,13 +56,13 @@ export default class Login extends React.Component{
 						</View>
 					</View>
 					<View style={{flex: 1,position: 'relative'}}>
-						<View style={{borderTopWidth: 1,borderColor: '#fff',flex: 1,marginBottom: 30}}>
+						<View style={{borderTopWidth: 1,borderColor: '#fff',height: 40,marginBottom: 0}}>
 						</View>
 						<View style={{backgroundColor: '#e87638',borderRadius: 100,height: 40,width: 40,position: 'absolute',alignSelf: 'center',top: -20,alignItems: 'center',justifyContent: 'center',borderColor: '#fff',borderWidth: 1}}>
 							<Text style={{color: '#fff'}}>OR</Text>
 						</View>	
-						<View style={{flex: 1,paddingLeft: 80,paddingRight: 80}}>
-							<View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
+						<View style={{flex: 1,paddingLeft: 80,paddingRight: 80,alignItems: 'center',justifyContent: 'center'}}>
+							<View style={{flexDirection: 'row'}}>
 								<TouchableOpacity style={{height: 40,width: 60}}>
 									<FontAwesomeIcon iconClass="fab fa-facebook-f" nativeBaseIconName="logo-facebook" style={styles.iconStyle2} styles={{fontSize: 40,color: '#fff', opacity: 1}}/>
 								</TouchableOpacity>

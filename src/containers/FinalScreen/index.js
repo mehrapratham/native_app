@@ -54,7 +54,7 @@ class FinalStep extends React.Component{
                   </View>
                 </View>
 		return(
-      <ReactNativeDrawer child={child}/>
+      <ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}
 }
@@ -97,6 +97,8 @@ const styles = StyleSheet.create({
   },
   btnview:{
     paddingBottom: 30,
+    paddingLeft: 20,
+    paddingRight: 20,
     flex: 1
   },
   heading: {
@@ -107,7 +109,8 @@ const styles = StyleSheet.create({
   	flex: 1,
   	alignItems: 'center',
   	justifyContent: 'center',
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginTop: 50
   },
   text: {
   	flex: 1,

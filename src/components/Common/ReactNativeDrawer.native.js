@@ -23,6 +23,10 @@ export default class ReactNativeDrawer extends React.Component {
         this.setState({ isOpened: true })
       }
     };
+    goToLogin(){
+      this.props.history.push('/')
+    }
+
   render() {
     return (
       <View style={{flex: 1,justifyContent: 'center',paddingTop: 20}}>
@@ -38,7 +42,7 @@ export default class ReactNativeDrawer extends React.Component {
         <Drawer
           ref={(ref) => { this.drawer = ref; }}
           content={<View style={{backgroundColor: '#000',height: '100%'}}>
-                    <MenuItem />
+                    <MenuItem goToLogin={this.goToLogin.bind(this)}/>
                   </View>}
           onClose={() => this.closeDrawer()}
           tapToClose={true}

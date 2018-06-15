@@ -74,7 +74,7 @@ class RecomendedFilter extends React.Component{
 					</View>
 		return(
 			
-			<ReactNativeDrawer child={child}/>
+			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}
 }

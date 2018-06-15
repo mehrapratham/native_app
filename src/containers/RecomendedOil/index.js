@@ -72,7 +72,7 @@ class RecomendedOil extends React.Component{
 						</View>
 					</View>
 		return(
-			<ReactNativeDrawer child={child}/>
+			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}
 }
