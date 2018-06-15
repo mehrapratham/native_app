@@ -9,6 +9,7 @@ import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../c
 import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
 import PaymentForm from './PaymentForm'
 import {payAmount} from '../../actions/VehicleForm'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 var timekit = require('timekit-sdk');
 
 class PaymentInfo extends React.Component{
@@ -26,10 +27,12 @@ class PaymentInfo extends React.Component{
 	  	this.props.history.push('/summary');
 	}
 
-	payAmount(token){
+	async payAmount(token){
 		let amount = 5000;
-		let bookingData = this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
+		let bookingData = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
+		console.log(bookingData,333333)
 		this.props.dispatch(payAmount(token, amount)).then(res=>{
+			console.log(res,22222)
 			timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
 				this.props.dispatch(removeLocalStorage('currentBookingDetail'))
 			})
@@ -37,17 +40,17 @@ class PaymentInfo extends React.Component{
         })
 	}
 	render(){
-		return(
-			<View style={styles.container}>
-				<View style={styles.arrow}>
-					<Text style={styles.heading}>Payment Info</Text>
-				</View>
-				<View style={styles.view}>
-					<View style={{width: '100%',flex: 1}}>
-					    <PaymentForm payAmount={this.payAmount.bind(this)}/>
+		let child = <View style={styles.container}>
+						<View style={styles.arrow}>
+							<Text style={styles.heading}>Payment Info</Text>
+						</View>
+						<View style={styles.view}>
+							<PaymentForm payAmount={this.payAmount.bind(this)}/>
+						</View>
 					</View>
-				</View>
-			</View>
+		return(
+			
+			<ReactNativeDrawer child={child}/>
 		)
 	}
 }
@@ -66,9 +69,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   view: {
-  	flex: 2,
-  	justifyContent: 'center',
-  	alignItems: 'center',
+  	flex: 3,
   	width: '100%',
   	paddingLeft: 20,
   	paddingRight: 20
@@ -80,31 +81,5 @@ const styles = StyleSheet.create({
   },
   heading: {
   	fontSize: 26
-  },
-  payment: {
-  	marginBottom: 10,
-  	width: '100%'
-  },
-  row: {
-  	marginBottom: 10,
-  	width: '100%',
-  	flexDirection: 'row'
-  },
-  cw: {
-  	width: '50%'
-  },
-  placeholder: {
-  	width: '99%'
-  },
-  last: {
-  	width: '50%', 
-  	alignSelf: 'flex-end', 
-  	alignItems: 'flex-end'
-  },
-  leftArrow: {
-  	margin: 24
-  },
-  oil: {
-  	width: 30
   }
 });

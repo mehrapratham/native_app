@@ -6,8 +6,10 @@ export default class Gradient extends React.Component{
 		return(
 			<View style={{flex: 1}} >
 				<LinearGradient
-		          colors={['#6F3615', '#EF6337']}
-		          style={styles.container}>
+		          colors={['#fdf450', '#e13530']}
+		          style={styles.container}
+		          start={[1.1, -0.1]} end={[0.1, 1]}
+		         >
 					{this.props.child}
 				</LinearGradient>
 			</View>

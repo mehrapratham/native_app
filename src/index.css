@@ -18,12 +18,12 @@ body, html{
 	overflow: auto;
 }
 #root{
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6f3615+0,ef6337+72 */
-background: #6f3615; /* Old browsers */
-background: -moz-linear-gradient(-45deg, #6f3615 0%, #ef6337 72%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, #6f3615 0%,#ef6337 72%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, #6f3615 0%,#ef6337 72%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6f3615', endColorstr='#ef6337',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e13530+0,fef751+100 */
+background: #e13530; /* Old browsers */
+background: -moz-linear-gradient(45deg, #e13530 0%, #fef751 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, #e13530 0%,#fef751 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, #e13530 0%,#fef751 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e13530', endColorstr='#fef751',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 #root > div{
 	max-width: 500px;
@@ -105,3 +105,52 @@ button[disabled]{
 label + button{
   width: 100%
 }
+
+
+
+.sideMenu{
+  position: absolute;
+  z-index: 2;
+  transition: all linear 0.2s 0s;
+  opacity: 0;
+  pointer-events: none;
+
+  width: 50%;
+  height: 100%;
+  background: #000;
+  transition: all linear 0.2s 0s;
+  left: -50%;
+}
+.menuOverlay{
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  position: absolute;
+  z-index: 1;
+  transition: all linear 0.2s 0s;
+  opacity: 0;
+  pointer-events: none;
+}
+.menuOverlay.opened{
+  opacity: 1;
+  pointer-events: auto;
+}
+.innerMenu{
+  width: 50%;
+  height: 100%;
+  background: #000;
+  position: relative;
+  transition: all linear 0.2s 0s;
+  left: -50%;
+}
+.sideMenu.opened{
+  opacity: 1;
+  pointer-events: auto;
+  left: 0;
+  color: #fff;
+}
+
+.sideMenu.opened .innerMenu{
+  left: 0;
+}
+

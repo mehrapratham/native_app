@@ -66,20 +66,26 @@ class PaymentForm extends React.Component{
 	render(){
 		const{ cardDetail, yearList, monthList } = this.state;
 		return(
-			<View>
-				<View style={styles.address}>
-					<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16}/>
+			<View style={{flex: 1}}>
+				<View style={{flex: 3}}>
+					<View style={styles.address}>
+						<Text style={styles.label}>Card Number</Text>
+						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16}/>
+					</View>
+					<View>
+						<Text style={styles.label}>Expiry Month</Text>
+						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
+					</View>
+					<View>
+						<Text style={styles.label}>Expiry year</Text>
+						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
+					</View>
+					<View style={styles.address}>
+						<Text style={styles.label}>CVV</Text>
+						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3}/>
+					</View>
 				</View>
-				<View>
-					<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
-				</View>
-				<View>
-					<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
-				</View>
-				<View style={styles.address}>
-					<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3}/>
-				</View>
-				<View style={{flex: 1,justifyContent: 'flex-end'}}>
+				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
 					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)} disabled={this.state.loading}/>
 				</View>
 			</View>
@@ -100,6 +106,10 @@ const mapDispatch = (dispatch) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  label:{
+  	marginBottom: 10,
+  	fontSize: 18
   },
   view: {
   	flex: 1,

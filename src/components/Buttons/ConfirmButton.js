@@ -4,11 +4,9 @@ import {Link } from '../../Routing'
 export default class ConfirmButton extends React.Component{
 	render(){
 		return(
-			<View style={styles.container}>
 				<TouchableOpacity style={this.props.disabled ? styles.viewDisable : styles.view} onPress={this.props.onButtonPress} disabled={this.props.disabled}>
 					<Text style={styles.arrow}>{this.props.label}</Text>
 				</TouchableOpacity>
-			</View>
 		)
 	}
 }
@@ -19,15 +17,15 @@ const styles = StyleSheet.create({
   view: {
   	justifyContent: 'center',
   	alignItems: 'center',
-  	backgroundColor: '#21409a',
-  	height: 40,
-  	borderRadius: 5
+  	backgroundColor: '#f5b443',
+  	height: 45,
+  	borderRadius: 5,
   },
   viewDisable : {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#c8cae7',
-    height: 40,
+    backgroundColor: '#edcc93',
+    height: 45,
     borderRadius: 5
   },
   arrow: {

@@ -35,14 +35,18 @@ class _CardForm extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>
-            <CardNumberElement style={{base: {fontSize: '18px', height: 50}}} />
-            <CardExpiryElement style={{base: {fontSize: '18px'}}} />
-            <CardCVCElement style={{base: {fontSize: '18px'}}} />
-          </label>
-          <button disabled={this.state.loading}>Pay Now</button>
+          <View style={{flex: 1}}>
+            <label>
+              <CardNumberElement style={{base: {fontSize: '18px', height: 50}}} />
+              <CardExpiryElement style={{base: {fontSize: '18px'}}} />
+              <CardCVCElement style={{base: {fontSize: '18px'}}} />
+            </label>
+          </View>
+          <View>
+            <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50}}>Pay Now</button>
+          </View>
         </form>
       </View>
     )

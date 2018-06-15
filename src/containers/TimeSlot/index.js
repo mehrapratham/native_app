@@ -7,7 +7,9 @@ import { connect } from 'react-redux'
 import {getAvailability} from '../../actions/VehicleForm'
 import moment from 'moment'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
-import ArrowButton from '../../components/Buttons/ArrowButton'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 var timekit = require('timekit-sdk');
 class TimeSlot extends React.Component{
 
@@ -81,59 +83,49 @@ class TimeSlot extends React.Component{
 	}
 	render(){
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
-		return(
-			
-			<View style={styles.container}>
-				
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
-				
-				<View style={styles.view}>
-					<Text style={styles.heading}>Select Time slot</Text>
-				</View>
-				<View style={styles.oilss}>
-					
-					<View style={styles.left}>
-						<TouchableOpacity style={styles.row} onPress={this.prevDate.bind(this)}>
-							<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-						</TouchableOpacity>
-						<View style={styles.row}>
-							<Text>{moment(this.state.filterTime).format('ddd MM/DD') }</Text>
+		let child = <View style={styles.container}>
+						<View style={styles.view}>
+							<Text style={styles.heading}>Select Time slot</Text>
 						</View>
-						<TouchableOpacity style={styles.row} onPress={this.nextDate.bind(this)}>
-							<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
-						</TouchableOpacity>
-					</View>
-					<ScrollView>
-
-					{this.state.loading && <View style={styles.loading}>
-							<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
-						</View>
-					}
-
-					{curAvailbility && curAvailbility.map((item, index)=>{
-						return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
-									<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
+						<View style={styles.oilss}>
+							<View style={styles.left}>
+								<TouchableOpacity style={styles.row} onPress={this.prevDate.bind(this)}>
+									<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
 								</TouchableOpacity>
-						})
-					}
-					</ScrollView>					
-				</View>
-				<View style={styles.row2}>
-					{/*<View style={styles.bottom}>
-						<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-							<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-						</TouchableOpacity>
-					</View>*/}
-					<View style={styles.bottom2}>
-						<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+								<View style={styles.row}>
+									<Text>{moment(this.state.filterTime).format('ddd MM/DD') }</Text>
+								</View>
+								<TouchableOpacity style={styles.row} onPress={this.nextDate.bind(this)}>
+									<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
+								</TouchableOpacity>
+							</View>
+							<ScrollView style={{height: 150,marginBottom: 20,marginTop: 20}}>
+
+							{this.state.loading && <View style={styles.loading}>
+									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+								</View>
+							}
+							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
+
+							{!this.state.loading && curAvailbility && curAvailbility.map((item, index)=>{
+								return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
+											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
+										</TouchableOpacity>
+								})
+							}
+							</ScrollView>					
+						</View>
+						<View style={styles.lasts}>
+							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+							</View>
+							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+							</View>
+						</View>
 					</View>
-				</View>
-			</View>
-			
+		return(
+			<ReactNativeDrawer child={child}/>	
 		)
 	}
 }
@@ -155,11 +147,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingLeft: 20,
-		paddingRight: 20
+		paddingRight: 20,
+		paddingTop: 20,
+		paddingBottom: 20
 	},
 	heading: {
 		fontSize: 26,
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	left: {
 		width: '100%',
@@ -186,7 +180,7 @@ const styles = StyleSheet.create({
 	fullSelected:{
 		width: '100%',
 		height: 40,
-		backgroundColor: '#21409a',
+		backgroundColor: '#e84b33',
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 5,
@@ -229,5 +223,17 @@ const styles = StyleSheet.create({
 	},
 	innerLoader :{
 		width: 80
-	}
+	},
+	lasts: {
+	  	paddingRight: 20,
+	  	paddingLeft: 20,
+	  	flexDirection: 'row',
+	  	paddingBottom: 30
+	  },
+	  center:{
+	  	textAlign: 'center',
+	  	marginTop: 20,
+	  	fontSize: 20,
+	  	color: '#fff'
+	  }
 })

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
-
 export default class Login extends React.Component{
 	onButtonPress() {
 	  	this.props.history.push('/vehicle-form');
@@ -10,71 +9,73 @@ export default class Login extends React.Component{
 	render(){
 		return(
 			<View style={styles.container}>
-				<View style={styles.logo}>
-					<Text style={styles.logoText}>TRANZOIL</Text>
-				</View>
-				<View style={styles.form}>
-					<View style={styles.formContainer}>
-						<View style={styles.heading}>
-							<Text style={styles.color}>USER LOGIN</Text>
+				<View style={{flex: 1}}>
+					<View style={styles.logo}>
+						<Text style={styles.logoText}>TRANZOIL</Text>
+					</View>
+					<View style={styles.form}>
+						<View style={{borderBottomWidth: 1,borderColor: '#fff',paddingBottom: 5,marginBottom: 30,position: 'relative'}}>
+							<TextInput
+				              	style={{textAlign: 'center',width: '100%',paddingLeft: 35,paddingRight: 35}}
+				              	placeholder="username"
+				              	underlineColorAndroid="#d6edf8"
+				              	placeholderTextColor="#fff"
+				          	/>
+				          	<View style={{position: 'absolute',top: -4,left: 10}}>
+								<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" style={styles.icon} icon={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
+							</View>
 						</View>
-						<View style={styles.outterBox}>
-							<View style={styles.formInner}>
-					          <TextInput
-					              style={styles.textInput}
-					              placeholder="USERNAME"
-					              underlineColorAndroid="#d6edf8"
-					              placeholderTextColor="#d6edf8"
-					          />
-					          <View style={styles.ImageStyle}>
-					          	<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" />
-					          </View>
+						
+						<View style={{borderBottomWidth: 1,borderColor: '#fff',paddingBottom: 5,marginBottom: 30,position: 'relative'}}>
+							<TextInput
+				              	style={{textAlign: 'center',width: '100%',paddingLeft: 35,paddingRight: 35}}
+				              	placeholder="password"
+				              	underlineColorAndroid="#d6edf8"
+					            placeholderTextColor="#fff"
+						    />
+						    <View style={{position: 'absolute',top: -4,left: 10}}>
+								<FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" style={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
 							</View>
-							<View style={styles.formInner}>
-					          <TextInput
-					              style={styles.textInput2}
-					              placeholder="PASSWORD"
-					              underlineColorAndroid="#d6edf8"
-					              placeholderTextColor="#d6edf8"
-					          />
-					          <View style={styles.ImageStyle}>
-					          <FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" />
-					          </View>
-							</View>
-							<View>
-								<TouchableOpacity style={styles.button}>
-									<Text style={styles.colors}>SIGN IN</Text>
+						</View>
+						<View style={{marginBottom: 30}}>
+							<TouchableOpacity style={{backgroundColor: '#f5b443',height: 40,alignItems: 'center',justifyContent: 'center'}}>
+								<Text style={{color: '#fff'}}>SIGN IN</Text>
+							</TouchableOpacity>
+						</View>
+						<View style={{flexDirection: 'row',marginBottom: 30, width: '100%'}}>
+							<View style={{flex: 1, alignItems: 'flex-start'}}>
+								<TouchableOpacity style={{borderColor: '#fff',borderBottomWidth: 1}}>
+									<Text style={{color: '#fff'}}>Register</Text>
 								</TouchableOpacity>
 							</View>
-							<View>
-								<TouchableOpacity>
-									<Text style={styles.register}>Register</Text>
+							<View style={{alignSelf: 'flex-end', flex: 2, justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+								<TouchableOpacity style={{borderColor: '#fff',borderBottomWidth: 1}}>
+									<Text style={{color: '#fff'}}>Forgot Password</Text>
 								</TouchableOpacity>
 							</View>
 						</View>
 					</View>
-					<View style={styles.downContainer}>
-						<TouchableOpacity style={styles.socialBtn}>
-							<View style={styles.common}>
-								<FontAwesomeIcon iconClass="fab fa-facebook-f" nativeBaseIconName="logo-facebook" />
+					<View style={{flex: 1,position: 'relative'}}>
+						<View style={{borderTopWidth: 1,borderColor: '#fff',flex: 1,marginBottom: 30}}>
+						</View>
+						<View style={{backgroundColor: '#e87638',borderRadius: 100,height: 40,width: 40,position: 'absolute',alignSelf: 'center',top: -20,alignItems: 'center',justifyContent: 'center',borderColor: '#fff',borderWidth: 1}}>
+							<Text style={{color: '#fff'}}>OR</Text>
+						</View>	
+						<View style={{flex: 1,paddingLeft: 80,paddingRight: 80}}>
+							<View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
+								<TouchableOpacity style={{height: 40,width: 60}}>
+									<FontAwesomeIcon iconClass="fab fa-facebook-f" nativeBaseIconName="logo-facebook" style={styles.iconStyle2} styles={{fontSize: 40,color: '#fff', opacity: 1}}/>
+								</TouchableOpacity>
+								<TouchableOpacity style={{height: 40,width: 60,alignSelf: 'flex-end'}}>
+									<FontAwesomeIcon iconClass="fab fa-google-plus-g" nativeBaseIconName="logo-googleplus" style={styles.iconStyle} styles={{fontSize: 40,color: '#fff', opacity: 1,alignSelf: 'flex-end'}}/>
+								</TouchableOpacity>
 							</View>
-							<View style={styles.view}>
-								<Text style={styles.color}>Login with Facebook</Text>
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity style={styles.socialBtnGoogle}>
-							<View style={styles.common}>
-								<FontAwesomeIcon iconClass="fab fa-google-plus-g" nativeBaseIconName="logo-googleplus" />
-							</View>
-							<View style={styles.view}>
-								<Text style={styles.color}>Login with Google</Text>
-							</View>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.guestCon}>
-						<TouchableOpacity onPress={this.onButtonPress.bind(this)} style={styles.guestBox}>
-							<Text style={styles.guest}>Continue as guest</Text>
-						</TouchableOpacity>
+						</View>
+						<View style={{flex: 1,alignItems: 'center'}}>
+							<TouchableOpacity style={{borderBottomWidth: 1,borderColor: '#fff'}} onPress={this.onButtonPress.bind(this)}>
+								<Text style={{color: '#fff'}}>Continue as guest</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 			</View>
@@ -84,7 +85,6 @@ export default class Login extends React.Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
   },
   logo: {
   	flex: 1,
@@ -92,133 +92,31 @@ const styles = StyleSheet.create({
   	alignItems: 'center'
   },
   form: {
-  	flex: 3,
-  	paddingLeft: 20,
-  	paddingRight: 20,
-
+  	flex: 2,
+  	paddingLeft: 80,
+  	paddingRight: 80,
   },
   logoText: {
   	fontSize: 26,
   },
-  formContainer: {
-  },
   color: {
   	color: '#fff'
   },
-  heading: {
-  	height: 40,
-  	justifyContent: 'center',
-  	alignItems: 'center',
-  	backgroundColor: '#3a3d46'
+  icon: {
+    color: '#d6edf8',
+    fontSize: 22,
+    opacity: 1
   },
-  formInner: {
-  	position: 'relative',
-  	backgroundColor: '#fff',
-  }, 
-	ImageStyle: {
-	    height: 25,
-	    width: 25,
-	    alignItems: 'center',
-	    justifyContent: 'center',
-	    position: 'absolute',
-	    right: 10,
-	    top: 7.5
-	},
-	textInput: {
-		paddingLeft: 10,
-		color: '#d6edf8',
-		borderColor: '#d6edf8',
-		borderBottomWidth: 0.6,
-		borderLeftWidth: 1,
-		borderRightWidth: 1,
-		borderTopWidth: 1,
-		height: 40,
-		borderTopLeftRadius: 5,
-		borderTopRightRadius: 5
-	},
-	textInput2: {
-		paddingLeft: 10,
-		color: '#d6edf8',
-		borderColor: '#d6edf8',
-		borderBottomWidth: 1,
-		borderLeftWidth: 1,
-		borderRightWidth: 1,
-		borderTopWidth: 0.5,
-		height: 40,
-		borderBottomLeftRadius: 5,
-		borderBottomRightRadius: 5
-	},
-	outterBox:{
-		paddingLeft: 20,
-		paddingRight: 20,
-		paddingTop: 20,
-		paddingBottom: 10,
-		backgroundColor: '#fff'
-	},
-	button: {
-		height: 40,
-		backgroundColor: '#3696dc',
-		marginTop: 10,
-		marginBottom: 10,
-		borderRadius: 5,
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	colors: {
-		color: '#fff',
-		alignSelf: 'center'
-	},
-	register: {
-		color: '#6075b7',
-		fontWeight: 'bold',
-		alignSelf: 'center'
-	},
-	downContainer: {
-		marginTop: 5,
-		backgroundColor: '#e1e1e1',
-		padding: 20
-	},
-	socialBtn: {
-		flexDirection: 'row',
-		height: 40,
-		alignItems: 'center',
-		borderRadius: 5,
-		marginBottom: 20,
-		backgroundColor: '#3c66c4',
-	},
-	socialBtnGoogle: {
-		flexDirection: 'row',
-		height: 40,
-		alignItems: 'center',
-		borderRadius: 5,
-		backgroundColor: '#cf4332',
-	},
-	guest: {
-		color: '#544675',
-		fontWeight: 'bold',
-		fontSize: 20
-	},
-	guestCon: {
-		marginTop: 5
-	},
-	common: {
-		width: 50, 
-		marginRight: 10,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	commonbutn: {
-		color: '#fff',
-		fontSize: 26,
-		fontWeight: 'bold'
-	},
-	view: {
-		width: '70%'
-	},
-	guestBox: {
-		backgroundColor: '#e1e1e1',
-		height: 40,
-		justifyContent: 'center',
-		alignItems: 'center'
-	}
+  iconStyle: {
+    color: '#d6edf8',
+    fontSize: 36,
+    opacity: 1,
+    alignSelf: 'flex-end'
+  },
+  iconStyle2: {
+    color: '#d6edf8',
+    fontSize: 36,
+    opacity: 1
+  },
+  
 });

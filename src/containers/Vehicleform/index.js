@@ -8,8 +8,9 @@ import { connect } from 'react-redux'
 import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { IsValidForm } from '../../components/Common/validation'
-
-import ArrowButton from '../../components/Buttons/ArrowButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -42,6 +43,7 @@ class Vehicleform extends React.Component{
 				this.props.dispatch(getVehicleModels(data.make))
 			}
 		}
+		this.onValueChange()
 	}
 	onValueChange(key, event) {
 		const { vehicle } = this.state;
@@ -85,16 +87,13 @@ class Vehicleform extends React.Component{
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
-		return(
-			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
+		let child = <View style={styles.container}>
+				<View style={{flex: 1}}>
+					<View style={styles.headingCon}>
+						<Text style={styles.heading}>Enter Vehicle Details</Text>
+					</View>
 				</View>
-				<View style={styles.view}>
-					<Text style={styles.heading}>Enter Vehicle Details</Text>
-				</View>
+				
 				<View style={styles.view}>
 					<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
 					<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
@@ -102,9 +101,18 @@ class Vehicleform extends React.Component{
 					<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} />
 				</View>
 				<View style={styles.lasts}>
-					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+					<View style={{width: '50%', alignSelf: 'flex-start'}}>
+						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+					</View>
+					<View style={{width: '50%', alignSelf: 'flex-end'}}>
+						<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+					</View>
 				</View>
 			</View>
+		return(
+			
+			<ReactNativeDrawer child={child}/>
+					
 		)
 	}
 }
@@ -123,13 +131,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+  headingCon:{
+  	flex: 2,
+  	alignItems: 'center',
+  	alignSelf: 'center',
+  	justifyContent: 'center'
+  },
   view: {
-  	flex: 1,
+  	flex: 3,
   	width: '100%',
   	paddingLeft: 20,
-  	paddingRight: 20,
-  	alignItems: 'center',
-  	justifyContent: 'center'
+  	paddingRight: 20
   },
   arrow: {
   	alignItems: 'flex-end', 
@@ -137,13 +149,14 @@ const styles = StyleSheet.create({
   	marginTop: 20
   },
   leftArrow: {
-  	margin: 24
+  	margin: 24,
+  	flex: 1
   },
   lasts: {
-  	flex: 1,
   	paddingRight: 20,
-  	justifyContent: 'center',
-  	alignItems: 'center'
+  	paddingLeft: 20,
+  	flexDirection: 'row',
+  	marginBottom: 30
   },
   heading: {
   	fontSize: 26,
@@ -151,5 +164,10 @@ const styles = StyleSheet.create({
   },
   oil: {
   	width: 30
+  },
+  icon: {
+    color: '#d6edf8',
+    fontSize: 22,
+    marginLeft: 20
   }
 });

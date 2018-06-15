@@ -6,7 +6,9 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import {getVehicleFilters} from '../../actions/VehicleForm'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
-import ArrowButton from '../../components/Buttons/ArrowButton'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 class RecomendedFilter extends React.Component{
 	constructor(props){
 		super(props)
@@ -48,29 +50,31 @@ class RecomendedFilter extends React.Component{
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		const {vehicleData} = this.state;
+		let child = <View style={styles.container}>
+						<View style={styles.headingCon}>
+							<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
+							<Text style={styles.subheading}>(Select one)</Text>
+						</View>
+						<View style={styles.list}>
+							{this.state.loading && <View style={styles.loading}>
+									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+								</View>
+							}
+							{filters && filters.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
+							<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
+						</View>
+						<View style={styles.lasts}>
+							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+							</View>
+							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedFilterType == ''} />
+							</View>
+						</View>
+					</View>
 		return(
-			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={{width: 30}}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
-				<View style={styles.view}>
-					<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-				</View>
-				{this.state.loading && <View style={styles.loading}>
-					<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
-				</View>
-				}
-				<View style={styles.list}>
-					{filters && filters.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No FilterType to show</Text>}
-					<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
-				</View>
-				<View style={styles.view}>
-					<Image source={require('../../img/oil.png')} style={styles.img}/>
-					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedFilterType == ''} />
-				</View>
-			</View>
+			
+			<ReactNativeDrawer child={child}/>
 		)
 	}
 }
@@ -87,6 +91,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
+	headingCon:{
+	  	flex: 1,
+	  	alignItems: 'center',
+	  	alignSelf: 'center',
+	  	justifyContent: 'center',
+	  	paddingTop: 20
+	  },
 	view: {
 		flex: 1,
 		justifyContent: 'center',
@@ -95,12 +106,15 @@ const styles = StyleSheet.create({
 		paddingRight: 20
 	},
 	list: {
-		flex: 1,
-		padding: 20,
-		justifyContent: 'center'
+		flex: 3,
+		padding: 20
 	},
 	heading: {
 		fontSize: 26,
+		textAlign: 'center'
+	},
+	subheading:{
+		fontSize: 20,
 		textAlign: 'center'
 	},
 	img: {
@@ -122,6 +136,12 @@ const styles = StyleSheet.create({
 	},
 	innerLoader :{
 		width: 80
-	}
+	},
+	lasts: {
+	  	paddingRight: 20,
+	  	paddingLeft: 20,
+	  	flexDirection: 'row',
+	  	marginBottom: 30
+	  },
 	
 })

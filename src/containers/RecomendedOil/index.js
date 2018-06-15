@@ -6,7 +6,9 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
 import {getVehicleTypes} from '../../actions/VehicleForm'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
-import ArrowButton from '../../components/Buttons/ArrowButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 class RecomendedOil extends React.Component{
 	constructor(props){
 		super(props)
@@ -47,29 +49,30 @@ class RecomendedOil extends React.Component{
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
+		let child = <View style={styles.container}>
+						<View style={styles.headingCon}>
+							<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
+							<Text style={styles.subheading}>(Select one)</Text>
+						</View>
+						<View style={styles.radiobttn}>
+							{this.state.loading && <View style={styles.loading}>
+								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+							</View>
+							}
+							{types && types.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
+							<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
+						</View>
+						<View style={styles.lasts}>
+							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+							</View>
+							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedOilType == ''} />
+							</View>
+						</View>
+					</View>
 		return(
-			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
-				<View style={styles.view}>
-					<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-				</View>
-				{this.state.loading && <View style={styles.loading}>
-					<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
-				</View>
-				}
-				<View style={styles.radiobttn}>
-					{types && types.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
-					<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
-				</View>
-				<View style={styles.view}>
-					<Image source={require('../../img/oil.png')} style={styles.img}/>
-					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedOilType == ''} />
-				</View>
-			</View>
+			<ReactNativeDrawer child={child}/>
 		)
 	}
 }
@@ -86,6 +89,13 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
+	headingCon:{
+	  	flex: 1,
+	  	alignItems: 'center',
+	  	alignSelf: 'center',
+	  	justifyContent: 'center',
+	  	paddingTop: 20
+	  },
 	view: {
 		flex: 1,
 		justifyContent: 'center',
@@ -98,12 +108,15 @@ const styles = StyleSheet.create({
 		height: 70
 	},
 	radiobttn: {
-		flex: 1,
-		padding: 20,
-		justifyContent: 'center'
+		flex: 3,
+		padding: 20
 	},
 	heading: {
 		fontSize: 26,
+		textAlign: 'center'
+	},
+	subheading:{
+		fontSize: 20,
 		textAlign: 'center'
 	},
 	leftArrow: {
@@ -124,5 +137,11 @@ const styles = StyleSheet.create({
 	},
 	innerLoader :{
 		width: 80
-	}
+	},
+	lasts: {
+	  	paddingRight: 20,
+	  	paddingLeft: 20,
+	  	flexDirection: 'row',
+	  	marginBottom: 30
+	  },
 })

@@ -28,6 +28,8 @@ const styles = StyleSheet.create({
     width: "100%", 
     paddingLeft: 15, 
     fontSize: 15, 
-    borderRadius: 5
+    borderRadius: 5,
+    borderBottomWidth: 4,
+    borderColor: '#c5c3c4'
   },
 })

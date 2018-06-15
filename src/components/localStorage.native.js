@@ -12,6 +12,7 @@ export const getFromLocalStorage = (key) => {
 	  	try {
 		    let data = await AsyncStorage.getItem(key);
 		   	data = JSON.parse(data) || [];
+		   	console.log(data, 'test')
 		    if (data.length != 0) {
 		    	return data
 		    }
@@ -29,6 +30,3 @@ export const removeLocalStorage = (key) => {
      AsyncStorage.removeItem(key)
    }
 }
-
-
-

@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff', 
     width, 
-    marginBottom: 10
+    marginBottom: 10,
+    borderBottomWidth: 4,
+    borderColor: '#c5c3c4'
   }
 });

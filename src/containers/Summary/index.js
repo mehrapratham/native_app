@@ -7,6 +7,9 @@ import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../c
 import { connect } from 'react-redux'
 import moment from 'moment'	
 import {confirmOrder} from '../../actions/VehicleForm'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 var timekit = require('timekit-sdk');
 class Summary extends React.Component{
 	constructor(props){
@@ -51,6 +54,7 @@ class Summary extends React.Component{
 		}
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
+			console.log(bookingDetail, 'bookingDetail')
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
 		this.props.history.push('/payment-info');
@@ -65,37 +69,33 @@ class Summary extends React.Component{
 	}
 	render(){
 		const { vehicleData,addressData } = this.state;
+		let child = <View style={styles.container}>
+						<View style={styles.headingView}>
+							<Text style={styles.heading}>Order Summary</Text>
+						</View>
+						<View style={styles.view}>
+							<View style={styles.left}>
+								<Text>Oil type: {vehicleData.oilType}</Text>
+							</View>
+							<View style={styles.left}>
+								<Text>filter type: {vehicleData.filterType}</Text>
+							</View>
+							<View style={styles.left}>
+								<Text>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
+							</View>
+							<View style={styles.left}>
+								<Text>Time: {vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text>
+							</View>
+							<View style={styles.left}>
+								<Text>Address: {addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text>
+							</View>
+						</View>
+						<View style={styles.lasts}>
+							<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
+						</View>
+					</View>
 		return(
-			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.row}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
-				<View style={styles.view}>
-					<Text style={styles.heading}>Order summary</Text>
-				</View>
-				<View style={styles.view}>
-					<View style={styles.left}>
-						<Text>Oil type: {vehicleData.oilType}</Text>
-					</View>
-					<View style={styles.left}>
-						<Text>filter type: {vehicleData.filterType}</Text>
-					</View>
-					<View style={styles.left}>
-						<Text>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-					</View>
-					<View style={styles.left}>
-						<Text>Time: {vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text>
-					</View>
-					<View style={styles.left}>
-						<Text>Address: {addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text>
-					</View>
-				</View>
-				<View style={styles.view}>
-					<ConfirmButton label="Confirm order" onButtonPress={this.onButtonPress.bind(this)}/>
-				</View>
-			</View>
+			<ReactNativeDrawer child={child}/>
 		)
 	}
 }
@@ -112,10 +112,15 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1
 	},
-	view: {
+	headingView:{
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		paddingLeft: 20,
+		paddingRight: 20
+	},
+	view: {
+		flex: 3,
 		paddingLeft: 20,
 		paddingRight: 20
 	},
@@ -137,6 +142,11 @@ const styles = StyleSheet.create({
 	},
 	leftArrow: {
 		margin: 24
-	}
+	},
+	lasts: {
+	  	paddingRight: 20,
+	  	paddingLeft: 20,
+	  	marginBottom: 30
+	  },
 	
 })

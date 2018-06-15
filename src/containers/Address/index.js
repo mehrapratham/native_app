@@ -7,7 +7,9 @@ import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { connect } from 'react-redux'
 import { IsValidForm } from '../../components/Common/validation'
-import ArrowButton from '../../components/Buttons/ArrowButton'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 class Address extends React.Component{
 	constructor(){
 		super();
@@ -27,6 +29,7 @@ class Address extends React.Component{
 		if(data){
 			this.setState({ address: data })
 		}
+		this.onChangeText()
 	}
 
 	onButtonPress() {
@@ -60,40 +63,46 @@ class Address extends React.Component{
       	}
 	}
 	render(){
+		let child = <View style={styles.container}>
+						<View style={styles.arrow}>
+							<Text style={styles.heading}>Enter Service Address</Text>
+						</View>
+						<View style={styles.view}>
+							<View style={styles.address}>
+								<Text style={styles.label}>Street</Text>
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')}/>
+							</View>
+							<View style={styles.address}>
+								<Text style={styles.label}>City</Text>
+								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')}/>
+							</View>
+							<View style={styles.text}>
+								<View style={styles.text2}>
+									<View style={styles.text3}>
+										<Text style={styles.label}>Zip</Text>
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')}/>
+									</View>
+								</View>
+								<View style={styles.text4}>
+									<View style={styles.text3}>
+										<Text style={styles.label}>State</Text>
+										<InputBox value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')}/>
+									</View>
+								</View>
+							</View>
+						</View>
+						<View style={styles.lasts}>
+							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+							</View>
+							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+							</View>
+						</View>
+					</View>
 		return(
-			<View style={styles.container}>
-				<View style={styles.leftArrow}>
-					<TouchableOpacity onPress={this.onButtonPress2.bind(this)} style={styles.oil}>
-						<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
-					</TouchableOpacity>
-				</View>
-				<View style={styles.arrow}>
-					<Text style={styles.heading}>Enter Service Address</Text>
-				</View>
-				<View style={styles.view}>
-					<View style={styles.address}>
-						<InputBox placeholder="Street" value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')}/>
-					</View>
-					<View style={styles.address}>
-						<InputBox placeholder="City" value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')}/>
-					</View>
-					<View style={styles.text}>
-						<View style={styles.text2}>
-							<View style={styles.text3}>
-								<InputBox placeholder="Zip" value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')}/>
-							</View>
-						</View>
-						<View style={styles.text4}>
-							<View style={styles.text3}>
-								<InputBox placeholder="State" value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')}/>
-							</View>
-						</View>
-					</View>
-				</View>
-				<View style={styles.text5}>
-					<ArrowButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
-				</View>
-			</View>
+			
+			<ReactNativeDrawer child={child}/>
 		)
 	}
 }
@@ -111,17 +120,20 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {
-  	flex: 1,
-  	justifyContent: 'center',
-  	alignItems: 'center',
+  	flex: 3,
   	width: '100%',
   	paddingLeft: 20,
   	paddingRight: 20
   },
+  label:{
+  	marginBottom: 10,
+  	fontSize: 18
+  },
   arrow: {
   	flex: 1,
   	alignItems: 'center',
-  	justifyContent: 'center'
+  	justifyContent: 'center',
+	paddingTop: 20
   },
   heading: {
   	fontSize: 26
@@ -139,7 +151,7 @@ const styles = StyleSheet.create({
   	width: '50%'
   },
   text3: {
-  	width: '99%'
+  	width: '96%'
   },
   text4: {
   	width: '50%', 
@@ -164,5 +176,11 @@ const styles = StyleSheet.create({
    },
    oil: {
    	width: 30
-   }
+   },
+   lasts: {
+	  	paddingRight: 20,
+	  	paddingLeft: 20,
+	  	flexDirection: 'row',
+	  	marginBottom: 30
+	  },
 });
