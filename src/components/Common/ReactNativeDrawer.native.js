@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Drawer } from 'native-base';
 import FontAwesomeIcon from '../Icon/FontAwesomeIcon'
+import MenuItem from './MenuItem'
 export default class ReactNativeDrawer extends React.Component {
   constructor(props){
     super(props);
@@ -28,7 +29,7 @@ export default class ReactNativeDrawer extends React.Component {
         <View style={{backgroundColor: '#000',height: 40,justifyContent: 'center',paddingLeft: 15}}>
             <TouchableOpacity onPress={this.openDrawer}>
               {this.state.isOpened ?
-                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="user" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
+                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="times-circle" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
                 :
                 <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="home" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
               }
@@ -36,7 +37,9 @@ export default class ReactNativeDrawer extends React.Component {
         </View>
         <Drawer
           ref={(ref) => { this.drawer = ref; }}
-          content={<Text style={{backgroundColor: '#000',height: '100%'}}>gfjfsagfhsf</Text>}
+          content={<View style={{backgroundColor: '#000',height: '100%'}}>
+                    <MenuItem />
+                  </View>}
           onClose={() => this.closeDrawer()}
           tapToClose={true}
           openDrawerOffset={0.5} >

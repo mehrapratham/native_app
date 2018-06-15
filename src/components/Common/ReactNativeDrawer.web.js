@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import FontAwesomeIcon from '../Icon/FontAwesomeIcon'
+import MenuItem from './MenuItem'
 export default class ReactNativeDrawer extends React.Component {
   constructor(props){
     super(props);
@@ -33,12 +34,11 @@ export default class ReactNativeDrawer extends React.Component {
         <View style={{flex: 1}}>
           <div className={this.state.isOpened ? "menuOverlay opened" : 'menuOverlay'} onClick={this.closeDrawer}></div>
           <div className={this.state.isOpened ? 'sideMenu opened' : 'sideMenu'}>
-              test
+            <MenuItem />
           </div>
           {this.props.child}
         </View>
       </View>
-      
     );
   }
 }
