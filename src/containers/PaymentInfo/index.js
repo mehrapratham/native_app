@@ -30,9 +30,7 @@ class PaymentInfo extends React.Component{
 	async payAmount(token){
 		let amount = 5000;
 		let bookingData = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
-		console.log(bookingData,333333)
 		this.props.dispatch(payAmount(token, amount)).then(res=>{
-			console.log(res,22222)
 			timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
 				this.props.dispatch(removeLocalStorage('currentBookingDetail'))
 			})
@@ -49,7 +47,6 @@ class PaymentInfo extends React.Component{
 						</View>
 					</View>
 		return(
-			
 			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}

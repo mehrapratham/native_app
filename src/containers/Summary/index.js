@@ -54,7 +54,6 @@ class Summary extends React.Component{
 		}
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
-			console.log(bookingDetail, 'bookingDetail')
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
 		this.props.history.push('/payment-info');

@@ -15,7 +15,6 @@ export default class ReactNativeDrawer extends React.Component {
       this.setState({ isOpened: false })
     };
     openDrawer = () => {
-      console.log(22222)
       if(this.state.isOpened){
         this.closeDrawer()
       }else{
@@ -29,13 +28,13 @@ export default class ReactNativeDrawer extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1,justifyContent: 'center',paddingTop: 20}}>
-        <View style={{backgroundColor: '#000',height: 40,justifyContent: 'center',paddingLeft: 15}}>
+      <View style={styles.container}>
+        <View style={styles.last2}>
             <TouchableOpacity onPress={this.openDrawer}>
               {this.state.isOpened ?
-                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="times-circle" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
+                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="md-close" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
                 :
-                <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="home" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
+                <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="md-menu" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
               }
             </TouchableOpacity>
         </View>
@@ -57,8 +56,19 @@ export default class ReactNativeDrawer extends React.Component {
 const styles = StyleSheet.create({
   icon: {
     color: '#d6edf8',
-    fontSize: 22,
+    fontSize: 26,
     opacity: 1
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingTop: 20
+  },
+  last2: {
+    backgroundColor: '#000',
+    height: 40,
+    justifyContent: 'center',
+    paddingLeft: 15
   }
   
 });

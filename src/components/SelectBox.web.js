@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View} from 'react-native'
 export default class SelectBox extends React.Component{
 	onChange(event){
-	    // console.log(event.target.value)
 	    this.props.onValueChange(event.target.value)
 	}
 	render(){

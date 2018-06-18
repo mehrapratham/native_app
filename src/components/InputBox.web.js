@@ -3,7 +3,6 @@ import {Text, View} from 'react-native'
 export default class InputBox extends React.Component{
 
 	onChange(event){
-		console.log(event.target.value)
 		this.props.onChange(event.target.value)
 	}
 	render(){

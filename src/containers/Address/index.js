@@ -92,10 +92,10 @@ class Address extends React.Component{
 							</View>
 						</View>
 						<View style={styles.lasts}>
-							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+							<View style={styles.last2}>
 								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
 							</View>
-							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+							<View style={styles.last2}>
 								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
 							</View>
 						</View>
@@ -182,5 +182,9 @@ const styles = StyleSheet.create({
 	  	paddingLeft: 20,
 	  	flexDirection: 'row',
 	  	marginBottom: 30
-	  },
+	},
+	last2: {
+		width: '50%', 
+		alignSelf: 'flex-start'
+	}
 });

@@ -101,10 +101,10 @@ class Vehicleform extends React.Component{
 					<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} />
 				</View>
 				<View style={styles.lasts}>
-					<View style={{width: '50%', alignSelf: 'flex-start'}}>
+					<View style={styles.last2}>
 						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
 					</View>
-					<View style={{width: '50%', alignSelf: 'flex-end'}}>
+					<View style={styles.last2}>
 						<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
 					</View>
 				</View>
@@ -167,5 +167,9 @@ const styles = StyleSheet.create({
     color: '#d6edf8',
     fontSize: 22,
     marginLeft: 20
+  },
+  last2: {
+  	width: '50%', 
+  	alignSelf: 'flex-start'
   }
 });

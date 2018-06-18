@@ -67,7 +67,7 @@ class TimeSlot extends React.Component{
 			return date
 		}
 	}
-	formatDate(date){
+	formatDate(date){ 
 		return (moment(date.start).format('hh')+ ':' +moment(date.start).format('mm') +' '+ moment(date.start).format('a')+ ' - ' + moment(date.end).format('hh')+ ':' +moment(date.end).format('mm') + ' ' + moment(date.end).format('a'))
 	}
 
@@ -99,10 +99,10 @@ class TimeSlot extends React.Component{
 									<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
 								</TouchableOpacity>
 							</View>
-							<ScrollView style={{height: 150,marginBottom: 20,marginTop: 20}}>
+							<ScrollView style={styles.last2}>
 
 							{this.state.loading && <View style={styles.loading}>
-									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last3} /></Text>
 								</View>
 							}
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
@@ -116,10 +116,10 @@ class TimeSlot extends React.Component{
 							</ScrollView>					
 						</View>
 						<View style={styles.lasts}>
-							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+							<View style={styles.last4}>
 								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
 							</View>
-							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+							<View style={styles.last4}>
 								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
 							</View>
 						</View>
@@ -230,10 +230,23 @@ const styles = StyleSheet.create({
 	  	flexDirection: 'row',
 	  	paddingBottom: 30
 	  },
-	  center:{
+	center:{
 	  	textAlign: 'center',
 	  	marginTop: 20,
 	  	fontSize: 20,
 	  	color: '#fff'
-	  }
+	},
+	last2: {
+		height: 150,
+		marginBottom: 20,
+		marginTop: 20
+	},
+	last3: {
+		width: 60, 
+		height: 60
+	},
+	last4: {
+		width: '50%', 
+		alignSelf: 'flex-start'
+	}
 })

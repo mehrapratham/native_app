@@ -2,7 +2,6 @@ import React from 'react';
 import {TextInput, View, StyleSheet} from 'react-native'
 export default class InputBox extends React.Component{
   onChange(event){
-    console.log(event)
     this.props.onChange(event)
   }
 
@@ -24,7 +23,7 @@ export default class InputBox extends React.Component{
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    height: 50, 
+    height: 45, 
     width: "100%", 
     paddingLeft: 15, 
     fontSize: 15, 

@@ -5,7 +5,6 @@ var {height, width} = Dimensions.get('window');
 width = width - 40;
 export default class SelectBox extends React.Component{
   onChange(event){
-    console.log(event,111111111111111)
     this.props.onValueChange(event)
   }
 	render(){		

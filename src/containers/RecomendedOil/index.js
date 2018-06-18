@@ -56,17 +56,17 @@ class RecomendedOil extends React.Component{
 						</View>
 						<View style={styles.radiobttn}>
 							{this.state.loading && <View style={styles.loading}>
-								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={{width: 60, height: 60}} /></Text>
+								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
 							</View>
 							}
-							{types && types.length == 0 && <Text style={{textAlign: 'center',color: '#fff',fontSize: 22}}>No OilType to show</Text>}
+							{types && types.length == 0 && <Text style={styles.last3}>No OilType to show</Text>}
 							<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
 						</View>
 						<View style={styles.lasts}>
-							<View style={{width: '50%', alignSelf: 'flex-start'}}>
+							<View style={styles.last4}>
 								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
 							</View>
-							<View style={{width: '50%', alignSelf: 'flex-end'}}>
+							<View style={styles.last4}>
 								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedOilType == ''} />
 							</View>
 						</View>
@@ -143,5 +143,18 @@ const styles = StyleSheet.create({
 	  	paddingLeft: 20,
 	  	flexDirection: 'row',
 	  	marginBottom: 30
-	  },
+	},
+	last2: {
+		width: 60, 
+		height: 60
+	},
+	last3: {
+		textAlign: 'center',
+		color: '#fff',
+		fontSize: 22
+	},
+	last4: {
+		width: '50%', 
+		alignSelf: 'flex-start'
+	}
 })
