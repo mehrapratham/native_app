@@ -70,19 +70,19 @@ class PaymentForm extends React.Component{
 				<View style={{flex: 3}}>
 					<View style={styles.address}>
 						<Text style={styles.label}>Card Number</Text>
-						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16}/>
+						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="next"/>
 					</View>
 					<View>
 						<Text style={styles.label}>Expiry Month</Text>
-						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')}/>
+						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')} nextkey="next"/>
 					</View>
 					<View>
 						<Text style={styles.label}>Expiry year</Text>
-						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')}/>
+						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')} nextkey="next"/>
 					</View>
 					<View style={styles.address}>
 						<Text style={styles.label}>CVV</Text>
-						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3}/>
+						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} nextkey="go"/>
 					</View>
 				</View>
 				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>

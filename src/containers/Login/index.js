@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard } from 'react-native'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 export default class Login extends React.Component{
 	onButtonPress() {
 	  	this.props.history.push('/vehicle-form');
 	}
+	onclick(){
+		console.log(1111)
+	}
 	render(){
 		return(
-			<View style={styles.container}>
+			<TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
 				<View style={styles.container}>
 					<View style={styles.logo}>
 						<Text style={styles.logoText}>TRANZOIL</Text>
@@ -18,8 +21,13 @@ export default class Login extends React.Component{
 							<TextInput
 				              	style={styles.last3}
 				              	placeholder="username"
-				              	underlineColorAndroid="#d6edf8"
+				              	underlineColorAndroid="transparent"
 				              	placeholderTextColor="#fff"
+				              	returnKeyType = {"next"}
+				              	autoFocus = {false}
+				              	onSubmitEditing={(event) => { 
+				                	this.refs.password.focus(); 
+					            }}
 				          	/>
 				          	<View style={styles.last4}>
 								<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" style={styles.icon} icon={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
@@ -29,8 +37,13 @@ export default class Login extends React.Component{
 							<TextInput
 				              	style={styles.last3}
 				              	placeholder="password"
-				              	underlineColorAndroid="#d6edf8"
+				              	underlineColorAndroid="transparent"
 					            placeholderTextColor="#fff"
+					            ref="password"
+					            returnKeyType = {"go"}
+					            onSubmitEditing={(event) => { 
+				                	this.refs.guest.focus(); 
+					            }}
 						    />
 						    <View style={styles.last4}>
 								<FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" style={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
@@ -71,13 +84,13 @@ export default class Login extends React.Component{
 							</View>
 						</View>
 						<View style={styles.last18}>
-							<TouchableOpacity style={styles.last9} onPress={this.onButtonPress.bind(this)}>
+							<TouchableOpacity style={styles.last9} onPress={this.onButtonPress.bind(this)} ref="guest">
 								<Text style={styles.color}>Continue as guest</Text>
 							</TouchableOpacity>
 						</View>
 					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		)
 	}
 }

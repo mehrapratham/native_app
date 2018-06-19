@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import SelectBox from '../../components/SelectBox'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
@@ -88,27 +88,27 @@ class Vehicleform extends React.Component{
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
 		let child = <View style={styles.container}>
-				<View style={{flex: 1}}>
-					<View style={styles.headingCon}>
-						<Text style={styles.heading}>Enter Vehicle Details</Text>
-					</View>
-				</View>
+						<View style={{flex: 1}}>
+							<View style={styles.headingCon}>
+								<Text style={styles.heading}>Enter Vehicle Details</Text>
+							</View>
+						</View>
 				
-				<View style={styles.view}>
-					<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
-					<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
-					<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
-					<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} />
+						<View style={styles.view}>
+							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
+							<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
+							<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
+							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="go"/>
+						</View>
+						<View style={styles.lasts}>
+							<View style={styles.last2}>
+								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+							</View>
+							<View style={styles.last2}>
+								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+							</View>
+						</View>
 				</View>
-				<View style={styles.lasts}>
-					<View style={styles.last2}>
-						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-					</View>
-					<View style={styles.last2}>
-						<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
-					</View>
-				</View>
-			</View>
 		return(
 			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)

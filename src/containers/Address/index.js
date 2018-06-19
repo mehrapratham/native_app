@@ -70,23 +70,23 @@ class Address extends React.Component{
 						<View style={styles.view}>
 							<View style={styles.address}>
 								<Text style={styles.label}>Street</Text>
-								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')}/>
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next"/>
 							</View>
 							<View style={styles.address}>
 								<Text style={styles.label}>City</Text>
-								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')}/>
+								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" />
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
 									<View style={styles.text3}>
 										<Text style={styles.label}>Zip</Text>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')}/>
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="next" />
 									</View>
 								</View>
 								<View style={styles.text4}>
 									<View style={styles.text3}>
 										<Text style={styles.label}>State</Text>
-										<InputBox value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')}/>
+										<InputBox value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')} nextkey="go" />
 									</View>
 								</View>
 							</View>

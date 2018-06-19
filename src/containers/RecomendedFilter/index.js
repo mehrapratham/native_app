@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native'
+import { View, Text, Image,StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -56,12 +56,19 @@ class RecomendedFilter extends React.Component{
 							<Text style={styles.subheading}>(Select one)</Text>
 						</View>
 						<View style={styles.list}>
-							{this.state.loading && <View style={styles.loading}>
+							<ScrollView style={styles.radio}>
+							{this.state.loading ? <View style={styles.loading}>
 									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
-								</View>
+								</View>:
+							<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
 							}
 							{filters && filters.length == 0 && <Text style={styles.last3}>No FilterType to show</Text>}
-							<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
+							</ScrollView>
+							<View style={styles.img}>
+								<View style={{width: 100,height: 150,overflow: 'hidden'}}>
+									<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
+								</View>
+							</View>
 						</View>
 						<View style={styles.lasts}>
 							<View style={styles.last4}>
@@ -73,7 +80,6 @@ class RecomendedFilter extends React.Component{
 						</View>
 					</View>
 		return(
-			
 			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}
@@ -96,7 +102,9 @@ const styles = StyleSheet.create({
 	  	alignItems: 'center',
 	  	alignSelf: 'center',
 	  	justifyContent: 'center',
-	  	paddingTop: 20
+	  	paddingTop: 20,
+	  	paddingLeft: 20,
+	  	paddingRight: 20
 	  },
 	view: {
 		flex: 1,
@@ -155,6 +163,14 @@ const styles = StyleSheet.create({
 	last4: {
 		width: '50%', 
 		alignSelf: 'flex-start'
+	},
+	radio: {
+		flex: 1,
+	},
+	img: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'flex-end',
 	}
 	
 })

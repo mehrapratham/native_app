@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 8420,
-  "expoServerNgrokUrl": "https://22-ujp.lovetrivedi.customer-app-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.22-ujp.lovetrivedi.customer-app-frontend.exp.direct",
-  "ngrokPid": 8440
+  "expoServerPort": 19001,
+  "packagerPort": 19003,
+  "packagerPid": 9791,
+  "expoServerNgrokUrl": "https://sv-x2d.lovetrivedi.customer-app-frontend.exp.direct",
+  "packagerNgrokUrl": "https://packager.4h-a4j.lovetrivedi.customer-app-frontend.exp.direct",
+  "ngrokPid": 9723
 }

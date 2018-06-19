@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { Drawer } from 'native-base';
 import FontAwesomeIcon from '../Icon/FontAwesomeIcon'
 import MenuItem from './MenuItem'
@@ -7,7 +7,8 @@ export default class ReactNativeDrawer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isOpened: false
+      isOpened: false,
+      isDisabled: true,
     }
   }
   closeDrawer = () => {
@@ -28,7 +29,7 @@ export default class ReactNativeDrawer extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
         <View style={styles.last2}>
             <TouchableOpacity onPress={this.openDrawer}>
               {this.state.isOpened ?
@@ -46,9 +47,10 @@ export default class ReactNativeDrawer extends React.Component {
           onClose={() => this.closeDrawer()}
           tapToClose={true}
           openDrawerOffset={0.5} >
+
           {this.props.child}
         </Drawer>
-      </View>
+      </TouchableOpacity>
       
     );
   }
@@ -62,7 +64,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 20
+    paddingTop: 25,
+
   },
   last2: {
     backgroundColor: '#000',

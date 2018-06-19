@@ -8,7 +8,11 @@ export default class SelectBox extends React.Component{
 	}
 
 	render(){
-		let selectedIndex = this.props.value && this.props.list && this.props.list.findIndex(item=> item == this.props.value) || ''
+		let selectedIndex = this.props.value && this.props.list && this.props.list.findIndex(item=> item == this.props.value)
+		console.log(selectedIndex,222222222)
+		/*if (selectedIndex == '') {
+			selectedIndex = null
+		}*/
 		return(
 			<RadioGroup color="#fff" thickness="10" style={styles.container} selectedIndex={selectedIndex && selectedIndex} onSelect= {(index, value) => this.onChange(index, value)}>
 				{this.props.list && this.props.list.map((item,key) => {
