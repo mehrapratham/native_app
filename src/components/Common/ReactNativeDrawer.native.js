@@ -8,7 +8,6 @@ export default class ReactNativeDrawer extends React.Component {
     super(props);
     this.state = {
       isOpened: false,
-      isDisabled: true,
     }
   }
   closeDrawer = () => {
