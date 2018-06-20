@@ -16,8 +16,7 @@ class PaymentForm extends React.Component{
 	    	cardDetail: {
 	    		'card_number': '',
 	    		'card_cvc': '',
-	    		'card_exp_month': '',
-	    		'card_exp_year': ''
+	    		'card_exp_date': ''
 	    	},
 	    	yearList: ["2019","2020","2021","2022","2023"],
 	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"],
@@ -29,42 +28,83 @@ class PaymentForm extends React.Component{
 
 	onValueChange(key,event){
 		const{ cardDetail } = this.state;
-		cardDetail[key] = event;
-	    this.setState({cardDetail});
+		
 
-	    let fields = ['card_number', 'card_cvc', 'card_exp_month', 'card_exp_year']
-      	let formValidation = IsValidForm(fields, this.state.cardDetail)
-      	this.setState({ errors: formValidation.errors })
-      	if (formValidation.validate) {
-      		this.setState({loading: false})
-      	}
-      	else{
-      		this.setState({loading: true})
-      	}
+	    /*let fields = ['card_number', 'card_cvc', 'card_exp_date']
+    	let formValidation = IsValidForm(fields, this.state.cardDetail)
+    	this.setState({ errors: formValidation.errors })
+    	if (formValidation.validate) {
+    		this.setState({loading: false})
+    	}
+    	else{
+    		this.setState({loading: true})
+    	}*/
+      if(key == 'card_exp_date'){
+        if (event.length == 1) {
+          if (parseInt(event) > 1) {
+            cardDetail[key] = '0';
+          }
+          else{
+            cardDetail[key] = event;
+          }
+        }
+        else if(event.length == 2){
+          if (parseInt(event) > 12) {
+            cardDetail[key] = '12/';
+          }
+          else{
+            cardDetail[key] = event+'/';
+          }
+        }
+        else if (event.length > 3){
+          cardDetail[key] = event;
+          this.setState({cardDetail})
+        }
+        this.setState({cardDetail})
+      }
+      else{
+        cardDetail[key] = event;
+        this.setState({cardDetail})
+      }
 	}
+
+  validateDate(date){
+    if (date.length == 1) {
+      if (parseInt(date) > 1) {
+
+      }
+    }
+    if (data.length == 2) {
+      
+    }
+  }
 	onSubmit(){
-		let fields = ['card_number', 'card_cvc', 'card_exp_month', 'card_exp_year']
+		let fields = ['card_number', 'card_cvc', 'card_exp_date']
       	let formValidation = IsValidForm(fields, this.state.cardDetail)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
       		this.setState({loading: true})
 			let {cardDetail} = this.state;
+      let seprateDate = cardDetail.card_exp_date.split('/')
 			let data = {
 				"card[number]": cardDetail.card_number,
 				"card[cvc]": cardDetail.card_cvc,
-				"card[exp_month]": cardDetail.card_exp_month,
-				"card[exp_year]": cardDetail.card_exp_year,
+				"card[exp_month]": seprateDate[0],
+				"card[exp_year]": seprateDate[1],
 				"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
 			}
-			this.props.dispatch(createToken(data)).then(res=>{
+      console.log(data);
+			/*this.props.dispatch(createToken(data)).then(res=>{
 				this.props.payAmount(res.id)
 				this.setState({loading: false})
-			})
-      	}	
+			})*/
+    }	
 	}
+  
 
 	render(){
 		const{ cardDetail, yearList, monthList } = this.state;
+    console.log(this.state.cardDetail)
 		return(
 			<View style={{flex: 1}}>
 				<View style={{flex: 3}}>
@@ -72,21 +112,29 @@ class PaymentForm extends React.Component{
 						<Text style={styles.label}>Card Number</Text>
 						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="next"/>
 					</View>
-					<View>
+					{/*<View>
 						<Text style={styles.label}>Expiry Month</Text>
 						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')} nextkey="next"/>
 					</View>
 					<View>
 						<Text style={styles.label}>Expiry year</Text>
-						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_year} onValueChange={this.onValueChange.bind(this,'card_exp_year')} nextkey="next"/>
-					</View>
+						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_date} onValueChange={this.onValueChange.bind(this,'card_exp_date')} nextkey="next"/>
+					</View>*/}
+          {/*<View>
+            <Text style={styles.label}>Expiry year</Text>
+            <SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_date} onValueChange={this.onValueChange.bind(this,'card_exp_date')} nextkey="next"/>
+          </View>*/}
+          <View style={styles.address}>
+            <Text style={styles.label}>MM/YY</Text>
+            <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="go"/>
+          </View>
 					<View style={styles.address}>
 						<Text style={styles.label}>CVV</Text>
 						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} nextkey="go"/>
 					</View>
 				</View>
 				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
-					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)} disabled={this.state.loading}/>
+					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)}/>
 				</View>
 			</View>
 		)
