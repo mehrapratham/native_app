@@ -24,14 +24,14 @@ class App extends React.Component{
       <Router>
         <Switch>
           <View style={{ display: 'flex', minHeight: '100%'}}>
-            {/*<Route exact path="/" component={Login} />*/}
+            <Route exact path="/" component={Login} />
             <Route path="/vehicle-form" component={Vehicleform} />
             <Route path="/recomended-oil" component={RecomendedOil} />
             <Route path="/recomended-filter" component={RecomendedFilter} />
             <Route path="/address" component={Address} />
             <Route path="/time-slot" component={TimeSlot} />
             <Route path="/summary" component={Summary} />
-            <Route exact path="/" component={PaymentInfo} />
+            <Route path="/payment-info" component={PaymentInfo} />
             <Route path="/final-screen" component={FinalScreen} />
           </View>
         </Switch>
