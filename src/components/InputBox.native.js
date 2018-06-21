@@ -6,11 +6,19 @@ export default class InputBox extends React.Component{
         this.state = {hasFocus: false};
   }
   onChange(event){
+    // console.log(event)
     this.props.onChange(event)
   }
   setFocus (hasFocus) {
       this.setState({hasFocus});
     }
+
+  handleKeyDown(e) {
+    console.log(e.nativeEvent,3333)
+    if(e.nativeEvent.key == "Backspace"){
+        // dismissKeyboard();
+    }
+}
 	render(){
 		return(
 			<TextInput
@@ -26,6 +34,8 @@ export default class InputBox extends React.Component{
         underlineColorAndroid="transparent"
         onFocus={this.setFocus.bind(this, true)}
         onBlur={this.setFocus.bind(this, false)}
+        onKeyPress={this.handleKeyDown.bind(this)}
+        keyboardType={this.props.keyboardType}
 	    />
 		)
 	}

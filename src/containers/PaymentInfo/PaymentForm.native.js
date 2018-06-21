@@ -28,9 +28,9 @@ class PaymentForm extends React.Component{
 
 	onValueChange(key,event){
 		const{ cardDetail } = this.state;
-		
 
-	    /*let fields = ['card_number', 'card_cvc', 'card_exp_date']
+
+	    let fields = ['card_number', 'card_cvc', 'card_exp_date']
     	let formValidation = IsValidForm(fields, this.state.cardDetail)
     	this.setState({ errors: formValidation.errors })
     	if (formValidation.validate) {
@@ -38,8 +38,8 @@ class PaymentForm extends React.Component{
     	}
     	else{
     		this.setState({loading: true})
-    	}*/
-      if(key == 'card_exp_date'){
+    	}
+      if(key == 'card_exp_date' && cardDetail[key].length < event.length){
         if (event.length == 1) {
           if (parseInt(event) > 1) {
             cardDetail[key] = '0';
@@ -84,21 +84,22 @@ class PaymentForm extends React.Component{
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
       		this.setState({loading: true})
-			let {cardDetail} = this.state;
-      let seprateDate = cardDetail.card_exp_date.split('/')
-			let data = {
-				"card[number]": cardDetail.card_number,
-				"card[cvc]": cardDetail.card_cvc,
-				"card[exp_month]": seprateDate[0],
-				"card[exp_year]": seprateDate[1],
-				"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
-			}
-      console.log(data);
-			/*this.props.dispatch(createToken(data)).then(res=>{
-				this.props.payAmount(res.id)
-				this.setState({loading: false})
-			})*/
-    }	
+    			let {cardDetail} = this.state;
+          let seprateDate = cardDetail.card_exp_date.split('/')
+    			let data = {
+    				"card[number]": cardDetail.card_number,
+    				"card[cvc]": cardDetail.card_cvc,
+    				"card[exp_month]": seprateDate[0],
+    				"card[exp_year]": seprateDate[1],
+    				"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
+    			}
+          console.log(data);
+    			this.props.dispatch(createToken(data)).then(res=>{
+            console.log('chl gya sir')
+    				this.props.payAmount(res.id)
+    				this.setState({loading: false})
+    			})
+      }	
 	}
   
 
@@ -110,27 +111,15 @@ class PaymentForm extends React.Component{
 				<View style={{flex: 3}}>
 					<View style={styles.address}>
 						<Text style={styles.label}>Card Number</Text>
-						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="next"/>
+						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="next" keyboardType='numeric' />
 					</View>
-					{/*<View>
-						<Text style={styles.label}>Expiry Month</Text>
-						<SelectBox placeholder="MM" list={monthList} selectedValue={cardDetail.card_exp_month} onValueChange={this.onValueChange.bind(this,'card_exp_month')} nextkey="next"/>
-					</View>
-					<View>
-						<Text style={styles.label}>Expiry year</Text>
-						<SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_date} onValueChange={this.onValueChange.bind(this,'card_exp_date')} nextkey="next"/>
-					</View>*/}
-          {/*<View>
-            <Text style={styles.label}>Expiry year</Text>
-            <SelectBox placeholder="YY" list={yearList} selectedValue={cardDetail.card_exp_date} onValueChange={this.onValueChange.bind(this,'card_exp_date')} nextkey="next"/>
-          </View>*/}
           <View style={styles.address}>
             <Text style={styles.label}>MM/YY</Text>
-            <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="go"/>
+            <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="next" keyboardType='numeric'/>
           </View>
 					<View style={styles.address}>
 						<Text style={styles.label}>CVV</Text>
-						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} nextkey="go"/>
+						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} nextkey="go" keyboardType='numeric'/>
 					</View>
 				</View>
 				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
