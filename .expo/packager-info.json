@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19002,
-  "packagerPid": 19193,
-  "expoServerNgrokUrl": "https://dj-khz.lovetrivedi.customer-app-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.dj-khz.lovetrivedi.customer-app-frontend.exp.direct",
-  "ngrokPid": 18904
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

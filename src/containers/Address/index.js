@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -43,7 +43,6 @@ class Address extends React.Component{
 			this.setState({loading: false})
 		  	this.props.history.push('/time-slot');
       	}
-		
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/recomended-filter');
@@ -63,11 +62,11 @@ class Address extends React.Component{
       	}
 	}
 	render(){
-		let child = <View style={styles.container}>
+		let child = <View style={styles.container} >
 						<View style={styles.arrow}>
 							<Text style={styles.heading}>Enter Service Address</Text>
 						</View>
-						<View style={styles.view}>
+						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<View style={styles.address}>
 								<Text style={styles.label}>Street</Text>
 								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next"/>
@@ -80,7 +79,7 @@ class Address extends React.Component{
 								<View style={styles.text2}>
 									<View style={styles.text3}>
 										<Text style={styles.label}>Zip</Text>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="next" />
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric'/>
 									</View>
 								</View>
 								<View style={styles.text4}>
@@ -90,7 +89,7 @@ class Address extends React.Component{
 									</View>
 								</View>
 							</View>
-						</View>
+						</KeyboardAvoidingView>
 						<View style={styles.lasts}>
 							<View style={styles.last2}>
 								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />

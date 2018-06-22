@@ -108,18 +108,18 @@ class PaymentForm extends React.Component{
     console.log(this.state.cardDetail)
 		return(
 			<View style={{flex: 1}}>
-				<View style={{flex: 3}}>
+				<View style={{flex: 3}} >
 					<View style={styles.address}>
 						<Text style={styles.label}>Card Number</Text>
-						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="next" keyboardType='numeric' />
+						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="done" keyboardType='numeric' />
 					</View>
           <View style={styles.address}>
             <Text style={styles.label}>MM/YY</Text>
-            <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="next" keyboardType='numeric'/>
+            <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="done" keyboardType='numeric'/>
           </View>
 					<View style={styles.address}>
 						<Text style={styles.label}>CVV</Text>
-						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} nextkey="go" keyboardType='numeric'/>
+						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} keyboardType='numeric'/>
 					</View>
 				</View>
 				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
