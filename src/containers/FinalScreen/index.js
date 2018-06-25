@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet, StatusBar} from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import { connect } from 'react-redux'
@@ -24,6 +24,10 @@ class FinalStep extends React.Component{
 	render(){
     let {orderData} = this.state;
     let child = <View style={styles.container}>
+                  <StatusBar
+                    barStyle="light-content"
+                    backgroundColor="blue"
+                  />
                   <View style={styles.headingview}>
                     <Text style={styles.heading}>Congratulations Your Oil service Has been scheduled</Text>
                   </View>

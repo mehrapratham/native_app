@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -63,6 +63,10 @@ class Address extends React.Component{
 	}
 	render(){
 		let child = <View style={styles.container} >
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.arrow}>
 							<Text style={styles.heading}>Enter Service Address</Text>
 						</View>
@@ -157,25 +161,6 @@ const styles = StyleSheet.create({
   	alignSelf: 'flex-end', 
   	alignItems: 'flex-end'
   },
-  text5: {
-  	flex: 1,
-  	alignItems: 'center',
-  	justifyContent: 'center',
-  	paddingLeft: 20,
-  	paddingRight: 20
-  },
-  arrows: {
-	alignItems: 'flex-end', 
-	alignSelf: 'flex-end', 
-	justifyContent: 'center',
-	marginTop: 20
-  },
-  leftArrow: {
-	margin: 24
-   },
-   oil: {
-   	width: 30
-   },
    lasts: {
 	  	paddingRight: 20,
 	  	paddingLeft: 20,

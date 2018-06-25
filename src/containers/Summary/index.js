@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -69,6 +69,10 @@ class Summary extends React.Component{
 	render(){
 		const { vehicleData,addressData } = this.state;
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.headingView}>
 							<Text style={styles.heading}>Order Summary</Text>
 						</View>

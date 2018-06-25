@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -50,6 +50,10 @@ class RecomendedOil extends React.Component{
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.headingCon}>
 							<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 							<Text style={styles.subheading}>(Select one)</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -39,6 +39,10 @@ class PaymentInfo extends React.Component{
 	}
 	render(){
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.arrow}>
 							<Text style={styles.heading}>Payment Info</Text>
 						</View>
@@ -51,7 +55,6 @@ class PaymentInfo extends React.Component{
 		)
 	}
 }
-
 export default connect(state => ({
   // vehicleForm: state.vehicleForm,
 }, mapDispatch))(PaymentInfo);

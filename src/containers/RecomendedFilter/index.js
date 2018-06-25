@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image,StyleSheet, TouchableOpacity, ScrollView} from 'react-native'
+import { View, Text, Image,StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -51,6 +51,10 @@ class RecomendedFilter extends React.Component{
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		const {vehicleData} = this.state;
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.headingCon}>
 							<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
 							<Text style={styles.subheading}>(Select one)</Text>
@@ -65,8 +69,8 @@ class RecomendedFilter extends React.Component{
 							{filters && filters.length == 0 && <Text style={styles.last3}>No FilterType to show</Text>}
 							</ScrollView>
 							<View style={styles.img}>
-								<View style={{width: 100,height: 150,overflow: 'hidden'}}>
-									<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
+								<View style={styles.outerView}>
+									<Image source={require('../../img/oiltype.jpeg')} style={styles.imgView}/>
 								</View>
 							</View>
 						</View>
@@ -171,6 +175,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
+	},
+	outerView: {
+		width: 100,
+		height: 150,
+		overflow: 'hidden'
+	},
+	imgView: {
+		width: '100%',
+		height: '100%'
 	}
 	
 })

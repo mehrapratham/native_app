@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard, StatusBar } from 'react-native'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 export default class Login extends React.Component{
@@ -12,6 +12,9 @@ export default class Login extends React.Component{
 	render(){
 		return(
 			<TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
+				<StatusBar barStyle = "light-content"
+			      backgroundColor="black"
+			    />
 				<View style={styles.container}>
 					<View style={styles.logo}>
 						<Text style={styles.logoText}>TRANZOIL</Text>

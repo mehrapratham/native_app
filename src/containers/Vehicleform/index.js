@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar } from 'react-native'
 import SelectBox from '../../components/SelectBox'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
@@ -88,6 +88,10 @@ class Vehicleform extends React.Component{
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={{flex: 1}}>
 							<View style={styles.headingCon}>
 								<Text style={styles.heading}>Enter Vehicle Details</Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar} from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -84,6 +84,10 @@ class TimeSlot extends React.Component{
 	render(){
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		let child = <View style={styles.container}>
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
 						<View style={styles.view}>
 							<Text style={styles.heading}>Select Time slot</Text>
 						</View>
