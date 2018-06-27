@@ -90,7 +90,7 @@ class Vehicleform extends React.Component{
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
-					      backgroundColor="blue"
+					      backgroundColor="#fff"
 					    />
 						<View style={{flex: 1}}>
 							<View style={styles.headingCon}>

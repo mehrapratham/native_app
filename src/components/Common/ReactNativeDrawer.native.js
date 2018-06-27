@@ -63,14 +63,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingTop: 25,
 
   },
   last2: {
     backgroundColor: '#000',
-    height: 40,
+    height: 64,
     justifyContent: 'center',
-    paddingLeft: 15
+    paddingLeft: 15,
+    paddingTop: 24
   }
   
 });

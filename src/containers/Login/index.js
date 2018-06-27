@@ -13,7 +13,7 @@ export default class Login extends React.Component{
 		return(
 			<TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
 				<StatusBar barStyle = "light-content"
-			      backgroundColor="black"
+			      backgroundColor="blue"
 			    />
 				<View style={styles.container}>
 					<View style={styles.logo}>

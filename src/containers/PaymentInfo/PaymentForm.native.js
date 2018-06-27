@@ -8,6 +8,7 @@ import SelectBox from '../../components/SelectBox'
 import {createToken} from '../../actions/VehicleForm'
 import { connect } from 'react-redux'
 import { IsValidForm } from '../../components/Common/validation'
+import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
 class PaymentForm extends React.Component{
 
 	constructor() {
@@ -95,7 +96,7 @@ class PaymentForm extends React.Component{
     			}
           console.log(data);
     			this.props.dispatch(createToken(data)).then(res=>{
-            console.log('chl gya sir')
+            console.log('chl gya sir',res)
     				this.props.payAmount(res.id)
     				this.setState({loading: false})
     			})
@@ -106,9 +107,10 @@ class PaymentForm extends React.Component{
 	render(){
 		const{ cardDetail, yearList, monthList } = this.state;
     console.log(this.state.cardDetail)
+    console.log(this.props.id,'gafdsgfhgsfdhsgdfgsfdgfsdf')
 		return(
-			<View style={{flex: 1}}>
-				<View style={{flex: 3}} >
+			<View style={styles.container}>
+				<View style={styles.text7}>
 					<View style={styles.address}>
 						<Text style={styles.label}>Card Number</Text>
 						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="done" keyboardType='numeric' />
@@ -122,8 +124,11 @@ class PaymentForm extends React.Component{
 						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} keyboardType='numeric'/>
 					</View>
 				</View>
-				<View style={{flex: 1, justifyContent: 'flex-end', paddingBottom: 30}}>
-					<ConfirmButton label="Pay now" onButtonPress={this.onSubmit.bind(this)}/>
+				<View style={styles.secondCon}>
+          <View style={styles.text5}><Text style={styles.text6}>enter card info to confirm booking, (you won't be charged until after service completion)</Text></View>
+          <View style={styles.container}>
+					<ConfirmButton label="Confirm Booking" onButtonPress={this.onSubmit.bind(this)}/>
+          </View>
 				</View>
 			</View>
 		)
@@ -209,5 +214,19 @@ const styles = StyleSheet.create({
   	width: '50%', 
   	alignSelf: 'flex-end', 
   	alignItems: 'flex-end'
+  },
+  text5: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  text6: {
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  secondCon: {
+    flex: 2
+  },
+  text7: {
+    flex: 3
   }
 });

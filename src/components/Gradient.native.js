@@ -19,6 +19,7 @@ export default class Gradient extends React.Component{
 const styles = StyleSheet.create({
   container: {
     // alignItems: 'center'
+    
   },
   
 });

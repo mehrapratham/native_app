@@ -137,6 +137,23 @@ let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id
      })
  }
 }
+export const confirmBookingOrder = (token, id) => {
+let query = {query: 'mutation{payment(input:{paymentToken:"'+token+ '",id:"' + id + '"}){msz}}'}
+ return dispatch => {
+   return axios
+     .post(`${GRAPHQL_URL}`, query)
+     .then(res => {
+       return res.data.data.payment
+     })
+     .catch(function(error) {
+       dispatch({
+         type: HAS_ERROR,
+         data: error,
+       })
+       return error
+     })
+ }
+}
 
 
 export const payAmount = (token, amount) => {

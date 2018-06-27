@@ -66,6 +66,9 @@ class Summary extends React.Component{
 			return (moment(date.start).format('hh')+ ':' +moment(date.start).format('mm') +' '+ moment(date.start).format('a')+ ' - ' + moment(date.end).format('hh')+ ':' +moment(date.end).format('mm') + ' ' + moment(date.start).format('a'))
 		}
 	}
+	backButton(){
+		this.props.history.push('/time-slot')
+	}
 	render(){
 		const { vehicleData,addressData } = this.state;
 		let child = <View style={styles.container}>
@@ -73,24 +76,34 @@ class Summary extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
+					    <View style={{paddingTop: 10,paddingLeft: 20}}>
+						    <TouchableOpacity onPress={this.backButton.bind(this)}>
+						    	<FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" styles={{fontSize: 26}}/>
+						    </TouchableOpacity>
+					    </View>
 						<View style={styles.headingView}>
 							<Text style={styles.heading}>Order Summary</Text>
 						</View>
 						<View style={styles.view}>
-							<View style={styles.left}>
-								<Text>Oil type: {vehicleData.oilType}</Text>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Oil type</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}</Text></View>
 							</View>
-							<View style={styles.left}>
-								<Text>filter type: {vehicleData.filterType}</Text>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>filter type</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.filterType}</Text></View>
 							</View>
-							<View style={styles.left}>
-								<Text>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Car / Model</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text></View>
 							</View>
-							<View style={styles.left}>
-								<Text>Time: {vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Time</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text></View>
 							</View>
-							<View style={styles.left}>
-								<Text>Address: {addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Address</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text></View>
 							</View>
 						</View>
 						<View style={styles.lasts}>
@@ -151,5 +164,29 @@ const styles = StyleSheet.create({
 	  	paddingLeft: 20,
 	  	marginBottom: 30
 	  },
+	lastCon: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		width: '100%',
+		height: 40,
+		backgroundColor: '#fff',
+		marginBottom: 5,
+		borderRadius: 5
+	},
+	innerCon: {
+		width: '50%',
+		paddingLeft: 30
+	},
+	lastCon2: {
+		fontSize: 18,
+		fontWeight: 'bold'
+	},
+	endFlex: {
+		alignSelf: 'flex-end'
+	},
+	innerCon3: {
+		width: '50%',
+		paddingRight: 30
+	},
 	
 })

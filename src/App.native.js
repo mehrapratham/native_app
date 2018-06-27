@@ -38,7 +38,7 @@ class App extends React.Component{
       </Router>
     )
     return(
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, padingTop: 20}}>
         <Gradient child = {child}/>
       </View>
     )

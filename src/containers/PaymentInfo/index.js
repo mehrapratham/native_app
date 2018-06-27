@@ -8,17 +8,19 @@ import { connect } from 'react-redux'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
 import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
 import PaymentForm from './PaymentForm'
-import {payAmount} from '../../actions/VehicleForm'
+import {payAmount,confirmBookingOrder} from '../../actions/VehicleForm'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 var timekit = require('timekit-sdk');
 
 class PaymentInfo extends React.Component{
-	componentWillMount()	{
+	async componentWillMount()	{
 		timekit.configure({
 		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
 		})
-		this.props.dispatch(removeLocalStorage('vehicleData'))
-		this.props.dispatch(removeLocalStorage('addressData'))
+		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+		console.log(vehicleData,111111111)
+		// this.props.dispatch(removeLocalStorage('vehicleData'))
+		// this.props.dispatch(removeLocalStorage('addressData'))
 	}
 	onButtonPress() {
 	  	this.props.history.push('/final-screen');
@@ -29,25 +31,43 @@ class PaymentInfo extends React.Component{
 
 	async payAmount(token){
 		let amount = 5000;
-		let bookingData = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
-		this.props.dispatch(payAmount(token, amount)).then(res=>{
-			timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
-				this.props.dispatch(removeLocalStorage('currentBookingDetail'))
-			})
-           this.props.history.push('/final-screen')
-        })
+		// let bookingData = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
+		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+		console.log(token,2222222)
+		this.props.dispatch(confirmBookingOrder(token,vehicleData._id)).then(res => {
+			console.log(res,'response')
+			if(res.msz == 'success'){
+				this.props.history.push('/final-screen')
+			}
+		})
+		// this.props.dispatch(payAmount(token, amount)).then(res=>{
+		// 	con
+		// 	timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
+		// 		this.props.dispatch(removeLocalStorage('currentBookingDetail'))
+		// 	})
+  //          this.props.history.push('/final-screen')
+  //       })
+	}
+	backButton(){
+		this.props.history.push('/summary')
 	}
 	render(){
+		let vehicleData = this.props.dispatch(getFromLocalStorage('confirmOrder'))
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
+					    <View style={{paddingTop: 10,paddingLeft: 20}}>
+						    <TouchableOpacity onPress={this.backButton.bind(this)}>
+						    	<FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" styles={{fontSize: 26}}/>
+						    </TouchableOpacity>
+					    </View>
 						<View style={styles.arrow}>
 							<Text style={styles.heading}>Payment Info</Text>
 						</View>
 						<View style={styles.view}>
-							<PaymentForm payAmount={this.payAmount.bind(this)}/>
+							<PaymentForm payAmount={this.payAmount.bind(this)} />
 						</View>
 					</View>
 		return(

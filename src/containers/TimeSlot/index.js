@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
