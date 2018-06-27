@@ -25,12 +25,13 @@ class TimeSlot extends React.Component{
 	
 	async componentWillMount(){
 		timekit.configure({
-		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
+		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
 		 
 		})
+		console.log(timekit.getResources());
 		this.setState({loading: true})
 		let data = {
-					resource_ids: ["286d96b5-567d-4eb3-b34a-dd085a25185d"], 
+					resource_ids: ["4bc085c1-ac1e-462a-99b1-46b9b1ef2dbb"], 
 					future: '1 month' , 
 					length : '1 hour'
 				}

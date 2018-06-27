@@ -15,7 +15,7 @@ var timekit = require('timekit-sdk');
 class PaymentInfo extends React.Component{
 	async componentWillMount()	{
 		timekit.configure({
-		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
+		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
 		})
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
 		console.log(vehicleData,111111111)

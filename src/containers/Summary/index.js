@@ -21,7 +21,7 @@ class Summary extends React.Component{
 	}
 	async componentWillMount(){
 		timekit.configure({
-		  appKey: 'test_api_key_qNYEtidaxMtFyopx2ofjqwJriNsi9TBI',
+		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
 		 
 		})
 
@@ -44,11 +44,11 @@ class Summary extends React.Component{
 			end: vehicleData.timeslot.end, 
 			what: 'test', 
 			description: 'hi, this is description', 
-			resource_id: '286d96b5-567d-4eb3-b34a-dd085a25185d',
+			resource_id: '4bc085c1-ac1e-462a-99b1-46b9b1ef2dbb',
 			graph: 'confirm_decline',
 			customer: {
 				name: vehicleData.make + ' ' +vehicleData.model,
-				email: "mehrapratham01@gmail.com",
+				email: "shamubarak@hotmail.com",
 			},
 			where: "Courthouse, Hill Valley, CA 95420, USA"
 		}
