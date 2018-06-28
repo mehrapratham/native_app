@@ -10,17 +10,10 @@ import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, 
 import PaymentForm from './PaymentForm'
 import {payAmount,confirmBookingOrder} from '../../actions/VehicleForm'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
-var timekit = require('timekit-sdk');
 
 class PaymentInfo extends React.Component{
 	async componentWillMount()	{
-		timekit.configure({
-		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
-		})
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
-		console.log(vehicleData,111111111)
-		// this.props.dispatch(removeLocalStorage('vehicleData'))
-		// this.props.dispatch(removeLocalStorage('addressData'))
 	}
 	onButtonPress() {
 	  	this.props.history.push('/final-screen');
@@ -30,23 +23,12 @@ class PaymentInfo extends React.Component{
 	}
 
 	async payAmount(token){
-		let amount = 5000;
-		// let bookingData = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
-		console.log(token,2222222)
 		this.props.dispatch(confirmBookingOrder(token,vehicleData._id)).then(res => {
-			console.log(res,'response')
 			if(res.msz == 'success'){
 				this.props.history.push('/final-screen')
 			}
 		})
-		// this.props.dispatch(payAmount(token, amount)).then(res=>{
-		// 	con
-		// 	timekit.updateBooking({id: bookingData.id, action: 'confirm'}).then(res=>{
-		// 		this.props.dispatch(removeLocalStorage('currentBookingDetail'))
-		// 	})
-  //          this.props.history.push('/final-screen')
-  //       })
 	}
 	backButton(){
 		this.props.history.push('/summary')

@@ -2,6 +2,7 @@ import React from 'react'
 import {StripeProvider, Elements} from 'react-stripe-elements';
 import { View } from 'react-native'
 import CardForm from './checkout'
+import {stripeKey} from '../../actions/remoteAPIKeys'
 
 
 class PaymentForm extends React.Component{
@@ -13,10 +14,10 @@ class PaymentForm extends React.Component{
 
 	componentDidMount() {
 	    if (window.Stripe) {
-	      this.setState({stripe: window.Stripe('pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl')});
+	      this.setState({stripe: window.Stripe(stripeKey)});
 	    } else {
 	      document.querySelector('#stripe-js').addEventListener('load', () => {
-	        this.setState({stripe: window.Stripe('pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl')});
+	        this.setState({stripe: window.Stripe(stripeKey)});
 	      });
 	    }
 	}

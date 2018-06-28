@@ -10,6 +10,7 @@ import {confirmOrder} from '../../actions/VehicleForm'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
 var timekit = require('timekit-sdk');
 class Summary extends React.Component{
 	constructor(props){
@@ -21,17 +22,16 @@ class Summary extends React.Component{
 	}
 	async componentWillMount(){
 		timekit.configure({
-		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
-		 
+		  appKey: timekitAPI,
 		})
-
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
 		this.setState({ vehicleData,addressData })
 	}
 	onButtonPress() {
 		const { vehicleData, addressData } = this.state;
-		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'"}'
+		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'"}'
+		console.log(data)
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
@@ -44,7 +44,7 @@ class Summary extends React.Component{
 			end: vehicleData.timeslot.end, 
 			what: 'test', 
 			description: 'hi, this is description', 
-			resource_id: '4bc085c1-ac1e-462a-99b1-46b9b1ef2dbb',
+			resource_id: defaultResourceId,
 			graph: 'confirm_decline',
 			customer: {
 				name: vehicleData.make + ' ' +vehicleData.model,
@@ -86,11 +86,11 @@ class Summary extends React.Component{
 						</View>
 						<View style={styles.view}>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Oil type</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}</Text></View>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Oil Type</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}{' ($' + vehicleData.oilPrice+')'}</Text></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>filter type</Text></View>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Filter Type</Text></View>
 								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.filterType}</Text></View>
 							</View>
 							<View style={styles.lastCon}>

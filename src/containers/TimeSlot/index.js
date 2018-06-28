@@ -10,7 +10,9 @@ import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStor
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
 var timekit = require('timekit-sdk');
+
 class TimeSlot extends React.Component{
 
 	constructor(){
@@ -25,13 +27,13 @@ class TimeSlot extends React.Component{
 	
 	async componentWillMount(){
 		timekit.configure({
-		  appKey: 'live_api_key_NKwPOStZqJmxZktZEJjAUM9z21Q3QUDu',
+		  appKey: timekitAPI,
 		 
 		})
 		console.log(timekit.getResources());
 		this.setState({loading: true})
 		let data = {
-					resource_ids: ["4bc085c1-ac1e-462a-99b1-46b9b1ef2dbb"], 
+					resource_ids: [defaultResourceId], 
 					future: '1 month' , 
 					length : '1 hour'
 				}

@@ -9,6 +9,7 @@ import {createToken} from '../../actions/VehicleForm'
 import { connect } from 'react-redux'
 import { IsValidForm } from '../../components/Common/validation'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+import {stripeKey} from '../../actions/remoteAPIKeys'
 class PaymentForm extends React.Component{
 
 	constructor() {
@@ -19,8 +20,6 @@ class PaymentForm extends React.Component{
 	    		'card_cvc': '',
 	    		'card_exp_date': ''
 	    	},
-	    	yearList: ["2019","2020","2021","2022","2023"],
-	    	monthList: ["1","2","3","4","5","6","7","8","9","10","11","12"],
 	    	loading: true,
 	    	error: {}
 	    };
@@ -92,11 +91,9 @@ class PaymentForm extends React.Component{
     				"card[cvc]": cardDetail.card_cvc,
     				"card[exp_month]": seprateDate[0],
     				"card[exp_year]": seprateDate[1],
-    				"key" : 'pk_test_a6Bqs1yFWSPwBYlDKiYaKcVl'
+    				"key" : stripeKey
     			}
-          console.log(data);
     			this.props.dispatch(createToken(data)).then(res=>{
-            console.log('chl gya sir',res)
     				this.props.payAmount(res.id)
     				this.setState({loading: false})
     			})
@@ -105,9 +102,7 @@ class PaymentForm extends React.Component{
   
 
 	render(){
-		const{ cardDetail, yearList, monthList } = this.state;
-    console.log(this.state.cardDetail)
-    console.log(this.props.id,'gafdsgfhgsfdhsgdfgsfdgfsdf')
+		const{ cardDetail } = this.state;
 		return(
 			<View style={styles.container}>
 				<View style={styles.text7}>

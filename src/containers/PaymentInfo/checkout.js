@@ -45,7 +45,7 @@ class _CardForm extends React.Component {
             </label>
           </View>
           <View>
-            <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50}}>Pay Now</button>
+            <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50}}>Confirm Booking</button>
           </View>
         </form>
       </View>

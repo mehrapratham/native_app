@@ -14,16 +14,18 @@ class RecomendedOil extends React.Component{
 		super(props)
 		this.state = {
 			selectedOilType: '',
+			selectedOilGrade: '',
 			vehicleData: {},
 			loading: false,
-			errors: {}
+			errors: {},
+			oilGrade: ['Conventional', 'Synthetic Blend', 'Full Synthetic']
 		}
 	}
 	async componentDidMount(){
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		this.setState({vehicleData: data,loading: true})
 		if (data.oilType) {
-			this.setState({selectedOilType: data.oilType})
+			this.setState({selectedOilType: data.oilType, selectedOilGrade: data.oilGrade})
 		}
 		if (data) {
 			this.props.dispatch(getVehicleTypes(data.make,data.model)).then(res => {
@@ -34,7 +36,19 @@ class RecomendedOil extends React.Component{
 	onButtonPress() {
 		if(this.state.selectedOilType){
 			let vehicleData = this.state.vehicleData
-			vehicleData.oilType = this.state.selectedOilType
+			vehicleData.oilType = this.state.selectedOilType;
+			vehicleData.oilGrade = this.state.selectedOilGrade;
+			if (vehicleData.oilGrade == 'Conventional') {
+				vehicleData.oilPrice = '29.99';
+			}
+			else if (vehicleData.oilGrade == 'Synthetic Blend') {
+				vehicleData.oilPrice = '49.99';
+			}
+			else if (vehicleData.oilGrade == 'Full Synthetic') {
+				vehicleData.oilPrice = '79.99';
+			}
+
+
 			let data = JSON.stringify(vehicleData)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
 		  	this.props.history.push('/recomended-filter');
@@ -46,41 +60,54 @@ class RecomendedOil extends React.Component{
 	onChange(event){
 		this.setState({ selectedOilType: event });
 	}
+	onChangeGrade(event){
+		console.log(event)
+		this.setState({ selectedOilGrade: event });
+	}
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
 		let child = <View style={styles.container}>
-						<StatusBar
-					      barStyle="light-content"
-					      backgroundColor="blue"
-					    />
-						<View style={styles.headingCon}>
-							<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-							<Text style={styles.subheading}>(Select one)</Text>
+			<StatusBar
+		      barStyle="light-content"
+		      backgroundColor="blue"
+		    />
+			<View style={styles.headingCon}>
+				<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
+				<Text style={styles.subheading}>(Select one)</Text>
+			</View>
+			<View style={styles.radiobttn}>
+				<ScrollView style={styles.radio}>
+					<View style={{flexDirection: 'row'}}>
+						<View style={{flex: 1}}>
+							<Text style={styles.labelText}>Select Oil Type</Text>
+							{this.state.loading ? <View style={styles.loading}>
+								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
+							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
+							}
+							{types && types.length == 0 && <Text style={styles.last3}>No OilType to show</Text>}
 						</View>
-						<View style={styles.radiobttn}>
-							<ScrollView style={styles.radio}>
-								{this.state.loading ? <View style={styles.loading}>
-									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
-								</View>:<RadioButton list={types} value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
-								}
-								{types && types.length == 0 && <Text style={styles.last3}>No OilType to show</Text>}
-							</ScrollView>
-							<View style={styles.img}>
-								<View style={{width: 100,height: 150,overflow: 'hidden'}}>
-									<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
-								</View>
-							</View>
-						</View>
-						<View style={styles.lasts}>
-							<View style={styles.last4}>
-								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-							</View>
-							<View style={styles.last4}>
-								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedOilType == ''} />
-							</View>
+						<View style={{flex: 1}}>
+							<Text style={styles.labelText}>Select Oil Grade</Text>
+							<RadioButton list={this.state.oilGrade} name="oilGrade" value={this.state.selectedOilGrade} onSelectValue={this.onChangeGrade.bind(this)}/>
 						</View>
 					</View>
+				</ScrollView>
+				<View style={styles.img}>
+					<View style={{width: 100,height: 150,overflow: 'hidden'}}>
+						<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
+					</View>
+				</View>
+			</View>
+			<View style={styles.lasts}>
+				<View style={styles.last4}>
+					<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+				</View>
+				<View style={styles.last4}>
+					<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={(this.state.selectedOilType == '') || (this.state.selectedOilGrade == '')} />
+				</View>
+			</View>
+		</View>
 		return(
 			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
@@ -176,5 +203,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'flex-end',
+	},
+	labelText: {
+		fontSize: 20, 
+		marginLeft: 15, 
+		marginBottom: 10	
 	}
 })
