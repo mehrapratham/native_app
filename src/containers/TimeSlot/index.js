@@ -35,7 +35,18 @@ class TimeSlot extends React.Component{
 		let data = {
 					resource_ids: [defaultResourceId], 
 					future: '1 month' , 
-					length : '1 hour'
+					length : '1 hour',
+					"filters": {
+					  "or":[
+					    { "specific_day_and_time": {"day": "Sunday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Monday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Tuesday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Wednesday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Thursday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Friday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Saturday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }}
+					  ]
+					}
 				}
 		timekit.findTime(data).then(res => {
 			this.props.dispatch(getAvailability(res.data))
@@ -115,6 +126,10 @@ class TimeSlot extends React.Component{
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
 
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index)=>{
+								/*if (moment(date.start).format('hh') < 8)) {
+
+								}*/
+
 								return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
 											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>

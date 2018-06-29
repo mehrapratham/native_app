@@ -15,6 +15,7 @@ class RecomendedOil extends React.Component{
 		this.state = {
 			selectedOilType: '',
 			selectedOilGrade: '',
+			selectedOilPrice: '',
 			vehicleData: {},
 			loading: false,
 			errors: {},
@@ -25,7 +26,7 @@ class RecomendedOil extends React.Component{
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		this.setState({vehicleData: data,loading: true})
 		if (data.oilType) {
-			this.setState({selectedOilType: data.oilType, selectedOilGrade: data.oilGrade})
+			this.setState({selectedOilType: data.oilType, selectedOilGrade: data.oilGrade, selectedOilPrice: data.oilPrice})
 		}
 		if (data) {
 			this.props.dispatch(getVehicleTypes(data.make,data.model)).then(res => {
@@ -38,16 +39,7 @@ class RecomendedOil extends React.Component{
 			let vehicleData = this.state.vehicleData
 			vehicleData.oilType = this.state.selectedOilType;
 			vehicleData.oilGrade = this.state.selectedOilGrade;
-			if (vehicleData.oilGrade == 'Conventional') {
-				vehicleData.oilPrice = '29.99';
-			}
-			else if (vehicleData.oilGrade == 'Synthetic Blend') {
-				vehicleData.oilPrice = '49.99';
-			}
-			else if (vehicleData.oilGrade == 'Full Synthetic') {
-				vehicleData.oilPrice = '79.99';
-			}
-
+			vehicleData.oilPrice = this.state.selectedOilPrice
 
 			let data = JSON.stringify(vehicleData)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
@@ -61,8 +53,17 @@ class RecomendedOil extends React.Component{
 		this.setState({ selectedOilType: event });
 	}
 	onChangeGrade(event){
-		console.log(event)
-		this.setState({ selectedOilGrade: event });
+		let {selectedOilPrice} = this.state;
+		if (event == 'Conventional') {
+			selectedOilPrice = '29.99';
+		}
+		else if (event == 'Synthetic Blend') {
+			selectedOilPrice = '49.99';
+		}
+		else if (event == 'Full Synthetic') {
+			selectedOilPrice = '79.99';
+		}
+		this.setState({ selectedOilGrade: event, selectedOilPrice });
 	}
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
@@ -94,7 +95,8 @@ class RecomendedOil extends React.Component{
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					<View style={{width: 100,height: 150,overflow: 'hidden'}}>
+					<Text style={{textAlign: 'center', fontSize: 20, marginBottom: 10}}>Total ${this.state.selectedOilPrice}</Text>
+					<View style={{width: 70,height: 110,overflow: 'hidden'}}>
 						<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
 					</View>
 				</View>

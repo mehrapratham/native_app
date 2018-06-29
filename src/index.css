@@ -38,9 +38,6 @@ input:focus{
 	border-color: blue;
 	transition: all ease-out 0.3s 0s;
 }
-
-
-
 .Checkout {
   margin: 0 auto;
   max-width: 800px;
@@ -154,4 +151,3 @@ label + button{
 .sideMenu.opened .innerMenu{
   left: 0;
 }
-

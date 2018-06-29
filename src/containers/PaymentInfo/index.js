@@ -40,16 +40,11 @@ class PaymentInfo extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
-					    <View style={{paddingTop: 10,paddingLeft: 20}}>
-						    <TouchableOpacity onPress={this.backButton.bind(this)}>
-						    	<FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" styles={{fontSize: 26}}/>
-						    </TouchableOpacity>
-					    </View>
 						<View style={styles.arrow}>
 							<Text style={styles.heading}>Payment Info</Text>
 						</View>
 						<View style={styles.view}>
-							<PaymentForm payAmount={this.payAmount.bind(this)} />
+							<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
 						</View>
 					</View>
 		return(

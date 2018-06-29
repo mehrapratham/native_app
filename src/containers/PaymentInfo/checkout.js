@@ -1,8 +1,11 @@
 import React from 'react';
-import {StripeProvider, injectStripe, IbanElement, IdealBankElement, Elements, CardElement, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement, PaymentRequestButtonElement} from 'react-stripe-elements';
+import {injectStripe, CardNumberElement, CardExpiryElement, CardCVCElement} from 'react-stripe-elements';
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import {payAmount} from '../../actions/VehicleForm'
+
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 
 class _CardForm extends React.Component {
 
@@ -32,6 +35,9 @@ class _CardForm extends React.Component {
       }
     };
 
+    onButtonPress2() {
+      this.props.history.push('/summary');
+    }
 
   render() {
     return (
@@ -46,6 +52,14 @@ class _CardForm extends React.Component {
           </View>
           <View>
             <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50}}>Confirm Booking</button>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
+              <View>
+                <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+              </View>
+              {/*<View style={styles.last4}>
+                <ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+              </View>*/}
+            </View>
           </View>
         </form>
       </View>

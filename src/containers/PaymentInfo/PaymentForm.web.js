@@ -4,14 +4,12 @@ import { View } from 'react-native'
 import CardForm from './checkout'
 import {stripeKey} from '../../actions/remoteAPIKeys'
 
-
 class PaymentForm extends React.Component{
 
 	constructor() {
 	    super();
 	    this.state = {stripe: null};
 	}
-
 	componentDidMount() {
 	    if (window.Stripe) {
 	      this.setState({stripe: window.Stripe(stripeKey)});
@@ -21,13 +19,12 @@ class PaymentForm extends React.Component{
 	      });
 	    }
 	}
-
 	render(){
 		return(
 			<View>
 				<StripeProvider stripe={this.state.stripe}>
 				    <Elements>
-				        <CardForm payAmount={this.props.payAmount}/>
+				        <CardForm payAmount={this.props.payAmount} history={this.props.history}/>
 				    </Elements>
 			    </StripeProvider>
 		    </View>

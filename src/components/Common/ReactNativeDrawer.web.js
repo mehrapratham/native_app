@@ -26,19 +26,20 @@ export default class ReactNativeDrawer extends React.Component {
     return (
       <View style={{flex: 1}}>
         <View style={{backgroundColor: '#000',height: 50,justifyContent: 'center',paddingLeft: 0}}>
-            <TouchableOpacity onPress={this.openDrawer} style={{width:40}}>
+          <Text style={{color: '#fff', paddingLeft: 20, padingRight: 20, fontSize: 20, textAlign: 'center'}}>Schedule a service today</Text>
+            {/*<TouchableOpacity onPress={this.openDrawer} style={{width:40}}>
               {this.state.isOpened ?
                 <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="user" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
                 :
                 <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="home" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
               }
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
         </View>
         <View style={{flex: 1}}>
-          <div className={this.state.isOpened ? "menuOverlay opened" : 'menuOverlay'} onClick={this.closeDrawer}></div>
+          {/*<div className={this.state.isOpened ? "menuOverlay opened" : 'menuOverlay'} onClick={this.closeDrawer}></div>
           <div className={this.state.isOpened ? 'sideMenu opened' : 'sideMenu'}>
             <MenuItem goToLogin={this.goToLogin.bind(this)}/>
-          </div>
+          </div>*/}
           {this.props.child}
         </View>
       </View>

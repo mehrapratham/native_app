@@ -18,7 +18,8 @@ class Address extends React.Component{
 				street: '',
 				city: '',
 				zip: '',
-				state: ''
+				state: '',
+				phone: ''
 			},
 			errors:{},
 			loading: true
@@ -34,7 +35,7 @@ class Address extends React.Component{
 
 	onButtonPress() {
 		this.setState({loading: true})
-		let fields = ['street', 'city', 'zip', 'state']
+		let fields = ['street', 'city', 'zip', 'state', 'phone']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -51,7 +52,7 @@ class Address extends React.Component{
 	    let { address } = this.state;
 	    address[key] = event;
 		this.setState({ address })
-		let fields = ['street', 'city', 'zip', 'state']
+		let fields = ['street', 'city', 'zip', 'state', 'phone']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -83,15 +84,19 @@ class Address extends React.Component{
 								<View style={styles.text2}>
 									<View style={styles.text3}>
 										<Text style={styles.label}>Zip</Text>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric'/>
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="next" keyboardType='numeric'/>
 									</View>
 								</View>
 								<View style={styles.text4}>
 									<View style={styles.text3}>
 										<Text style={styles.label}>State</Text>
-										<InputBox value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')} nextkey="go" />
+										<InputBox value={this.state.address.state} onChange={this.onChangeText.bind(this,'state')} nextkey="done" />
 									</View>
 								</View>
+							</View>
+							<View style={styles.address}>
+								<Text style={styles.label}>Phone</Text>
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="go" />
 							</View>
 						</KeyboardAvoidingView>
 						<View style={styles.lasts}>

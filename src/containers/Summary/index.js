@@ -30,7 +30,7 @@ class Summary extends React.Component{
 	}
 	onButtonPress() {
 		const { vehicleData, addressData } = this.state;
-		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'"}'
+		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'",phone:"' + vehicleData.phone +'"}'
 		console.log(data)
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
@@ -52,6 +52,7 @@ class Summary extends React.Component{
 			},
 			where: "Courthouse, Hill Valley, CA 95420, USA"
 		}
+
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
@@ -76,11 +77,11 @@ class Summary extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
-					    <View style={{paddingTop: 10,paddingLeft: 20}}>
+					    {/*<View style={{paddingTop: 10,paddingLeft: 20}}>
 						    <TouchableOpacity onPress={this.backButton.bind(this)}>
 						    	<FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" styles={{fontSize: 26}}/>
 						    </TouchableOpacity>
-					    </View>
+					    </View>*/}
 						<View style={styles.headingView}>
 							<Text style={styles.heading}>Order Summary</Text>
 						</View>
@@ -105,9 +106,23 @@ class Summary extends React.Component{
 								<View style={styles.innerCon}><Text style={styles.lastCon2}>Address</Text></View>
 								<View style={styles.innerCon3}><Text style={styles.endFlex}>{addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text></View>
 							</View>
+							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Phone</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}> {addressData.phone} </Text></View>
+							</View>
 						</View>
 						<View style={styles.lasts}>
-							<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
+							<View>
+								<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
+							</View>
+							<View style={{flexDirection: 'row', marginTop: 10}}>
+								<View style={styles.last4}>
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+								</View>
+								{/*<View style={styles.last4}>
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+								</View>*/}
+							</View>
 						</View>
 					</View>
 		return(
@@ -188,5 +203,9 @@ const styles = StyleSheet.create({
 		width: '50%',
 		paddingRight: 30
 	},
+	last4: {
+		width: '50%', 
+		alignSelf: 'flex-start'
+	}
 	
 })

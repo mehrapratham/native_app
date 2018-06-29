@@ -29,7 +29,6 @@ class RecomendedFilter extends React.Component{
 				this.setState({ loading: false})
 			})
 		}
-		
 	}
 	onButtonPress() {
 		if(this.state.selectedFilterType){

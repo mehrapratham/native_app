@@ -10,6 +10,9 @@ import { connect } from 'react-redux'
 import { IsValidForm } from '../../components/Common/validation'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
 import {stripeKey} from '../../actions/remoteAPIKeys'
+import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
+
 class PaymentForm extends React.Component{
 
 	constructor() {
@@ -25,47 +28,44 @@ class PaymentForm extends React.Component{
 	    };
 	}
 
-
 	onValueChange(key,event){
 		const{ cardDetail } = this.state;
-
-
-	    let fields = ['card_number', 'card_cvc', 'card_exp_date']
-    	let formValidation = IsValidForm(fields, this.state.cardDetail)
-    	this.setState({ errors: formValidation.errors })
-    	if (formValidation.validate) {
-    		this.setState({loading: false})
-    	}
-    	else{
-    		this.setState({loading: true})
-    	}
-      if(key == 'card_exp_date' && cardDetail[key].length < event.length){
-        if (event.length == 1) {
-          if (parseInt(event) > 1) {
-            cardDetail[key] = '0';
-          }
-          else{
-            cardDetail[key] = event;
-          }
+    let fields = ['card_number', 'card_cvc', 'card_exp_date']
+  	let formValidation = IsValidForm(fields, this.state.cardDetail)
+  	this.setState({ errors: formValidation.errors })
+  	if (formValidation.validate) {
+  		this.setState({loading: false})
+  	}
+  	else{
+  		this.setState({loading: true})
+  	}
+    if(key == 'card_exp_date' && cardDetail[key].length < event.length){
+      if (event.length == 1) {
+        if (parseInt(event) > 1) {
+          cardDetail[key] = '0';
         }
-        else if(event.length == 2){
-          if (parseInt(event) > 12) {
-            cardDetail[key] = '12/';
-          }
-          else{
-            cardDetail[key] = event+'/';
-          }
-        }
-        else if (event.length > 3){
+        else{
           cardDetail[key] = event;
-          this.setState({cardDetail})
         }
-        this.setState({cardDetail})
       }
-      else{
+      else if(event.length == 2){
+        if (parseInt(event) > 12) {
+          cardDetail[key] = '12/';
+        }
+        else{
+          cardDetail[key] = event+'/';
+        }
+      }
+      else if (event.length > 3){
         cardDetail[key] = event;
         this.setState({cardDetail})
       }
+      this.setState({cardDetail})
+    }
+    else{
+      cardDetail[key] = event;
+      this.setState({cardDetail})
+    }
 	}
 
   validateDate(date){
@@ -99,8 +99,9 @@ class PaymentForm extends React.Component{
     			})
       }	
 	}
-  
-
+  onButtonPress2() {
+      this.props.history.push('/summary');
+    }
 	render(){
 		const{ cardDetail } = this.state;
 		return(
@@ -121,9 +122,19 @@ class PaymentForm extends React.Component{
 				</View>
 				<View style={styles.secondCon}>
           <View style={styles.text5}><Text style={styles.text6}>enter card info to confirm booking, (you won't be charged until after service completion)</Text></View>
+          
           <View style={styles.container}>
 					<ConfirmButton label="Confirm Booking" onButtonPress={this.onSubmit.bind(this)}/>
           </View>
+          <View style={{flexDirection: 'row', marginBottom: 10}}>
+            <View style={styles.last4}>
+              <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+            </View>
+            {/*<View style={styles.last4}>
+              <ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+            </View>*/}
+          </View>
+
 				</View>
 			</View>
 		)
@@ -223,5 +234,9 @@ const styles = StyleSheet.create({
   },
   text7: {
     flex: 3
+  },
+  last4: {
+    width: '50%', 
+    alignSelf: 'flex-start'
   }
 });
