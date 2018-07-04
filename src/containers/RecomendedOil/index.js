@@ -95,9 +95,9 @@ class RecomendedOil extends React.Component{
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					<Text style={{textAlign: 'center', fontSize: 20, marginBottom: 10}}>Total ${this.state.selectedOilPrice}</Text>
-					<View style={{width: 70,height: 110,overflow: 'hidden'}}>
-						<Image source={require('../../img/oiltype.jpeg')} style={{width: '100%',height: '100%'}}/>
+					<Text style={styles.recomenderOil}>Total ${this.state.selectedOilPrice}</Text>
+					<View style={styles.innerOil}>
+						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
 					</View>
 				</View>
 			</View>
@@ -116,7 +116,6 @@ class RecomendedOil extends React.Component{
 	}
 }
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(RecomendedOil);
 
 
@@ -210,5 +209,19 @@ const styles = StyleSheet.create({
 		fontSize: 20, 
 		marginLeft: 15, 
 		marginBottom: 10	
+	},
+	recomenderOil: {
+		textAlign: 'center', 
+		fontSize: 20, 
+		marginBottom: 10
+	},
+	innerOil: {
+		width: 70,
+		height: 110,
+		overflow: 'hidden'
+	},
+	imgSize: {
+		width: '100%',
+		height: '100%'
 	}
 })

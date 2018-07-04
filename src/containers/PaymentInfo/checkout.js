@@ -3,10 +3,8 @@ import {injectStripe, CardNumberElement, CardExpiryElement, CardCVCElement} from
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import {payAmount} from '../../actions/VehicleForm'
-
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
-
 class _CardForm extends React.Component {
 
     constructor(props) {
@@ -56,9 +54,6 @@ class _CardForm extends React.Component {
               <View>
                 <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
               </View>
-              {/*<View style={styles.last4}>
-                <ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
-              </View>*/}
             </View>
           </View>
         </form>

@@ -15,10 +15,6 @@ class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			yearlist: [2018, 2019, 2020],
-			makelist: ['BMW', 'Audi', 'Bentlay', 'Farari'],
-			modellist: [2018, 2019, 2020],
-
 			vehicle: {
 				year: '',
 				make: '',
@@ -56,7 +52,7 @@ class Vehicleform extends React.Component{
 	    	this.props.dispatch(getVehicleModels(event))
 	    }
 
-	    let fields = ['year', 'make', 'model', 'mileage']
+	    let fields = ['year', 'make', 'model']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -69,7 +65,7 @@ class Vehicleform extends React.Component{
 	  }
   	onButtonPress() {
   		this.setState({loading: true})
-  		let fields = ['year', 'make', 'model', 'mileage']
+  		let fields = ['year', 'make', 'model']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -92,12 +88,11 @@ class Vehicleform extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="#fff"
 					    />
-						<View style={{flex: 1}}>
+						<View style={styles.container}>
 							<View style={styles.headingCon}>
 								<Text style={styles.heading}>Enter Vehicle Details</Text>
 							</View>
 						</View>
-				
 						<View style={styles.view}>
 							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
 							<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
@@ -120,7 +115,6 @@ class Vehicleform extends React.Component{
 }
 
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(Vehicleform);
 
 

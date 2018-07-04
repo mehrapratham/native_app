@@ -66,15 +66,12 @@ class FinalStep extends React.Component{
 }
 
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(FinalStep);
-
 
 const mapDispatch = (dispatch) => {
    const allActionProps = Object.assign({}, dispatch);
    return allActionProps;
 }
-
 
 const styles = StyleSheet.create({
   container: {

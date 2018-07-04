@@ -58,7 +58,6 @@ class TimeSlot extends React.Component{
 		if (vehicleData && vehicleData.timeslot) {
 			this.setState({selectedTime: vehicleData.timeslot})
 		}
-
 	}
 	onButtonPress() {
 		if(this.state.selectedTime.start){
@@ -75,7 +74,6 @@ class TimeSlot extends React.Component{
 	booking(item){
 		this.setState({ selectedTime: item })
 	}
-
 	filterDate(date){
 		 if (date && moment(this.state.filterTime).format('M') == moment(date.start).format('M') && moment(this.state.filterTime).date() == moment(date.start).date()) {
 			return date
@@ -84,7 +82,6 @@ class TimeSlot extends React.Component{
 	formatDate(date){ 
 		return (moment(date.start).format('hh')+ ':' +moment(date.start).format('mm') +' '+ moment(date.start).format('a')+ ' - ' + moment(date.end).format('hh')+ ':' +moment(date.end).format('mm') + ' ' + moment(date.end).format('a'))
 	}
-
 	nextDate(){
 		let {filterTime} = this.state;
 		filterTime = moment(filterTime).add(1, 'days');
@@ -126,10 +123,6 @@ class TimeSlot extends React.Component{
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
 
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index)=>{
-								/*if (moment(date.start).format('hh') < 8)) {
-
-								}*/
-
 								return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
 											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>
@@ -152,9 +145,7 @@ class TimeSlot extends React.Component{
 	}
 }
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(TimeSlot);
-
 
 const mapDispatch = (dispatch) => {
    const allActionProps = Object.assign({}, dispatch);

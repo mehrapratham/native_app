@@ -45,7 +45,6 @@ class RecomendedFilter extends React.Component{
 	onChange(event){
 		this.setState({ selectedFilterType: event });
 	}
-	
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		const {vehicleData} = this.state;
@@ -88,7 +87,6 @@ class RecomendedFilter extends React.Component{
 	}
 }
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(RecomendedFilter);
 
 

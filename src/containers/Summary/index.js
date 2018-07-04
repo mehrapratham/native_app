@@ -37,8 +37,6 @@ class Summary extends React.Component{
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
 			return res
 		})
-
-
 		let bookingData = {
 			start : vehicleData.timeslot.start, 
 			end: vehicleData.timeslot.end, 
@@ -52,7 +50,6 @@ class Summary extends React.Component{
 			},
 			where: "Courthouse, Hill Valley, CA 95420, USA"
 		}
-
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
@@ -77,18 +74,17 @@ class Summary extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
-					    {/*<View style={{paddingTop: 10,paddingLeft: 20}}>
-						    <TouchableOpacity onPress={this.backButton.bind(this)}>
-						    	<FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" styles={{fontSize: 26}}/>
-						    </TouchableOpacity>
-					    </View>*/}
 						<View style={styles.headingView}>
 							<Text style={styles.heading}>Order Summary</Text>
 						</View>
 						<View style={styles.view}>
 							<View style={styles.lastCon}>
+								<View style={styles.innerCon}><Text style={styles.lastCon2}>Price</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{' ($' + vehicleData.oilPrice+')'}</Text></View>
+							</View>
+							<View style={styles.lastCon}>
 								<View style={styles.innerCon}><Text style={styles.lastCon2}>Oil Type</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}{' ($' + vehicleData.oilPrice+')'}</Text></View>
+								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}</Text></View>
 							</View>
 							<View style={styles.lastCon}>
 								<View style={styles.innerCon}><Text style={styles.lastCon2}>Filter Type</Text></View>
@@ -115,13 +111,10 @@ class Summary extends React.Component{
 							<View>
 								<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
 							</View>
-							<View style={{flexDirection: 'row', marginTop: 10}}>
+							<View style={styles.last5}>
 								<View style={styles.last4}>
 									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
 								</View>
-								{/*<View style={styles.last4}>
-									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
-								</View>*/}
 							</View>
 						</View>
 					</View>
@@ -131,9 +124,7 @@ class Summary extends React.Component{
 	}
 }
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(Summary);
-
 
 const mapDispatch = (dispatch) => {
    const allActionProps = Object.assign({}, dispatch);
@@ -206,6 +197,10 @@ const styles = StyleSheet.create({
 	last4: {
 		width: '50%', 
 		alignSelf: 'flex-start'
+	},
+	last5: {
+		flexDirection: 'row', 
+		marginTop: 10
 	}
 	
 })

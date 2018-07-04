@@ -6,9 +6,6 @@ export default class Login extends React.Component{
 	onButtonPress() {
 	  	this.props.history.push('/vehicle-form');
 	}
-	onclick(){
-		console.log(1111)
-	}
 	render(){
 		return(
 			<TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
@@ -17,38 +14,38 @@ export default class Login extends React.Component{
 			    />
 				<View style={styles.container}>
 					<View style={styles.logo}>
-						<Text style={styles.logoText}>TRANZOIL</Text>
+            <Image style={styles.imgStyle} source={require('../../img/logos.png')} />
 					</View>
 					<View style={styles.form}>
 						<View style={styles.last2}>
 							<TextInput
-				              	style={styles.last3}
-				              	placeholder="username"
-				              	underlineColorAndroid="transparent"
-				              	placeholderTextColor="#fff"
-				              	returnKeyType = {"next"}
-				              	autoFocus = {false}
-				              	onSubmitEditing={(event) => { 
-				                	this.refs.password.focus(); 
-					            }}
-				          	/>
-				          	<View style={styles.last4}>
+              	style={styles.last3}
+              	placeholder="username"
+              	underlineColorAndroid="transparent"
+              	placeholderTextColor="#fff"
+              	returnKeyType = {"next"}
+              	autoFocus = {false}
+              	onSubmitEditing={(event) => { 
+                	this.refs.password.focus(); 
+	              }}
+	          	/>
+	          	<View style={styles.last4}>
 								<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" style={styles.icon} icon={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
 							</View>
 						</View>
 						<View style={styles.last2}>
 							<TextInput
-				              	style={styles.last3}
-				              	placeholder="password"
-				              	underlineColorAndroid="transparent"
-					            placeholderTextColor="#fff"
-					            ref="password"
-					            returnKeyType = {"go"}
-					            onSubmitEditing={(event) => { 
-				                	this.refs.guest.focus(); 
-					            }}
-						    />
-						    <View style={styles.last4}>
+              	style={styles.last3}
+              	placeholder="password"
+              	underlineColorAndroid="transparent"
+		            placeholderTextColor="#fff"
+		            ref="password"
+		            returnKeyType = {"go"}
+		            onSubmitEditing={(event) => { 
+	                	this.refs.guest.focus(); 
+		            }}
+					    />
+					    <View style={styles.last4}>
 								<FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" style={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
 							</View>
 						</View>
@@ -111,9 +108,6 @@ const styles = StyleSheet.create({
   	paddingLeft: 80,
   	paddingRight: 80,
   	justifyContent: 'center'
-  },
-  logoText: {
-  	fontSize: 26,
   },
   color: {
   	color: '#fff'
@@ -225,5 +219,9 @@ const styles = StyleSheet.create({
   last18: {
   	flex: 1,
   	alignItems: 'center'
+  },
+  imgStyle: {
+    width: 120,
+    height: 50
   }
 });

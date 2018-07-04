@@ -12,22 +12,22 @@ import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../c
 import {stripeKey} from '../../actions/remoteAPIKeys'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
-
+import ToastComponent from '../../components/ToastComponent'
 class PaymentForm extends React.Component{
-
-	constructor() {
-	    super();
-	    this.state = {
-	    	cardDetail: {
-	    		'card_number': '',
-	    		'card_cvc': '',
-	    		'card_exp_date': ''
-	    	},
-	    	loading: true,
-	    	error: {}
-	    };
+	constructor(props) {
+    super(props);
+    this.state = {
+    	cardDetail: {
+    		'card_number': '',
+    		'card_cvc': '',
+    		'card_exp_date': ''
+    	},
+    	loading: true,
+    	error: {},
+      showToast: false,
+      toastmsg: ''
+    };
 	}
-
 	onValueChange(key,event){
 		const{ cardDetail } = this.state;
     let fields = ['card_number', 'card_cvc', 'card_exp_date']
@@ -68,15 +68,10 @@ class PaymentForm extends React.Component{
     }
 	}
 
-  validateDate(date){
-    if (date.length == 1) {
-      if (parseInt(date) > 1) {
-
-      }
-    }
-    if (data.length == 2) {
-      
-    }
+  isValidCardNo(){
+    var cardvalidate = require('credit-card-validation')
+    card = cardvalidate(this.state.cardDetail.card_number);
+    return card.isValid()
   }
 	onSubmit(){
 		let fields = ['card_number', 'card_cvc', 'card_exp_date']
@@ -86,17 +81,26 @@ class PaymentForm extends React.Component{
       		this.setState({loading: true})
     			let {cardDetail} = this.state;
           let seprateDate = cardDetail.card_exp_date.split('/')
-    			let data = {
-    				"card[number]": cardDetail.card_number,
-    				"card[cvc]": cardDetail.card_cvc,
-    				"card[exp_month]": seprateDate[0],
-    				"card[exp_year]": seprateDate[1],
-    				"key" : stripeKey
-    			}
-    			this.props.dispatch(createToken(data)).then(res=>{
-    				this.props.payAmount(res.id)
-    				this.setState({loading: false})
-    			})
+          let isValidCard = this.isValidCardNo()
+          if(isValidCard){
+            let data = {
+              "card[number]": cardDetail.card_number,
+              "card[cvc]": cardDetail.card_cvc,
+              "card[exp_month]": seprateDate[0],
+              "card[exp_year]": seprateDate[1],
+              "key" : stripeKey
+            }
+            this.props.dispatch(createToken(data)).then(res=>{
+              this.props.payAmount(res.id)
+              this.setState({loading: false})
+            })
+          }else{
+            this.setState({ showToast: true,toastmsg: "Please enter valid card number"})
+            setTimeout(() => {
+              this.setState({ showToast: false})
+            }, 3000)
+          }
+    			
       }	
 	}
   onButtonPress2() {
@@ -120,31 +124,24 @@ class PaymentForm extends React.Component{
 						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} keyboardType='numeric'/>
 					</View>
 				</View>
-				<View style={styles.secondCon}>
-          <View style={styles.text5}><Text style={styles.text6}>enter card info to confirm booking, (you won't be charged until after service completion)</Text></View>
-          
+				<View style={styles.secondCon}>          
           <View style={styles.container}>
 					<ConfirmButton label="Confirm Booking" onButtonPress={this.onSubmit.bind(this)}/>
           </View>
-          <View style={{flexDirection: 'row', marginBottom: 10}}>
+          <View style={styles.nextButton}>
             <View style={styles.last4}>
               <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
             </View>
-            {/*<View style={styles.last4}>
-              <ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
-            </View>*/}
           </View>
-
 				</View>
+        {this.state.showToast && this.state.toastmsg?<ToastComponent msg={this.state.toastmsg}/>: null}
 			</View>
 		)
 	}
 }
 
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(PaymentForm);
-
 
 const mapDispatch = (dispatch) => {
    const allActionProps = Object.assign({}, dispatch);
@@ -202,7 +199,7 @@ const styles = StyleSheet.create({
   	width: 30
   },
   address: {
-  	marginBottom: 10,
+  	marginBottom: 2,
   	width: '100%'
   },
   text: {
@@ -238,5 +235,9 @@ const styles = StyleSheet.create({
   last4: {
     width: '50%', 
     alignSelf: 'flex-start'
+  },
+  nextButton: {
+    flexDirection: 'row', 
+    marginBottom: 10
   }
 });

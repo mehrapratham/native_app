@@ -21,7 +21,6 @@ class PaymentInfo extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/summary');
 	}
-
 	async payAmount(token){
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
 		this.props.dispatch(confirmBookingOrder(token,vehicleData._id)).then(res => {
@@ -41,7 +40,7 @@ class PaymentInfo extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.arrow}>
-							<Text style={styles.heading}>Payment Info</Text>
+							<Text style={styles.heading}>Enter card info to confirm booking, (you won't be charged until after service completion)</Text>
 						</View>
 						<View style={styles.view}>
 							<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
@@ -53,9 +52,7 @@ class PaymentInfo extends React.Component{
 	}
 }
 export default connect(state => ({
-  // vehicleForm: state.vehicleForm,
 }, mapDispatch))(PaymentInfo);
-
 
 const mapDispatch = (dispatch) => {
    const allActionProps = Object.assign({}, dispatch);
@@ -77,6 +74,9 @@ const styles = StyleSheet.create({
   	justifyContent: 'center'
   },
   heading: {
-  	fontSize: 26
+  	fontSize: 20,
+  	paddingLeft: 15,
+  	paddingRight: 15,
+  	textAlign: 'center'
   }
 });

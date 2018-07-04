@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY } from '../types'
+import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST } from '../types'
 var qs = require('qs');
 
 export const getVehicleYears = () => {
@@ -196,5 +196,27 @@ let url = 'https://api.stripe.com/v1/tokens';
      })
  }
 }
+
+export const getStateList = () => {
+return dispatch => {
+  return axios
+    .get('../json/state.js')
+    .then(res => {
+      dispatch({
+        type: GET_STATE_LIST,
+        data: res.data
+      })
+      return res.data
+    })
+    .catch(function(error) {
+      dispatch({
+        type: HAS_ERROR,
+        data: error,
+      })
+      return error
+    })
+}
+}
+
 
 

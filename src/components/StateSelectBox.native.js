@@ -13,14 +13,14 @@ export default class SelectBox extends React.Component{
               iosHeader="Select one"
               mode="dropdown"
               selectedValue={this.props.selectedValue}
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
               onValueChange={this.onChange.bind(this)}
               style={styles.container}
               placeholder={this.props.placeholder}
               placeholderStyle={{color: "#646262"}}
+              iosIcon={<Icon name="ios-arrow-down-outline" />}
             >
               {this.props.list && this.props.list.map((item, key) => {
-              	return <Picker.Item label={item} value={item} key={key}/>
+              	return <Picker.Item label={item.name} value={item.name} key={key}/>
               })}
             </Picker>
 		)
@@ -29,8 +29,7 @@ export default class SelectBox extends React.Component{
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff', 
-    width, 
-    marginBottom: 10,
+    width: '100%',
     borderBottomWidth: 4,
     borderColor: '#c5c3c4',
   }
