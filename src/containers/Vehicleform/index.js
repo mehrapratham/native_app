@@ -11,6 +11,7 @@ import { IsValidForm } from '../../components/Common/validation'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
+import FontComponent from '../../components/FontComponent'
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -90,7 +91,7 @@ class Vehicleform extends React.Component{
 					    />
 						<View style={styles.container}>
 							<View style={styles.headingCon}>
-								<Text style={styles.heading}>Enter Vehicle Details</Text>
+								<FontComponent style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold'}} text="Enter Vehicle Details"/>
 							</View>
 						</View>
 						<View style={styles.view}>
@@ -153,10 +154,6 @@ const styles = StyleSheet.create({
   	paddingLeft: 20,
   	flexDirection: 'row',
   	marginBottom: 30
-  },
-  heading: {
-  	fontSize: 26,
-  	textAlign: 'center'
   },
   oil: {
   	width: 30

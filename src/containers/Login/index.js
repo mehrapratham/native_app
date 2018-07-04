@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard, StatusBar } from 'react-native'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
+import FontComponent from '../../components/FontComponent'
 export default class Login extends React.Component{
 	onButtonPress() {
 	  	this.props.history.push('/vehicle-form');
@@ -16,6 +17,7 @@ export default class Login extends React.Component{
 					<View style={styles.logo}>
             <Image style={styles.imgStyle} source={require('../../img/logos.png')} />
 					</View>
+          
 					<View style={styles.form}>
 						<View style={styles.last2}>
 							<TextInput
@@ -51,18 +53,19 @@ export default class Login extends React.Component{
 						</View>
 						<View style={styles.last5}>
 							<TouchableOpacity style={styles.last6}>
-								<Text style={styles.color}>SIGN IN</Text>
+								{/*<Text style={styles.color}>SIGN IN</Text>*/}
+                <FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="SIGN IN"/>
 							</TouchableOpacity>
 						</View>
 						<View style={styles.last7}>
 							<View style={styles.last8}>
 								<TouchableOpacity style={styles.last9}>
-									<Text style={styles.color}>Register</Text>
+									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="Register"/>
 								</TouchableOpacity>
 							</View>
 							<View style={styles.last10}>
 								<TouchableOpacity style={styles.last9}>
-									<Text style={styles.color}>Forgot Password</Text>
+									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="Forgot Password"/>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -71,7 +74,7 @@ export default class Login extends React.Component{
 						<View style={styles.last12}>
 						</View>
 						<View style={styles.last13}>
-							<Text style={styles.color}>OR</Text>
+							<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="OR"/>
 						</View>	
 						<View style={styles.last14}>
 							<View style={styles.last15}>
@@ -85,7 +88,7 @@ export default class Login extends React.Component{
 						</View>
 						<View style={styles.last18}>
 							<TouchableOpacity style={styles.last9} onPress={this.onButtonPress.bind(this)} ref="guest">
-								<Text style={styles.color}>Continue as guest</Text>
+								<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="continue as a guest"/>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
   	justifyContent: 'center'
   },
   color: {
-  	color: '#fff'
+  	color: '#fff',
   },
   icon: {
     color: '#d6edf8',

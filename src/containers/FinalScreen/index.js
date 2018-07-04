@@ -4,6 +4,7 @@ import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import { connect } from 'react-redux'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
+import FontComponent from '../../components/FontComponent'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 class FinalStep extends React.Component{
 
@@ -31,7 +32,7 @@ class FinalStep extends React.Component{
                     backgroundColor="blue"
                   />
                   <View style={styles.headingview}>
-                    <Text style={styles.heading}>Congratulations Your Oil service Has been scheduled</Text>
+                    <FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Congratulations Your Oil service Has been scheduled"/>
                   </View>
                   <View style={styles.view}>
                     <View style={styles.arrow}>
@@ -103,10 +104,6 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     flex: 1
-  },
-  heading: {
-  	fontSize: 26,
-  	textAlign: 'center'
   },
   address: {
   	flex: 1,

@@ -11,6 +11,7 @@ import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
+import FontComponent from '../../components/FontComponent'
 var timekit = require('timekit-sdk');
 
 class TimeSlot extends React.Component{
@@ -100,7 +101,7 @@ class TimeSlot extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.view}>
-							<Text style={styles.heading}>Select Time slot</Text>
+							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Select Time slot"/>
 						</View>
 						<View style={styles.oilss}>
 							<View style={styles.left}>
@@ -122,7 +123,7 @@ class TimeSlot extends React.Component{
 							}
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
 
-							{!this.state.loading && curAvailbility && curAvailbility.map((item, index)=>{
+							{!this.state.loading && curAvailbility && curAvailbility.map((item, index) =>{
 								return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
 											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>
@@ -163,10 +164,6 @@ const styles = StyleSheet.create({
 		paddingRight: 20,
 		paddingTop: 20,
 		paddingBottom: 20
-	},
-	heading: {
-		fontSize: 26,
-		textAlign: 'center',
 	},
 	left: {
 		width: '100%',

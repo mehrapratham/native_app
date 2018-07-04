@@ -10,7 +10,7 @@ import {StripeProvider, injectStripe, Elements, CardElement, CardNumberElement, 
 import PaymentForm from './PaymentForm'
 import {payAmount,confirmBookingOrder} from '../../actions/VehicleForm'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
-
+import FontComponent from '../../components/FontComponent'
 class PaymentInfo extends React.Component{
 	async componentWillMount()	{
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
@@ -40,7 +40,7 @@ class PaymentInfo extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.arrow}>
-							<Text style={styles.heading}>Enter card info to confirm booking, (you won't be charged until after service completion)</Text>
+							<FontComponent style={{fontSize: 26,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
 						</View>
 						<View style={styles.view}>
 							<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
@@ -72,11 +72,5 @@ const styles = StyleSheet.create({
   	flex: 1,
   	alignItems: 'center',
   	justifyContent: 'center'
-  },
-  heading: {
-  	fontSize: 20,
-  	paddingLeft: 15,
-  	paddingRight: 15,
-  	textAlign: 'center'
   }
 });

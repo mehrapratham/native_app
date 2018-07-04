@@ -9,6 +9,7 @@ import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStor
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import FontComponent from '../../components/FontComponent'
 class RecomendedOil extends React.Component{
 	constructor(props){
 		super(props)
@@ -68,20 +69,22 @@ class RecomendedOil extends React.Component{
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
+		const text = "Recomended oil For "+vehicleData.make+" "+vehicleData.model+" "+vehicleData.year
+		console.log(text)
 		let child = <View style={styles.container}>
 			<StatusBar
 		      barStyle="light-content"
 		      backgroundColor="blue"
 		    />
 			<View style={styles.headingCon}>
-				<Text style={styles.heading}>Recomended oil For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-				<Text style={styles.subheading}>(Select one)</Text>
+				<FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+				<FontComponent style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 			</View>
 			<View style={styles.radiobttn}>
 				<ScrollView style={styles.radio}>
 					<View style={{flexDirection: 'row'}}>
 						<View style={{flex: 1}}>
-							<Text style={styles.labelText}>Select Oil Type</Text>
+							<FontComponent style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
 							{this.state.loading ? <View style={styles.loading}>
 								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
 							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
@@ -89,13 +92,13 @@ class RecomendedOil extends React.Component{
 							{types && types.length == 0 && <Text style={styles.last3}>No OilType to show</Text>}
 						</View>
 						<View style={{flex: 1}}>
-							<Text style={styles.labelText}>Select Oil Grade</Text>
+							<FontComponent style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>
 							<RadioButton list={this.state.oilGrade} name="oilGrade" value={this.state.selectedOilGrade} onSelectValue={this.onChangeGrade.bind(this)}/>
 						</View>
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					<Text style={styles.recomenderOil}>Total ${this.state.selectedOilPrice}</Text>
+					{this.state.selectedOilPrice.length != 0 &&<Text style={styles.recomenderOil}>Total ${this.state.selectedOilPrice}</Text>}
 					<View style={styles.innerOil}>
 						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
 					</View>
@@ -151,14 +154,6 @@ const styles = StyleSheet.create({
 		flex: 3,
 		padding: 20
 	},
-	heading: {
-		fontSize: 26,
-		textAlign: 'center'
-	},
-	subheading:{
-		fontSize: 20,
-		textAlign: 'center'
-	},
 	leftArrow: {
 	  	margin: 24
 	},
@@ -206,9 +201,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 	},
 	labelText: {
-		fontSize: 20, 
-		marginLeft: 15, 
-		marginBottom: 10	
+		fontSize: 20, marginLeft: 15, marginBottom: 10	
 	},
 	recomenderOil: {
 		textAlign: 'center', 

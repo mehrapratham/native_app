@@ -1,0 +1,157 @@
+%!Adobe-FontList 1.17
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-Bold
+FamilyName:Dosis
+StyleName:Bold
+FullName:Dosis Bold
+MenuName:Dosis
+StyleBits:2
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-Bold.ttf
+DataFormat:sfntData
+FileLength:157428
+FileModTime:1452630257
+WeightClass:700
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis Bold
+NameArray:0,Mac,4,Dosis Bold
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-Book
+FamilyName:Dosis
+StyleName:Book
+FullName:Dosis Book
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-Book.ttf
+DataFormat:sfntData
+FileLength:154760
+FileModTime:1452630266
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis Book
+NameArray:0,Mac,4,Dosis Book
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-ExtraBold
+FamilyName:Dosis
+StyleName:ExtraBold
+FullName:Dosis ExtraBold
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-ExtraBold.ttf
+DataFormat:sfntData
+FileLength:181396
+FileModTime:1452630275
+WeightClass:800
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis ExtraBold
+NameArray:0,Mac,4,Dosis ExtraBold
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-ExtraLight
+FamilyName:Dosis
+StyleName:ExtraLight
+FullName:Dosis ExtraLight
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-ExtraLight.ttf
+DataFormat:sfntData
+FileLength:163476
+FileModTime:1452630283
+WeightClass:250
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis ExtraLight
+NameArray:0,Mac,4,Dosis ExtraLight
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-Light
+FamilyName:Dosis
+StyleName:Light
+FullName:Dosis Light
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-Light.ttf
+DataFormat:sfntData
+FileLength:169016
+FileModTime:1452630291
+WeightClass:300
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis Light
+NameArray:0,Mac,4,Dosis Light
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-Medium
+FamilyName:Dosis
+StyleName:Medium
+FullName:Dosis Medium
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-Medium.ttf
+DataFormat:sfntData
+FileLength:174260
+FileModTime:1452630299
+WeightClass:500
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis Medium
+NameArray:0,Mac,4,Dosis Medium
+NameArray:0,Win,1,Dosis
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Dosis-SemiBold
+FamilyName:Dosis
+StyleName:SemiBold
+FullName:Dosis SemiBold
+MenuName:Dosis
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:\\DESKTOP-7HRIKLN\network\1-UpWork\Hassan\LOGO OYLERS\SOURCE\Font\Dosis-SemiBold.ttf
+DataFormat:sfntData
+FileLength:176368
+FileModTime:1452630307
+WeightClass:600
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,18,Dosis SemiBold
+NameArray:0,Mac,4,Dosis SemiBold
+NameArray:0,Win,1,Dosis
+%EndFont
+

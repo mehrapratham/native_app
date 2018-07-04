@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import FontComponent from '../../components/FontComponent'
 class RecomendedFilter extends React.Component{
 	constructor(props){
 		super(props)
@@ -48,14 +49,15 @@ class RecomendedFilter extends React.Component{
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		const {vehicleData} = this.state;
+		const text = "Recomended filter For "+vehicleData.make+" "+vehicleData.model+" "+vehicleData.year
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingCon}>
-							<Text style={styles.heading}>Recomended filter For {vehicleData.make} {vehicleData.model} {vehicleData.year}</Text>
-							<Text style={styles.subheading}>(Select one)</Text>
+							<FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+							<FontComponent style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 						</View>
 						<View style={styles.list}>
 							<ScrollView style={styles.radio}>
@@ -117,14 +119,6 @@ const styles = StyleSheet.create({
 	list: {
 		flex: 3,
 		padding: 20
-	},
-	heading: {
-		fontSize: 26,
-		textAlign: 'center'
-	},
-	subheading:{
-		fontSize: 20,
-		textAlign: 'center'
 	},
 	img: {
 		width: 70,

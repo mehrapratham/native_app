@@ -13,6 +13,7 @@ import {stripeKey} from '../../actions/remoteAPIKeys'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ToastComponent from '../../components/ToastComponent'
+import FontComponent from '../../components/FontComponent'
 class PaymentForm extends React.Component{
 	constructor(props) {
     super(props);
@@ -112,15 +113,15 @@ class PaymentForm extends React.Component{
 			<View style={styles.container}>
 				<View style={styles.text7}>
 					<View style={styles.address}>
-						<Text style={styles.label}>Card Number</Text>
+            <FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Card Number"/>
 						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="done" keyboardType='numeric' />
 					</View>
           <View style={styles.address}>
-            <Text style={styles.label}>MM/YY</Text>
+            <FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="MM/YY"/>
             <InputBox placeholder="MM/YY" onChange={this.onValueChange.bind(this,'card_exp_date')} value={cardDetail.card_exp_date} maxLength={5} nextkey="done" keyboardType='numeric'/>
           </View>
 					<View style={styles.address}>
-						<Text style={styles.label}>CVV</Text>
+						<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="CVV"/>
 						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} keyboardType='numeric'/>
 					</View>
 				</View>
@@ -151,10 +152,6 @@ const mapDispatch = (dispatch) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
-  label:{
-  	marginBottom: 10,
-  	fontSize: 18
   },
   view: {
   	flex: 1,

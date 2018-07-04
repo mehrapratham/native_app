@@ -12,6 +12,7 @@ import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ToastComponent from '../../components/ToastComponent'
+import FontComponent from '../../components/FontComponent'
 import state from '../../json/state.js'
 
 class Address extends React.Component{
@@ -104,33 +105,33 @@ class Address extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.arrow}>
-							<Text style={styles.heading}>Enter Service Address</Text>
+							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Enter Service Address"/>
 						</View>
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<View style={styles.address}>
-								<Text style={styles.label}>Street</Text>
+								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Street"/>
 								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next"/>
 							</View>
 							<View style={styles.address}>
-								<Text style={styles.label}>City</Text>
+								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="City"/>
 								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" />
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
 									<View style={styles.text3}>
-										<Text style={styles.label}>Zip</Text>
+										<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Zip"/>
 										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric'/>
 									</View>
 								</View>
 								<View style={styles.text4}>
 									<View style={styles.text3}>
-										<Text style={styles.label}>State</Text>
+										<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="State"/>
 										<StateSelectBox placeholder="State" list={state.state} selectedValue={this.state.address.state} onValueChange={this.onChangeText.bind(this,'state')}/>
 									</View>
 								</View>
 							</View>
 							<View style={styles.address}>
-								<Text style={styles.label}>Phone</Text>
+								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Phone"/>
 								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done" />
 							</View>
 						</KeyboardAvoidingView>
@@ -166,10 +167,6 @@ const styles = StyleSheet.create({
   	width: '100%',
   	paddingLeft: 20,
   	paddingRight: 20
-  },
-  label:{
-  	marginBottom: 10,
-  	fontSize: 18
   },
   arrow: {
   	flex: 1,

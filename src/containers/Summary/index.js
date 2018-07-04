@@ -11,6 +11,7 @@ import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
+import FontComponent from '../../components/FontComponent'
 var timekit = require('timekit-sdk');
 class Summary extends React.Component{
 	constructor(props){
@@ -69,42 +70,45 @@ class Summary extends React.Component{
 	}
 	render(){
 		const { vehicleData,addressData } = this.state;
+		const text = vehicleData.make+' '+vehicleData.model+' '+vehicleData.year
+		const timeText = vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())+' '+this.formatDate(vehicleData && vehicleData.timeslot)
+		const addressText = addressData.street+' '+addressData.city+' '+addressData.zip+' '+addressData.state
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingView}>
-							<Text style={styles.heading}>Order Summary</Text>
+							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
 						</View>
 						<View style={styles.view}>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Price</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{' ($' + vehicleData.oilPrice+')'}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Oil Type</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.oilType}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Filter Type</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.filterType}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Car / Model</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData.make} {vehicleData.model} {vehicleData.year}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Time</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())} {this.formatDate(vehicleData && vehicleData.timeslot)}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={timeText}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Address</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}>{addressData.street} {addressData.city} {addressData.zip} {addressData.state}</Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
 							</View>
 							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><Text style={styles.lastCon2}>Phone</Text></View>
-								<View style={styles.innerCon3}><Text style={styles.endFlex}> {addressData.phone} </Text></View>
+								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
+								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
 							</View>
 						</View>
 						<View style={styles.lasts}>
@@ -146,10 +150,6 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 		paddingRight: 20
 	},
-	heading: {
-		fontSize: 26,
-		textAlign: 'center'
-	},
 	left: {
 		width: '100%',
 		height: 40,
@@ -184,8 +184,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 30
 	},
 	lastCon2: {
-		fontSize: 18,
-		fontWeight: 'bold'
+		fontSize: 18,fontWeight: 'bold'
 	},
 	endFlex: {
 		alignSelf: 'flex-end'
