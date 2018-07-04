@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo';
 export default class Gradient extends React.Component{
 	render(){
 		return(
-			<View style={{flex: 1}} >
+			<View style={styles.container} >
 				<LinearGradient
 		          colors={['#fdf450', '#e13530']}
 		          style={styles.container}
@@ -17,9 +17,7 @@ export default class Gradient extends React.Component{
 	}
 }
 const styles = StyleSheet.create({
-  container: {
-    // alignItems: 'center'
-    
-  },
-  
+  	container: {
+		flex: 1
+  	}
 });

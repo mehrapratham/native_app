@@ -3,7 +3,6 @@ export const saveToLocalStorage = (key, data) => {
      localStorage.setItem(key, data)
    }
 }
-
 export const getFromLocalStorage = (key) => {
    return dispatch => {
 
@@ -11,7 +10,6 @@ export const getFromLocalStorage = (key) => {
      return JSON.parse(data);
    }
 }
-
 export const removeLocalStorage = (key) => {
    return dispatch => {
      localStorage.removeItem(key)

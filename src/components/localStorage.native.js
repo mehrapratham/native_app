@@ -1,4 +1,3 @@
-
 import {AsyncStorage } from 'react-native'
 
 export const saveToLocalStorage = (key, data) => {
@@ -6,7 +5,6 @@ export const saveToLocalStorage = (key, data) => {
      AsyncStorage.setItem(key, data)
    }
 }
-
 export const getFromLocalStorage = (key) => {
    return async dispatch => {
 	  	try {
@@ -23,7 +21,6 @@ export const getFromLocalStorage = (key) => {
 		}
 	}
 }
-
 export const removeLocalStorage = (key) => {
    return dispatch => {
      AsyncStorage.removeItem(key)

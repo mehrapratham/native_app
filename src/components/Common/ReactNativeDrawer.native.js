@@ -25,7 +25,6 @@ export default class ReactNativeDrawer extends React.Component {
     goToLogin(){
       this.props.history.push('/')
     }
-
   render() {
     return (
       <TouchableOpacity style={styles.container} onPress={Keyboard.dismiss} accessible={false} activeOpacity={ 1 }>
@@ -50,7 +49,6 @@ export default class ReactNativeDrawer extends React.Component {
           {this.props.child}
         </Drawer>
       </TouchableOpacity>
-      
     );
   }
 }
@@ -72,5 +70,4 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingTop: 24
   }
-  
 });

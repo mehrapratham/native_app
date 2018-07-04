@@ -15,7 +15,7 @@ export default class SelectBox extends React.Component{
 								<Text style={{fontSize: 20, marginLeft: 15, marginTop: -5}}> {item}</Text>
 							</Text>
 						</View>
-				)
+					)
 				})}
 			</View>
 		)
