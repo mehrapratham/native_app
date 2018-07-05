@@ -29,9 +29,9 @@ const httpsOptions = {
  cert: fs.readFileSync('./cert.pem')
 }
 
-const server = https.createServer(httpsOptions, app).listen(port, () => {
+/*const server = https.createServer(httpsOptions, app).listen(port, () => {
  console.log('server running at ' + port)
-})
+})*/
 
 /*--------------------Routing Over----------------------------*/
 
