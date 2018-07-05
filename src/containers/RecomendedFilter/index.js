@@ -66,7 +66,7 @@ class RecomendedFilter extends React.Component{
 								</View>:
 							<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
 							}
-							{filters && filters.length == 0 && <Text style={styles.last3}>No FilterType to show</Text>}
+							{filters && filters.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
 							</ScrollView>
 							<View style={styles.img}>
 								<View style={styles.outerView}>

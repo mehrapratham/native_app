@@ -101,7 +101,6 @@ class PaymentForm extends React.Component{
               this.setState({ showToast: false})
             }, 3000)
           }
-    			
       }	
 	}
   onButtonPress2() {

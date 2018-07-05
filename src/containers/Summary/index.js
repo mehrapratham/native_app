@@ -32,7 +32,6 @@ class Summary extends React.Component{
 	onButtonPress() {
 		const { vehicleData, addressData } = this.state;
 		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ moment(vehicleData.timeslot.start).format('ll') +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'",phone:"' + vehicleData.phone +'"}'
-		console.log(data)
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))

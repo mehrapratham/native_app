@@ -35,25 +35,30 @@ class FinalStep extends React.Component{
                     <FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Congratulations Your Oil service Has been scheduled"/>
                   </View>
                   <View style={styles.view}>
-                    <View style={styles.arrow}>
-                      <Text>Oil type: {orderData.oilType}</Text>
+                    <View style={styles.lastCon}>
+                      <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil type"/></View>
+                      <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.oilType}/></View>
                     </View>
-                    <View style={styles.arrow}>
-                      <Text>filter type: {orderData.filterType}</Text>
+                    <View style={styles.lastCon}>
+                      <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="filter type"/></View>
+                      <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.filterType}/></View>
                     </View>
-                    <View style={styles.arrow}>
-                      <Text>{orderData.make + ' ' +orderData.model + ' ' +orderData.year}</Text>
+                    <View style={styles.lastCon}>
+                      <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
+                      <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year}/></View>
                     </View>
-                    <View style={styles.arrow}>
-                      <Text>Time: {orderData.date + ' ' + orderData.time}</Text>
+                    <View style={styles.lastCon}>
+                      <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
+                      <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.date + ' ' + orderData.time}/></View>
                     </View>
-                    <View style={styles.arrow}>
-                      <Text>Address: {orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}</Text>
+                    <View style={styles.lastCon}>
+                      <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
+                      <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}/></View>
                     </View>
                   </View>
                   <View style={styles.btnview}>
                     <View style={styles.address}>
-                      <Text style={styles.text2}>Sign up and create Profile and recieve 50% off next oil change</Text>
+                      <FontComponent style={{textAlign: 'center',fontSize: 20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
                     </View>
                     <View style={styles.text}> 
                       <ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)}/>
@@ -90,15 +95,6 @@ const styles = StyleSheet.create({
   	paddingLeft: 20,
   	paddingRight: 20
   },
-  arrow: {
-  	width: '100%',
-  	height: 40,
-  	backgroundColor: '#fff',
-  	justifyContent: 'center',
-  	alignItems: 'center',
-  	borderRadius: 5,
-  	marginBottom: 5
-  },
   btnview:{
     paddingBottom: 30,
     paddingLeft: 20,
@@ -117,7 +113,23 @@ const styles = StyleSheet.create({
   	width: '100%'
   },
   text2: {
-  	textAlign: 'center',
-  	fontSize: 20
-  }
+  	textAlign: 'center',fontSize: 20
+  },
+  lastCon: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    height: 40,
+    backgroundColor: '#fff',
+    marginBottom: 5,
+    borderRadius: 5
+  },
+  innerCon: {
+    width: '50%',
+    paddingLeft: 30
+  },
+  innerCon3: {
+    width: '50%',
+    paddingRight: 30
+  },
 });

@@ -1,11 +1,12 @@
 import React from 'react'
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native'
 import {Link } from '../../Routing'
+import FontComponent from '../FontComponent'
 export default class ConfirmButton extends React.Component{
 	render(){
 		return(
 				<TouchableOpacity style={this.props.disabled ? styles.viewDisable : styles.view} onPress={this.props.onButtonPress} disabled={this.props.disabled}>
-					<Text style={styles.arrow}>{this.props.label}</Text>
+          <FontComponent style={{color: '#fff',fontFamily: 'dosis-bold'}} text={this.props.label}/>
 				</TouchableOpacity>
 		)
 	}

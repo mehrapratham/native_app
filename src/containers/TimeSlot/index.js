@@ -31,7 +31,6 @@ class TimeSlot extends React.Component{
 		  appKey: timekitAPI,
 		 
 		})
-		console.log(timekit.getResources());
 		this.setState({loading: true})
 		let data = {
 					resource_ids: [defaultResourceId], 

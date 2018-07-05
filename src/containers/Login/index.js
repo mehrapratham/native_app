@@ -53,7 +53,6 @@ export default class Login extends React.Component{
 						</View>
 						<View style={styles.last5}>
 							<TouchableOpacity style={styles.last6}>
-								{/*<Text style={styles.color}>SIGN IN</Text>*/}
                 <FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="SIGN IN"/>
 							</TouchableOpacity>
 						</View>

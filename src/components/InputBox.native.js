@@ -6,7 +6,6 @@ export default class InputBox extends React.Component{
         this.state = {hasFocus: false};
   }
   onChange(event){
-    // console.log(event)
     this.props.onChange(event)
   }
   setFocus (hasFocus) {

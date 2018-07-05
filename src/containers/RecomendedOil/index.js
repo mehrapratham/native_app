@@ -70,7 +70,7 @@ class RecomendedOil extends React.Component{
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
 		const text = "Recomended oil For "+vehicleData.make+" "+vehicleData.model+" "+vehicleData.year
-		console.log(text)
+		const total = 'Total $'+this.state.selectedOilPrice
 		let child = <View style={styles.container}>
 			<StatusBar
 		      barStyle="light-content"
@@ -89,7 +89,7 @@ class RecomendedOil extends React.Component{
 								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
 							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
 							}
-							{types && types.length == 0 && <Text style={styles.last3}>No OilType to show</Text>}
+							{types && types.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
 						</View>
 						<View style={{flex: 1}}>
 							<FontComponent style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>
@@ -98,7 +98,7 @@ class RecomendedOil extends React.Component{
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					{this.state.selectedOilPrice.length != 0 &&<Text style={styles.recomenderOil}>Total ${this.state.selectedOilPrice}</Text>}
+					{this.state.selectedOilPrice.length != 0 &&<FontComponent style={{textAlign: 'center', fontSize: 20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/>}
 					<View style={styles.innerOil}>
 						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
 					</View>
@@ -183,11 +183,6 @@ const styles = StyleSheet.create({
 		width: 60, 
 		height: 60
 	},
-	last3: {
-		textAlign: 'center',
-		color: '#fff',
-		fontSize: 22
-	},
 	last4: {
 		width: '50%', 
 		alignSelf: 'flex-start'
@@ -202,11 +197,6 @@ const styles = StyleSheet.create({
 	},
 	labelText: {
 		fontSize: 20, marginLeft: 15, marginBottom: 10	
-	},
-	recomenderOil: {
-		textAlign: 'center', 
-		fontSize: 20, 
-		marginBottom: 10
 	},
 	innerOil: {
 		width: 70,

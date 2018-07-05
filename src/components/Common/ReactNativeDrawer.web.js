@@ -26,7 +26,7 @@ export default class ReactNativeDrawer extends React.Component {
     return (
       <View style={{flex: 1}}>
         <View style={{backgroundColor: '#000',height: 50,justifyContent: 'center',paddingLeft: 0}}>
-          <Text style={{color: '#fff', paddingLeft: 20, padingRight: 20, fontSize: 20, textAlign: 'center'}}>Schedule a service today</Text>
+          <Text style={{color: '#fff', paddingLeft: 20, padingRight: 20, fontSize: 20, textAlign: 'center',fontFamily: 'dosis-bold'}}>Schedule a service today</Text>
         </View>
         <View style={{flex: 1}}>
           {this.props.child}

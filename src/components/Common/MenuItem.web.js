@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+
 export default class MenuItem extends React.Component{
-	
 	render(){
 		return(
 			<View style={styles.container}>
@@ -11,7 +11,7 @@ export default class MenuItem extends React.Component{
       	<TouchableOpacity style={styles.last2}>
         	<Text style={styles.icon}>Register</Text>
       	</TouchableOpacity>
-    </View>
+      </View>
 		)
 	}
 }

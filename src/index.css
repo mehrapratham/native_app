@@ -5,13 +5,18 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+@font-face {
+  font-family: dosis-bold;
+  src: url(./assets/fonts/Dosis-Bold.ttf);
+}
+@font-face {
+  font-family: dosis-medium;
+  src: url(./assets/fonts/Dosis-Medium.ttf);
 }
 body, html{
 	height: 100%;
 }
-
-
 
 #root,#root > div{
 	height: 100%;
@@ -104,8 +109,6 @@ label + button{
   width: 100%
 }
 
-
-
 .sideMenu{
   position: absolute;
   z-index: 2;
@@ -150,4 +153,25 @@ label + button{
 
 .sideMenu.opened .innerMenu{
   left: 0;
+}
+.navbar-light .navbar-brand{
+  font-family: dosis-bold;
+}
+.header .navbar-light .navbar-nav .nav-link{
+  font-family: dosis-bold;
+}
+.stepSec ul li h4{
+  font-family: dosis-bold;
+}
+.workCon h2{
+  font-family: dosis-bold;
+}
+.h5, h5{
+  font-family: dosis-medium;
+}
+.workCon h6{
+  font-family: dosis-medium;
+}
+p{
+  font-family: dosis-medium;
 }
