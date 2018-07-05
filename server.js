@@ -24,14 +24,14 @@ app.get('/*', function(req, res){
 });
 
 
-/*const httpsOptions = {
+const httpsOptions = {
  key: fs.readFileSync('./key.pem'),
  cert: fs.readFileSync('./cert.pem')
-}*/
+}
 
-/*const server = https.createServer(httpsOptions, app).listen(port, () => {
+const server = https.createServer(httpsOptions, app).listen(port, () => {
  console.log('server running at ' + port)
-})*/
+})
 
 /*--------------------Routing Over----------------------------*/
 

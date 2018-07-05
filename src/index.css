@@ -5,6 +5,8 @@
 body {
   margin: 0;
   padding: 0;
+  src: url(./assets/fonts/Dosis-Medium.ttf);
+  font-family: dosis-medium;
 }
 @font-face {
   font-family: dosis-bold;
