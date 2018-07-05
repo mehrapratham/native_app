@@ -49,7 +49,7 @@ class _CardForm extends React.Component {
             </label>
           </View>
           <View>
-            <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50}}>Confirm Booking</button>
+            <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50,fontFamily: 'dosis-bold'}}>Confirm Booking</button>
             <View style={{flexDirection: 'row', marginTop: 10}}>
               <View>
                 <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />

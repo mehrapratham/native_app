@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 		height: 70,
 		width: '100%',
 		position: 'absolute',
-		bottom: 70
+		bottom: 60
 	},
 	OuterView: {
 		justifyContent: 'center',
