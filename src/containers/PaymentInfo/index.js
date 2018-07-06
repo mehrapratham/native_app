@@ -29,9 +29,6 @@ class PaymentInfo extends React.Component{
 			}
 		})
 	}
-	backButton(){
-		this.props.history.push('/summary')
-	}
 	render(){
 		let vehicleData = this.props.dispatch(getFromLocalStorage('confirmOrder'))
 		let child = <View style={styles.container}>
