@@ -20,22 +20,22 @@ app.use(function(req, res, next) {
 });
 app.use(express.static(__dirname + '/build'));
 
-// app.get('/*', function(req, res){
-//  res.sendFile('/build/index.html' ,{root:__dirname});
-// });
+app.get('/*', function(req, res){
+ res.sendFile('/build/index.html' ,{root:__dirname});
+});
 
 
-const httpsOptions = {
- key: fs.readFileSync('./key.pem'),
- cert: fs.readFileSync('./cert.pem')
-}
+// const httpsOptions = {
+//  key: fs.readFileSync('./key.pem'),
+//  cert: fs.readFileSync('./cert.pem')
+// }
 
-const server = https.createServer(httpsOptions, app).listen(port, () => {
- console.log('server running at ' + port)
-})
+// const server = https.createServer(httpsOptions, app).listen(port, () => {
+//  console.log('server running at ' + port)
+// })
 
 /*--------------------Routing Over----------------------------*/
 
-/*app.listen(3001,function(){
+app.listen(3001,function(){
    console.log("Express Started on Port 3000");
-});*/
+});

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, ScrollView } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -81,42 +81,46 @@ class Summary extends React.Component{
 							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
 						</View>
 						<View style={styles.view}>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={timeText}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
-							</View>
-							<View style={styles.lastCon}>
-								<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
-								<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
-							</View>
+							<ScrollView style={{height: 100}}>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={timeText}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
+									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
+								</TouchableOpacity>
+							</ScrollView>
 						</View>
-						<View style={styles.lasts}>
-							<View>
-								<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
-							</View>
-							<View style={styles.last5}>
-								<View style={styles.last4}>
-									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+						<View style={styles.lastss}>
+							<View style={styles.lasts}>
+								<View>
+									<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
+								</View>
+								<View style={styles.last5}>
+									<View style={styles.last4}>
+										<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+									</View>
 								</View>
 							</View>
 						</View>
@@ -138,16 +142,18 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	headingView:{
-		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingLeft: 20,
-		paddingRight: 20
+		paddingRight: 20,
+		paddingTop: 10,
+		paddingBottom: 50
 	},
 	view: {
-		flex: 3,
+		flex: 2,
 		paddingLeft: 20,
-		paddingRight: 20
+		paddingRight: 20,
+		justifyContent: 'center'
 	},
 	left: {
 		width: '100%',
@@ -199,6 +205,10 @@ const styles = StyleSheet.create({
 	last5: {
 		flexDirection: 'row', 
 		marginTop: 10
+	},
+	lastss: {
+		flex: 1,
+		justifyContent: 'flex-end'
 	}
 	
 })

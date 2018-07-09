@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar, ScrollView, KeyboardAvoidingView } from 'react-native'
 import SelectBox from '../../components/SelectBox'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
@@ -28,7 +28,9 @@ class Vehicleform extends React.Component{
 	}
 	 async componentWillMount(){
 		
-		this.props.dispatch(getVehicleYears())
+		this.props.dispatch(getVehicleYears()).then(res=>{
+			console.log()
+		})
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		if (data != null) {
@@ -43,14 +45,19 @@ class Vehicleform extends React.Component{
 		this.onValueChange()
 	}
 	onValueChange(key, event) {
-		const { vehicle } = this.state;
+		let { vehicle } = this.state;
 		vehicle[key] = event;
 	    this.setState({vehicle});
 	    if(key == 'year'){
 	    	this.props.dispatch(getVehicleMakes(event))
+	    	vehicle.make = '';
+	    	vehicle.model = '';
+	    	this.setState({vehicle})
 	    }
 	    if(key == 'make'){
 	    	this.props.dispatch(getVehicleModels(event))
+	    	vehicle.model = '';
+	    	this.setState({vehicle})
 	    }
 
 	    let fields = ['year', 'make', 'model']
@@ -89,23 +96,26 @@ class Vehicleform extends React.Component{
 					      barStyle="light-content"
 					      backgroundColor="#fff"
 					    />
-						<View style={styles.container}>
-							<View style={styles.headingCon}>
-								<FontComponent style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold'}} text="Enter Vehicle Details"/>
-							</View>
+						<View style={styles.headingCon}>
+							<FontComponent style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
 						</View>
-						<View style={styles.view}>
+
+						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
+				
 							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
 							<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
 							<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
 							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>
-						</View>
-						<View style={styles.lasts}>
-							<View style={styles.last2}>
-								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-							</View>
-							<View style={styles.last2}>
-								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+							
+						</KeyboardAvoidingView>
+						<View style={styles.lastss}>
+							<View style={styles.lasts}>
+								<View style={styles.last2}>
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+								</View>
+								<View style={styles.last2}>
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+								</View>
 							</View>
 						</View>
 				</View>
@@ -129,16 +139,15 @@ const styles = StyleSheet.create({
     flex: 1
   },
   headingCon:{
-  	flex: 2,
   	alignItems: 'center',
   	alignSelf: 'center',
   	justifyContent: 'center'
   },
   view: {
-  	flex: 3,
+  	flex: 2,
   	width: '100%',
   	paddingLeft: 20,
-  	paddingRight: 20
+  	paddingRight: 20,
   },
   arrow: {
   	alignItems: 'flex-end', 
@@ -153,7 +162,7 @@ const styles = StyleSheet.create({
   	paddingRight: 20,
   	paddingLeft: 20,
   	flexDirection: 'row',
-  	marginBottom: 30
+  	marginBottom: 30,
   },
   oil: {
   	width: 30
@@ -166,5 +175,9 @@ const styles = StyleSheet.create({
   last2: {
   	width: '50%', 
   	alignSelf: 'flex-start'
+  },
+  lastss: {
+  	flex: 1,
+  	justifyContent: 'flex-end'
   }
 });

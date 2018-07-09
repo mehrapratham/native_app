@@ -130,12 +130,14 @@ class TimeSlot extends React.Component{
 							}
 							</ScrollView>					
 						</View>
-						<View style={styles.lasts}>
-							<View style={styles.last4}>
-								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-							</View>
-							<View style={styles.last4}>
-								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+						<View style={styles.lastss}>
+							<View style={styles.lasts}>
+								<View style={styles.last4}>
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+								</View>
+								<View style={styles.last4}>
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+								</View>
 							</View>
 						</View>
 					</View>
@@ -156,13 +158,12 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	view: {
-		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		paddingLeft: 20,
 		paddingRight: 20,
-		paddingTop: 20,
-		paddingBottom: 20
+		paddingTop: 10,
+		paddingBottom: 40
 	},
 	left: {
 		width: '100%',
@@ -220,7 +221,8 @@ const styles = StyleSheet.create({
 	oilss: {
 		flex: 3,
 		paddingRight: 20,
-		paddingLeft: 20
+		paddingLeft: 20,
+		justifyContent: 'center',
 	},
 	oil: {
 		width: 30
@@ -257,5 +259,9 @@ const styles = StyleSheet.create({
 	last4: {
 		width: '50%', 
 		alignSelf: 'flex-start'
+	},
+	lastss: {
+		flex: 1,
+		justifyContent: 'flex-end'
 	}
 })

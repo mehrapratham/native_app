@@ -104,12 +104,14 @@ class RecomendedOil extends React.Component{
 					</View>
 				</View>
 			</View>
-			<View style={styles.lasts}>
-				<View style={styles.last4}>
-					<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-				</View>
-				<View style={styles.last4}>
-					<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={(this.state.selectedOilType == '') || (this.state.selectedOilGrade == '')} />
+			<View style={styles.lastss}>
+				<View style={styles.lasts}>
+					<View style={styles.last4}>
+						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+					</View>
+					<View style={styles.last4}>
+						<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={(this.state.selectedOilType == '') || (this.state.selectedOilGrade == '')} />
+					</View>
 				</View>
 			</View>
 		</View>
@@ -131,13 +133,14 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	headingCon:{
-	  	flex: 1,
 	  	alignItems: 'center',
 	  	alignSelf: 'center',
 	  	justifyContent: 'center',
 	  	paddingTop: 20,
 	  	paddingLeft: 20,
-	  	paddingRight: 20
+	  	paddingRight: 20,
+	  	paddingTop: 10,
+	  	paddingBottom: 10
 	  },
 	view: {
 		flex: 1,
@@ -146,13 +149,9 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 		paddingRight: 20
 	},
-	img: {
-		width: 70,
-		height: 70
-	},
 	radiobttn: {
 		flex: 3,
-		padding: 20
+		padding: 20,
 	},
 	leftArrow: {
 	  	margin: 24
@@ -193,18 +192,22 @@ const styles = StyleSheet.create({
 	img: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'flex-end',
+		justifyContent: 'flex-end'
 	},
 	labelText: {
 		fontSize: 20, marginLeft: 15, marginBottom: 10	
 	},
 	innerOil: {
-		width: 70,
-		height: 110,
+		width: 50,
+		height: 70,
 		overflow: 'hidden'
 	},
 	imgSize: {
 		width: '100%',
 		height: '100%'
+	},
+	lastss: {
+		flex: 1,
+		justifyContent: 'flex-end'
 	}
 })

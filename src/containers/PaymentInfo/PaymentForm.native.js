@@ -1,6 +1,6 @@
 import React from 'react'
 import {StripeProvider, Elements, CardElement} from 'react-stripe-elements';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, ScrollView, KeyboardAvoidingView } from 'react-native'
 import CardForm from './checkout'
 import InputBox from '../../components/InputBox'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -110,7 +110,9 @@ class PaymentForm extends React.Component{
 		const{ cardDetail } = this.state;
 		return(
 			<View style={styles.container}>
-				<View style={styles.text7}>
+      
+				<KeyboardAvoidingView style={styles.text7} behaviour="position">
+          {/*<ScrollView style={{height: 100}}>*/}
 					<View style={styles.address}>
             <FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Card Number"/>
 						<InputBox placeholder="Enter Card number" onChange={this.onValueChange.bind(this,'card_number')} maxLength={16} nextkey="done" keyboardType='numeric' />
@@ -123,7 +125,8 @@ class PaymentForm extends React.Component{
 						<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="CVV"/>
 						<InputBox placeholder="CVC" onChange={this.onValueChange.bind(this,'card_cvc')} maxLength={3} keyboardType='numeric'/>
 					</View>
-				</View>
+           {/*</ScrollView>*/}
+				</KeyboardAvoidingView>
 				<View style={styles.secondCon}>          
           <View style={styles.container}>
 					<ConfirmButton label="Confirm Booking" onButtonPress={this.onSubmit.bind(this)}/>
@@ -134,6 +137,7 @@ class PaymentForm extends React.Component{
             </View>
           </View>
 				</View>
+     
         {this.state.showToast && this.state.toastmsg?<ToastComponent msg={this.state.toastmsg}/>: null}
 			</View>
 		)
@@ -226,7 +230,8 @@ const styles = StyleSheet.create({
     flex: 2
   },
   text7: {
-    flex: 3
+    flex: 3,
+    paddingBottom: 20
   },
   last4: {
     width: '50%', 

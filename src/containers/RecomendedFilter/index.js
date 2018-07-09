@@ -74,12 +74,14 @@ class RecomendedFilter extends React.Component{
 								</View>
 							</View>
 						</View>
-						<View style={styles.lasts}>
-							<View style={styles.last4}>
-								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-							</View>
-							<View style={styles.last4}>
-								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedFilterType == ''} />
+						<View style={styles.lastss}>
+							<View style={styles.lasts}>
+								<View style={styles.last4}>
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+								</View>
+								<View style={styles.last4}>
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedFilterType == ''} />
+								</View>
 							</View>
 						</View>
 					</View>
@@ -101,13 +103,13 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	headingCon:{
-	  	flex: 1,
 	  	alignItems: 'center',
 	  	alignSelf: 'center',
 	  	justifyContent: 'center',
-	  	paddingTop: 20,
+	  	paddingTop: 10,
 	  	paddingLeft: 20,
-	  	paddingRight: 20
+	  	paddingRight: 20,
+	  	paddingBottom: 10
 	  },
 	view: {
 		flex: 1,
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
 	  	paddingRight: 20,
 	  	paddingLeft: 20,
 	  	flexDirection: 'row',
-	  	marginBottom: 30
+	  	marginBottom: 30,
 	},
 	last2: {
 		width: 60, 
@@ -168,13 +170,17 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 	},
 	outerView: {
-		width: 100,
-		height: 150,
+		width: 50,
+		height: 70,
 		overflow: 'hidden'
 	},
 	imgView: {
 		width: '100%',
 		height: '100%'
+	},
+	lastss: {
+		flex: 1,
+		justifyContent: 'flex-end'
 	}
 	
 })

@@ -39,9 +39,9 @@ class PaymentInfo extends React.Component{
 						<View style={styles.arrow}>
 							<FontComponent style={{fontSize: 26,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
 						</View>
-						<View style={styles.view}>
+						<KeyboardAvoidingView style={styles.view} behaviour="position">
 							<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
-						</View>
+						</KeyboardAvoidingView>
 					</View>
 		return(
 			<ReactNativeDrawer child={child} history={this.props.history}/>
@@ -66,8 +66,9 @@ const styles = StyleSheet.create({
   	paddingRight: 20
   },
   arrow: {
-  	flex: 1,
   	alignItems: 'center',
-  	justifyContent: 'center'
+  	justifyContent: 'center',
+  	paddingTop: 10,
+  	paddingBottom: 10
   }
 });

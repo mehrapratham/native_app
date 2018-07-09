@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar, ScrollView } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -99,15 +99,16 @@ class Address extends React.Component{
       	}
 	}
 	render(){
-		let child = <View style={styles.container}>
+		let child = <View style={styles.container} >
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
+					<View style={{flex: 1}}>
 						<View style={styles.arrow}>
 							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Enter Service Address"/>
 						</View>
-						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
+						<KeyboardAvoidingView style={styles.view} behavior="position" enabled >						
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Street"/>
 								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next"/>
@@ -135,14 +136,17 @@ class Address extends React.Component{
 								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done" />
 							</View>
 						</KeyboardAvoidingView>
-						<View style={styles.lasts}>
-							<View style={styles.last2}>
-								<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
-							</View>
-							<View style={styles.last2}>
-								<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+						<View style={styles.lastss}>
+							<View style={styles.lasts}>
+								<View style={styles.last2}>
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+								</View>
+								<View style={styles.last2}>
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+								</View>
 							</View>
 						</View>
+					</View>
 						{this.state.showToast && this.state.toastmsg?<ToastComponent msg={this.state.toastmsg}/>: null}
 					</View>
 		return(
@@ -163,16 +167,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {
-  	flex: 3,
+  	flex: 1,
   	width: '100%',
   	paddingLeft: 20,
   	paddingRight: 20
   },
   arrow: {
-  	flex: 1,
   	alignItems: 'center',
   	justifyContent: 'center',
-	paddingTop: 20
+	paddingTop: 10,
+	paddingBottom: 10
   },
   heading: {
   	fontSize: 26
@@ -206,5 +210,8 @@ const styles = StyleSheet.create({
 	last2: {
 		width: '50%', 
 		alignSelf: 'flex-start'
+	},
+	lastss: {
+		justifyContent: 'flex-end'
 	}
 });
