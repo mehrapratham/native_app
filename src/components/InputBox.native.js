@@ -8,9 +8,18 @@ export default class InputBox extends React.Component{
   onChange(event){
     this.props.onChange(event)
   }
-  setFocus (hasFocus) {
+  setFocus (hasFocus, e) {
+    console.log(222)
       this.setState({hasFocus});
+      if (hasFocus && this.props.disableAnimate) {
+        this.props.disableAnimate(true)
+      } 
+      else if(!hasFocus && this.props.disableAnimate){
+        this.props.disableAnimate(false)
+      }
   }
+
+  
 	render(){
 		return(
 			<TextInput
@@ -27,6 +36,7 @@ export default class InputBox extends React.Component{
         onFocus={this.setFocus.bind(this, true)}
         onBlur={this.setFocus.bind(this, false)}
         keyboardType={this.props.keyboardType}
+        enablesReturnKeyAutomatically={true}
 	    />
 		)
 	}

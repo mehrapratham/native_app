@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, StatusBar, KeyboardAvoidingView } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -31,17 +31,19 @@ class PaymentInfo extends React.Component{
 	}
 	render(){
 		let vehicleData = this.props.dispatch(getFromLocalStorage('confirmOrder'))
-		let child = <View style={styles.container}>
+		let child = <View style={styles.container} >
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
-						<View style={styles.arrow}>
-							<FontComponent style={{fontSize: 26,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
-						</View>
-						<KeyboardAvoidingView style={styles.view} behaviour="position">
-							<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
-						</KeyboardAvoidingView>
+					    	<View style={{flex: 1}}>
+								<View style={styles.arrow}>
+									<FontComponent style={{fontSize: 20,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
+								</View>
+								<View style={styles.view}>
+									<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />
+								</View>
+							</View>
 					</View>
 		return(
 			<ReactNativeDrawer child={child} history={this.props.history}/>

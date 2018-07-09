@@ -28,9 +28,7 @@ class Vehicleform extends React.Component{
 	}
 	 async componentWillMount(){
 		
-		this.props.dispatch(getVehicleYears()).then(res=>{
-			console.log()
-		})
+		this.props.dispatch(getVehicleYears())
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		if (data != null) {
@@ -99,14 +97,11 @@ class Vehicleform extends React.Component{
 						<View style={styles.headingCon}>
 							<FontComponent style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
 						</View>
-
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
-				
 							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
 							<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
 							<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
-							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>
-							
+							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>

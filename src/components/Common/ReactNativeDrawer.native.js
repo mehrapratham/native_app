@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     height: 64,
     justifyContent: 'center',
     paddingLeft: 15,
-    paddingTop: 24
+    paddingTop: 24,
+    zIndex: 1
   }
 });

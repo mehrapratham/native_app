@@ -29,7 +29,8 @@ class Address extends React.Component{
 			errors:{},
 			loading: true,
 			showToast: false,
-			toastmsg: ''
+			toastmsg: '',
+			disableKeyboardView: false
 		}
 	}
 	async componentWillMount(){
@@ -98,24 +99,27 @@ class Address extends React.Component{
       		this.setState({loading: true})
       	}
 	}
+
+	onFocusTextBox(bool){
+		if (bool) {
+			this.setState({disableKeyboardView: true})
+		}
+		else{
+			this.setState({disableKeyboardView: false})
+		}
+	}
 	render(){
-		let child = <View style={styles.container} >
-						<StatusBar
-					      barStyle="light-content"
-					      backgroundColor="blue"
-					    />
-					<View style={{flex: 1}}>
-						<View style={styles.arrow}>
-							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Enter Service Address"/>
-						</View>
-						<KeyboardAvoidingView style={styles.view} behavior="position" enabled >						
+		let subChild = <View>	
+							<View style={styles.arrow}>
+								<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Enter Service Address"/>
+							</View>					
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Street"/>
-								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next"/>
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)}/>
 							</View>
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="City"/>
-								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" />
+								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next"/>
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
@@ -133,9 +137,19 @@ class Address extends React.Component{
 							</View>
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Phone"/>
-								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done" />
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done"/>
 							</View>
-						</KeyboardAvoidingView>
+						</View>
+		let child = 
+					<View style={styles.container} >
+						<StatusBar
+					      barStyle="light-content"
+					      backgroundColor="blue"
+					    />
+					<View style={{flex: 1}}>
+							<KeyboardAvoidingView style={styles.view} behavior={this.state.disableKeyboardView ? '': 'position'} enabled>
+								{subChild}
+							</KeyboardAvoidingView>					
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
 								<View style={styles.last2}>
@@ -149,6 +163,7 @@ class Address extends React.Component{
 					</View>
 						{this.state.showToast && this.state.toastmsg?<ToastComponent msg={this.state.toastmsg}/>: null}
 					</View>
+				
 		return(
 			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
@@ -167,16 +182,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   view: {
-  	flex: 1,
+  	flex: 2,
   	width: '100%',
   	paddingLeft: 20,
-  	paddingRight: 20
+  	paddingRight: 20,
+  	zIndex: .1
   },
   arrow: {
   	alignItems: 'center',
   	justifyContent: 'center',
 	paddingTop: 10,
-	paddingBottom: 10
   },
   heading: {
   	fontSize: 26
