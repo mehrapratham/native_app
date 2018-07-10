@@ -4,11 +4,85 @@
 #root{
 	width: 100%;
 }
+.body{
+	padding-top: 92px;
+}
+.header{
+	background-color: #1b1b1b;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+}
+.header .bg-dark{
+	background-color: #1b1b1b !important;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 .header .navbar-collapse{
 	justify-content: flex-end;
 }
+.header .navbar-brand{
+	position: relative;
+	top: 4px;
+}
+.header .navbar-expand-lg .navbar-nav .nav-link{
+	padding: 30px 20px;
+    font-weight: 300;
+    letter-spacing: 0.7px;	
+}
+.banner{
+	position: relative;
+}
+.banner .container{
+	position: absolute;
+	top: 15%;
+	left: 50%;
+	margin-left: -570px;
+}
 .banner img{
 	width: 100%;
+}
+.bannerText{
+	
+}
+.bannerText ul{
+	padding: 0;
+	list-style: none;
+	margin: 0;
+	margin-bottom: 35px;
+	
+}
+.bannerText ul li{
+	margin-bottom: 20px;
+	padding-left: 45px;
+	position: relative;
+	font-size: 18px;
+	color: #1b1b1b;
+	font-weight: 700;
+}
+.bannerText ul li:last-child{
+	margin-bottom: 0;
+}
+.bannerText ul li:before{
+	content: attr(x);
+	width: 40px;
+	height: 40px;
+	background: url(images/tick.png) no-repeat;
+	position: absolute;
+	left: 0;
+	top: 10px;
+}
+.bannerText button.btn, .workCon button.btn{
+	background: #f5b443;
+    color: #fff;
+    padding: 8px 45px;
+    height: auto;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 18px;
+    border-radius: 8px;
 }
 .stepSec{
 	text-align: center;
@@ -44,10 +118,10 @@
 }
 .stepSec ul li h4{
 	margin-bottom: 0;
-    color: #7d7b7b;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: 400;
+    color: #000;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: inherit !important;
 }
 .workCon{
 	padding: 40px 0;
@@ -60,7 +134,14 @@
 	width: 20%;
 }
 .workCon h2{
-	margin-bottom: 30px
+	margin-bottom: 30px;
+	font-family: inherit !important;
+	font-size: 50px;
+}
+.workCon h5{
+	font-family: inherit;
+	font-weight: 400;
+	font-size: 17px;
 }
 .workCon h6{
 	font-size: 25px;
@@ -69,4 +150,341 @@
 	margin-top: 40px;
 	clear: both;
 	margin-bottom: 60px;
+}
+
+
+
+.topStepsCon{
+	border-bottom: solid 1px #f1efef;
+}
+
+.topStepsCon.stepSec ul li i{
+	height: 115px;
+	border: none;
+	width: 200px;
+	border-radius: 0;
+	font-size: 0;
+}
+.topStepsCon.stepSec ul li i.fa-car{
+	background: url(images/car.png) no-repeat bottom;
+}
+.topStepsCon.stepSec ul li i.fa-filter{
+	background: url(images/oil.png) no-repeat bottom;
+}
+.topStepsCon.stepSec ul li i.fa-map-marker-alt{
+	background: url(images/service_address.png) no-repeat bottom;
+}
+.topStepsCon.stepSec ul li i.fa-clock{
+	background: url(images/clock.png) no-repeat bottom;
+}
+.workCon.stepSec ul{
+	margin-bottom: 40px;
+}
+.workCon.stepSec ul li i{
+	width: 118px;
+	height: 118px;
+	border: none;
+	background-size: 118px;
+	font-size: 0;
+}
+.workCon.stepSec ul li i.fa-sign-in-alt{
+	background: url(images/signup.png) no-repeat;
+}
+.workCon.stepSec ul li i.fa-transgender{
+	background: url(images/get_trained.png) no-repeat;
+}
+.workCon.stepSec ul li i.fa-calendar-plus{
+	background: url(images/work_schedule.png) no-repeat;
+}
+.workCon.stepSec ul li i.fa-book{
+	background: url(images/recieve_bookings.png) no-repeat;
+}
+.workCon.stepSec ul li i.fa-wrench{
+	background: url(images/provide_service.png) no-repeat;
+}
+
+.aboutCon{
+	background: #f4f2f3;
+}
+.aboutCon h6{
+	margin-bottom: 10px;
+}
+.aboutCon p{
+	font-size: 18px;
+	line-height: 28px;
+	font-family: inherit;
+}
+.serving{
+	list-style: none;
+	padding: 0;
+	margin: 0
+}
+.stepSec.workCon ul.serving{
+	max-width: 400px;
+}
+.stepSec.workCon ul.serving li{
+	width: 50%;
+	float: left;
+	padding: 0;
+	text-align: left;
+	font-size: 24px;
+	color: #f2b542;
+	position: relative;
+	padding-left: 35px;
+}
+.stepSec.workCon ul.serving li:before{
+	content: attr(x);
+	position: absolute;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	background: url(images/tick_orange.png) no-repeat;
+	top: 12px;
+}
+.fleetCon.workCon ul li{
+	width: 33.33%
+}
+.fleetCon.workCon ul li i{
+	width: 123px;
+	height: 120px;
+	border-radius: 0;
+}
+.workCon.fleetCon ul li i.fa-sign-in-alt{
+	background: url(images/workpack_package.png) no-repeat;
+}
+.workCon.fleetCon ul li i.fa-transgender{
+	background: url(images/herdPackage.png) no-repeat;
+}
+.workCon.fleetCon ul li i.fa-calendar-plus{
+	background: url(images/fleetPackage.png) no-repeat;
+}
+
+.footer{
+	background: #303030;
+	padding-bottom: 30px;
+	padding-top: 45px;
+}
+.copyRight p{
+	color: #fff;
+	margin-top: 30px;
+	font-family: inherit;
+	letter-spacing: 1px;
+}
+.footer ul{
+	list-style: none;
+	padding: 0;
+	margin-bottom: 0;
+	width: 100%;
+	text-align: center;
+}
+.footer ul.footerMenu{
+	margin: 50px 0 70px;
+}
+.footer ul li{
+	display: inline-block;
+}
+.footer ul li a{
+	display: inline-block;
+	padding: 10px 32px;
+	color: #fff;
+	font-family: arial;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all ease-out 0.3s 0s;
+}
+.footer ul li a:hover{
+	color: #ccc;
+}
+
+.footer ul.social{
+}
+
+
+.popupCon{
+	position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    transition: all ease-out 0.3s 0s;
+    background: rgba(0,0,0,0.6);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+.popupCon.opened{
+	opacity: 1;
+    pointer-events: auto;
+}
+
+.popupCon #root{
+	opacity: 0;
+	position: relative;
+	top: -100px;
+	transition: all ease-out 0.3s 0s;
+}
+.popupCon.opened #root{
+	opacity: 1;
+	top: 0;
+}
+.popupCon .close{
+	position: absolute;
+    z-index: 1;
+    right: 35px;
+    margin: 0;
+    width: 40px;
+    background: #fff;
+    opacity: 1;
+    top: 35px;
+    font-size: 20px;
+    outline: none;
+    opacity: 0;
+    transition: all ease-out 0.3s 0s;
+    border-radius: 50%;
+}
+.popupCon.opened .close{
+	opacity: 1;
+}
+.aboutCon img.img-responsive{
+	width: 100%;
+}
+
+.banner{
+	background: url(images/banner1.jpg) no-repeat;
+	background-size: 100%;
+	background-attachment: fixed;
+}
+.banner img{
+	opacity: 0;
+}
+
+@media (max-width: 1300px){
+	.banner .container{
+		top: 10%;
+
+	}
+	.banner img{
+		min-height: 390px;
+		width: auto;
+	}
+	.banner{
+		overflow: hidden;
+	}
+}
+@media (max-width: 1199px){
+	.banner .container{
+		margin-left: -475px;
+	}
+}
+@media (max-width: 991px){
+	.banner .container{
+		margin-left: -360px;
+	}
+	.stepSec ul li{
+		width: 50%;
+		padding: 20px 10px;
+	}
+	.topStepsCon{
+		padding: 30px 0;
+	}
+	.stepSec.workCon ul li{
+		width: 50%;
+		padding: 10px;
+	}
+	.header .navbar-expand-lg .navbar-nav .nav-link{
+		padding: 10px;
+	}
+	.footer ul li a{
+		padding: 10px 20px;
+	}
+}
+@media (max-width: 767px){
+	.navbar-brand img{
+		height: 45px;
+	}
+	.header .navbar-brand{
+		top: 2px;
+	}
+	.header .navbar-toggler{
+		margin-top: 0;
+	}
+	.body{
+		padding-top: 65px;
+	}
+	.banner .container{
+		margin-left: -270px;
+		top: 5%;
+	}
+	.bannerText ul li{
+		margin-bottom: 10px;
+	}
+	.banner img{
+		height: 345px;
+		min-height: 1px;
+	}
+	.topStepsCon.stepSec ul li i{
+		height: 80px;
+		background-size: auto 70px !important;
+	}
+	.topStepsCon.stepSec ul li i.fa-car{
+		background-size: 122px !important
+	}
+	.workCon h2{
+		font-size: 30px;
+	}
+	.workCon.stepSec ul li i{
+		width: 70px;
+		height: 70px;
+		background-size: 70px !important;
+	}
+	.stepSec ul li h4{
+		font-size: 18px;
+	}
+	.stepSec ul li h4 br{
+		display: none;
+	}
+	.aboutCon p{
+		text-align: center;
+	}
+	.footer ul.footerMenu li a{
+		width: 160px;
+	}
+	.bannerText button.btn, .workCon button.btn{
+		font-size: 14px;
+		padding: 6px 25px;
+	}
+	.banner{
+		background-size: auto;
+	}
+
+}
+@media (max-width: 575px){
+	.banner .container{
+		margin-left: 0;
+		width: 100%;
+		left: 0;
+	}
+	.stepSec ul li{
+		width: 100%;
+	}
+	.workCon.stepSec ul li i{
+		margin-bottom: 10px;
+	}
+	.stepSec.workCon ul li{
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.topStepsCon.stepSec ul li i{
+		margin-bottom: 10px;
+	}
+	.workCon h6{
+		font-size: 18px;
+	}
+	.stepSec.workCon ul.serving li{
+		font-size: 17px;
+	}
+	.stepSec.workCon ul.serving li:before{
+		top: 6px;
+	}
 }
