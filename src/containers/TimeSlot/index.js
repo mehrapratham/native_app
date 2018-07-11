@@ -4,7 +4,7 @@ import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
-import {getAvailability} from '../../actions/VehicleForm'
+import {getAvailability, getBookings} from '../../actions/VehicleForm'
 import moment from 'moment'
 import {getFromLocalStorage,saveToLocalStorage} from '../../components/localStorage'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
@@ -58,6 +58,8 @@ class TimeSlot extends React.Component{
 		if (vehicleData && vehicleData.timeslot) {
 			this.setState({selectedTime: vehicleData.timeslot})
 		}
+		const api = await this.props.dispatch(getBookings())
+		console.log(api,333)
 	}
 	onButtonPress() {
 		if(this.state.selectedTime.start){
@@ -71,8 +73,11 @@ class TimeSlot extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/address');
 	}
-	booking(item){
-		this.setState({ selectedTime: item })
+	booking(item, bookingIndex){
+		if (bookingIndex == -1) {
+			this.setState({ selectedTime: item })
+		}
+		
 	}
 	filterDate(date){
 		 if (date && moment(this.state.filterTime).format('M') == moment(date.start).format('M') && moment(this.state.filterTime).date() == moment(date.start).date()) {
@@ -93,6 +98,7 @@ class TimeSlot extends React.Component{
 		this.setState({filterTime})
 	}
 	render(){
+		console.log(this.props,22222)
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		let child = <View style={styles.container}>
 						<StatusBar
@@ -123,8 +129,9 @@ class TimeSlot extends React.Component{
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
 
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index) =>{
-								return  <TouchableOpacity style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : styles.full} key={index} onPress={this.booking.bind(this,item)}>
-											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : null}>{this.formatDate(item)}</Text>
+								const bookingIndex = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.findIndex(bookingItem => bookingItem.date == item.start);
+								return  <TouchableOpacity activeOpacity={bookingIndex != -1 ? 1 : 0} style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : (bookingIndex != -1 ? styles.booked : styles.full)} key={index} onPress={this.booking.bind(this,item, bookingIndex)}>
+											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : (bookingIndex != -1 ? styles.fullSelectedText : null)}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>
 								})
 							}
@@ -196,6 +203,17 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginBottom: 5
 	},
+	booked:{
+		width: '100%',
+		height: 40,
+		backgroundColor: '#ccc',
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 5,
+		marginBottom: 5,
+	},
+
+	
 	fullSelectedText: {
 		color: '#fff'
 	},

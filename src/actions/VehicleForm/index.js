@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST } from '../types'
+import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS } from '../types'
 var qs = require('qs');
 
 export const getVehicleYears = () => {
@@ -216,6 +216,27 @@ return dispatch => {
       return error
     })
 }
+}
+export const getBookings = () => {
+let query = {query: '{ bookings {date} }'}
+ return dispatch => {
+   return axios
+     .post(`${GRAPHQL_URL}`, query)
+     .then(res => {
+       dispatch({
+         type: GET_VEHICLE_BOOKINGS,
+         data: res.data.data.bookings
+       })
+       return res.data
+     })
+     .catch(function(error) {
+       dispatch({
+         type: HAS_ERROR,
+         data: error,
+       })
+       return error
+     })
+ }
 }
 
 

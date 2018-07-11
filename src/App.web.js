@@ -24,8 +24,9 @@ class App extends React.Component{
       <Router>
         <Switch>
           <View style={{ display: 'flex', minHeight: '100%'}}>
-            {/*<Route exact path="/" component={Login} />*/}				
-            <Route exact path="/" component={Vehicleform} />
+            {/*<Route exact path="/" component={Login} />*/}	     
+            <Route exact path="/" component={Vehicleform} />      
+            <Route exact path="/vehicle-form" component={Vehicleform} />
             <Route path="/recomended-oil" component={RecomendedOil} />
             <Route path="/recomended-filter" component={RecomendedFilter} />
             <Route path="/address" component={Address} />

@@ -1,5 +1,5 @@
 import initialState from '../initialState'
-import { GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY } from '../../actions/types'
+import { GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_VEHICLE_BOOKINGS } from '../../actions/types'
 export default (state = initialState.VehicleForm, action) => {
  switch (action.type) {
    case GET_VEHICLE_YEARS:
@@ -14,6 +14,8 @@ export default (state = initialState.VehicleForm, action) => {
      return { ...state, filterTypeList: action.data }
    case GET_AVAILABILITY:
      return { ...state, availabilityList: action.data }
+   case GET_VEHICLE_BOOKINGS:
+     return { ...state, bookingList: action.data }
    default:
      return state
  }
