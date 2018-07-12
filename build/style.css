@@ -487,4 +487,90 @@
 	.stepSec.workCon ul.serving li:before{
 		top: 6px;
 	}
+	.popupCon{
+		padding: 0;
+	}
+	div[dir="auto"]{
+		/*font-size: 20px !important;*/
+	}
+	.popupCon .close{
+		width: 30px;
+		height: 30px;
+		font-size: 15px;
+		top: 10px;
+		right: 10px;
+	}
+	.popupCon select{
+		height: 40px !important;
+		padding: 5px 10px !important;
+		font-size: 15px !important;
+		margin-bottom: 10px !important
+	}
+	.popupCon input{
+		height: 40px !important;
+		padding: 5px 10px !important;
+		font-size: 15px !important;
+		margin-bottom: 5px !important;
+	}
+	.popupCon input[type="number"],.popupCon input[type="text"]{
+		height: 36px !important;
+		padding: 5px 10px !important;
+		font-size: 15px !important;
+	}
+	#root > div{
+		overflow: auto !important;
+	}
+	.popupCon input[type="radio"]{
+		width: 18px !important;
+		height: 18px !important;
+	}
+	.popupCon input[type="radio"] + span{
+		margin-left: 3px !important;
+		font-size: 15px !important;
+	}
+	.mainHeading{
+		margin-left: 0 !important
+	}
+	.radioBtn{
+		padding-left: 0 !important
+	}
+	div.timeSlot{
+		font-size: 14px !important;
+	}
+	div.timeheading{
+		font-size: 15px !important	
+	}
+	div.labelText{
+		padding-left: 10px !important;
+		padding-top: 2px;
+	}
+	div.labelText > div, 
+	div.infoText > div{
+		font-size: 15px !important
+	}
+	div.infoText{
+		padding-right: 10px !important;
+		padding-top: 2px;
+	}
+	.StripeElement{
+		height: 40px;
+		padding: 10px !important;
+	}
+	.mainHeadingTop{
+		font-size: 18px !important;
+	}
+	.mainSubHeading{
+		font-size: 16px !important
+	}
+	.arrowView{
+		width: 45px;
+		height: 45px;
+	}
+	.arrowView > div{
+		width: 35px;
+		height: 35px;
+	}
+	.arrowView > div > i{
+		font-size: 20px !important;
+	}
 }
