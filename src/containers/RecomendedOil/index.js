@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, StatusBar, PixelRatio } from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -10,6 +10,13 @@ import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
+var FONT_BACK_26   = 26;
+var FONT_BACK_20   = 20;
+
+if (PixelRatio.get() <= 2) {
+  FONT_BACK_26 = 15;
+  FONT_BACK_20 = 14;
+}
 class RecomendedOil extends React.Component{
 	constructor(props){
 		super(props)
@@ -77,14 +84,14 @@ class RecomendedOil extends React.Component{
 		      backgroundColor="blue"
 		    />
 			<View style={styles.headingCon}>
-				<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
-				<FontComponent className="mainSubHeading" style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
+				<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+				<FontComponent className="mainSubHeading" style={{fontSize: FONT_BACK_20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 			</View>
 			<View style={styles.radiobttn}>
 				<ScrollView style={styles.radio}>
 					<View style={{flexDirection: 'row'}}>
 						<View style={{flex: 1}} className="radioCon" >
-							<FontComponent className="mainHeading" style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
+							<FontComponent className="mainHeading" style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
 							{this.state.loading ? <View style={styles.loading}>
 								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
 							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)} className="radioBtn"/>
@@ -92,13 +99,13 @@ class RecomendedOil extends React.Component{
 							{types && types.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
 						</View>
 						<View style={{flex: 1}}>
-							<FontComponent style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>
+							<FontComponent style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>
 							<RadioButton list={this.state.oilGrade} name="oilGrade" value={this.state.selectedOilGrade} onSelectValue={this.onChangeGrade.bind(this)}/>
 						</View>
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					{this.state.selectedOilPrice.length != 0 &&<FontComponent style={{textAlign: 'center', fontSize: 20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/>}
+					{this.state.selectedOilPrice.length != 0 &&<FontComponent style={{textAlign: 'center', fontSize: FONT_BACK_20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/>}
 					<View style={styles.innerOil}>
 						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
 					</View>
@@ -195,7 +202,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end'
 	},
 	labelText: {
-		fontSize: 20, marginLeft: 15, marginBottom: 10	
+		fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10	
 	},
 	innerOil: {
 		width: 50,
@@ -209,5 +216,8 @@ const styles = StyleSheet.create({
 	lastss: {
 		flex: 1,
 		justifyContent: 'flex-end'
-	}
+	},
+	label: {
+	    fontSize: FONT_BACK_LABEL
+	  }
 })
