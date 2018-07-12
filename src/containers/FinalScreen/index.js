@@ -32,7 +32,7 @@ class FinalStep extends React.Component{
                     backgroundColor="blue"
                   />
                   <View style={styles.headingview}>
-                    <FontComponent style={{fontSize: 22,textAlign: 'center',fontFamily: 'dosis-bold', paddingTop: 10, paddingBottom:30}} text="Congratulations Your Oil service Has been scheduled"/>
+                    <FontComponent className="mainHeadingTop" style={{fontSize: 22,textAlign: 'center',fontFamily: 'dosis-bold', paddingTop: 10, paddingBottom:30}} text="Congratulations Your Oil service Has been scheduled"/>
                   </View>
                   <View style={styles.view}>
                     <ScrollView style={{height: 100}}>

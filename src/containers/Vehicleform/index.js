@@ -95,7 +95,7 @@ class Vehicleform extends React.Component{
 					      backgroundColor="#fff"
 					    />
 						<View style={styles.headingCon}>
-							<FontComponent style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
 						</View>
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>

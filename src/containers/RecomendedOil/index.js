@@ -77,17 +77,17 @@ class RecomendedOil extends React.Component{
 		      backgroundColor="blue"
 		    />
 			<View style={styles.headingCon}>
-				<FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
-				<FontComponent style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
+				<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+				<FontComponent className="mainSubHeading" style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 			</View>
 			<View style={styles.radiobttn}>
 				<ScrollView style={styles.radio}>
 					<View style={{flexDirection: 'row'}}>
-						<View style={{flex: 1}}>
-							<FontComponent style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
+						<View style={{flex: 1}} className="radioCon" >
+							<FontComponent className="mainHeading" style={{fontSize: 20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
 							{this.state.loading ? <View style={styles.loading}>
 								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
-							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)}/>
+							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)} className="radioBtn"/>
 							}
 							{types && types.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
 						</View>

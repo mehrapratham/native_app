@@ -111,7 +111,7 @@ class Address extends React.Component{
 	render(){
 		let subChild = <View>	
 							<View style={styles.arrow}>
-								<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Enter Service Address"/>
+								<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
 							</View>					
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Street"/>

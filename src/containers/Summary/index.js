@@ -78,37 +78,37 @@ class Summary extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingView}>
-							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
 						</View>
 						<View style={styles.view}>
 							<ScrollView style={{height: 100}}>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={timeText}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={timeText}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-									<View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
-									<View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
 								</TouchableOpacity>
 							</ScrollView>
 						</View>

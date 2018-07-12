@@ -5,7 +5,7 @@ import FontAwesomeIcon from '../Icon/FontAwesomeIcon'
 export default class ArrowLeftButton extends React.Component{
 	render(){
 		return(
-      <View style={styles.arrowView}>
+      <View style={styles.arrowView} className="arrowView">
   			<TouchableOpacity  style={this.props.disabled ? styles.arrowDisabled : styles.arrow} onPress={this.props.onPress} disabled={this.props.disabled}>
           <FontAwesomeIcon iconClass="fa fa-angle-left" nativeBaseIconName="ios-arrow-dropleft" disabled={this.props.disabled} styles={{fontSize: 26}}/>
         </TouchableOpacity>

@@ -106,7 +106,7 @@ class TimeSlot extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.view}>
-							<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Select Time slot"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Select Time slot"/>
 						</View>
 						<View style={styles.oilss}>
 							<View style={styles.left}>
@@ -114,7 +114,7 @@ class TimeSlot extends React.Component{
 									<FontAwesomeIcon iconClass="fas fa-arrow-left" nativeBaseIconName="ios-arrow-dropleft" />
 								</TouchableOpacity>
 								<View style={styles.row}>
-									<Text>{moment(this.state.filterTime).format('ddd MM/DD') }</Text>
+									<Text className="timeheading">{moment(this.state.filterTime).format('ddd MM/DD') }</Text>
 								</View>
 								<TouchableOpacity style={styles.row} onPress={this.nextDate.bind(this)}>
 									<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
@@ -131,7 +131,7 @@ class TimeSlot extends React.Component{
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index) =>{
 								const bookingIndex = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.findIndex(bookingItem => bookingItem.date == item.start);
 								return  <TouchableOpacity activeOpacity={bookingIndex != -1 ? 1 : 0} style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : (bookingIndex != -1 ? styles.booked : styles.full)} key={index} onPress={this.booking.bind(this,item, bookingIndex)}>
-											<Text style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : (bookingIndex != -1 ? styles.fullSelectedText : null)}>{this.formatDate(item)}</Text>
+											<Text className="timeSlot" style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : (bookingIndex != -1 ? styles.fullSelectedText : null)}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>
 								})
 							}

@@ -56,8 +56,8 @@ class RecomendedFilter extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingCon}>
-							<FontComponent style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
-							<FontComponent style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+							<FontComponent className="mainSubHeading" style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 						</View>
 						<View style={styles.list}>
 							<ScrollView style={styles.radio}>
