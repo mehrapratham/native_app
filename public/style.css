@@ -460,6 +460,9 @@
 	#root > div{
 		overflow: auto !important;
 	}
+	.popupCon{
+		padding: 0;
+	}
 
 }
 @media (max-width: 575px){
