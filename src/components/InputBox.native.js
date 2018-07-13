@@ -1,5 +1,10 @@
 import React from 'react';
-import {TextInput, View, StyleSheet} from 'react-native'
+import {TextInput, View, StyleSheet, PixelRatio } from 'react-native'
+var FONT_BACK_15   = 13;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_15 = 15;
+}
 export default class InputBox extends React.Component{
   constructor (props) {
         super(props);
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
     height: 45, 
     width: "100%", 
     paddingLeft: 15, 
-    fontSize: 15, 
+    fontSize: FONT_BACK_15, 
     borderRadius: 5,
     borderBottomWidth: 4,
     borderColor: '#c5c3c4'
@@ -57,7 +62,7 @@ const styles = StyleSheet.create({
     height: 45, 
     width: "100%", 
     paddingLeft: 15, 
-    fontSize: 15, 
+    fontSize: FONT_BACK_15, 
     borderRadius: 5,
     borderWidth: 2,
     borderColor: '#9df441',

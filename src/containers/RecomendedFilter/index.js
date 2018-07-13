@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image,StyleSheet, TouchableOpacity, ScrollView, StatusBar } from 'react-native'
+import { View, Text, Image,StyleSheet, TouchableOpacity, ScrollView, StatusBar, PixelRatio } from 'react-native'
 import RadioButton from '../../components/Buttons/RadioButton'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -10,6 +10,18 @@ import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+var FONT_BACK_WIDTH = 50;
+var FONT_BACK_HEIGHT = 70;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+  FONT_BACK_WIDTH = 70;
+  FONT_BACK_HEIGHT = 100;
+}
+
 class RecomendedFilter extends React.Component{
 	constructor(props){
 		super(props)
@@ -46,6 +58,7 @@ class RecomendedFilter extends React.Component{
 	onChange(event){
 		this.setState({ selectedFilterType: event });
 	}
+
 	render(){
 		const filters = this.props.VehicleForm && this.props.VehicleForm.filterTypeList;
 		const {vehicleData} = this.state;
@@ -56,8 +69,8 @@ class RecomendedFilter extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingCon}>
-							<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
-							<FontComponent className="mainSubHeading" style={{fontSize: 20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
+							<FontComponent className="mainSubHeading" style={{fontSize: FONT_BACK_20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
 						</View>
 						<View style={styles.list}>
 							<ScrollView style={styles.radio}>
@@ -66,7 +79,7 @@ class RecomendedFilter extends React.Component{
 								</View>:
 							<RadioButton list={filters && filters} value={this.state.selectedFilterType} onSelectValue={this.onChange.bind(this)}/>
 							}
-							{filters && filters.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
+							{filters && filters.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: FONT_BACK_20,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
 							</ScrollView>
 							<View style={styles.img}>
 								<View style={styles.outerView}>
@@ -152,11 +165,6 @@ const styles = StyleSheet.create({
 		width: 60, 
 		height: 60
 	},
-	last3: {
-		textAlign: 'center',
-		color: '#fff',
-		fontSize: 22
-	},
 	last4: {
 		width: '50%', 
 		alignSelf: 'flex-start'
@@ -170,8 +178,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 	},
 	outerView: {
-		width: 50,
-		height: 70,
+		width: FONT_BACK_WIDTH,
+		height: FONT_BACK_HEIGHT,
 		overflow: 'hidden'
 	},
 	imgView: {

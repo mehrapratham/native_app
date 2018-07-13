@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlight, Keyboard, TouchableWithoutFeedback, PixelRatio } from 'react-native'
 import { Drawer } from 'native-base';
 import FontAwesomeIcon from '../Icon/FontAwesomeIcon'
 import MenuItem from './MenuItem'
+var FONT_BACK_22   = 20;
+var FONT_BACK_26   = 22;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_22 = 22;
+  FONT_BACK_26 = 26;
+}
 export default class ReactNativeDrawer extends React.Component {
   constructor(props){
     super(props);
@@ -31,9 +38,9 @@ export default class ReactNativeDrawer extends React.Component {
         <View style={styles.last2}>
             <TouchableOpacity onPress={this.openDrawer}>
               {this.state.isOpened ?
-                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="md-close" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
+                <FontAwesomeIcon iconClass="fas fa-times" nativeBaseIconName="md-close" style={styles.icon}  styles={{fontSize: FONT_BACK_22,color: '#fff',marginLeft: 20}}/>
                 :
-                <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="md-menu" style={styles.icon}  styles={{fontSize: 22,color: '#fff',marginLeft: 20}}/>
+                <FontAwesomeIcon iconClass="fas fa-bars" nativeBaseIconName="md-menu" style={styles.icon}  styles={{fontSize: FONT_BACK_22,color: '#fff',marginLeft: 20}}/>
               }
             </TouchableOpacity>
         </View>
@@ -55,7 +62,7 @@ export default class ReactNativeDrawer extends React.Component {
 const styles = StyleSheet.create({
   icon: {
     color: '#d6edf8',
-    fontSize: 26,
+    fontSize: FONT_BACK_26,
     opacity: 1
   },
   container: {

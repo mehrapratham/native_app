@@ -1,15 +1,20 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet} from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet, PixelRatio } from 'react-native'
 import FontComponent from '../FontComponent'
+var FONT_BACK_20   = 18;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_20 = 20;
+}
 export default class MenuItem extends React.Component{
 	render(){
 		return(
 			<View style={styles.container}>
       	<TouchableOpacity style={styles.last2} onPress={this.props.goToLogin}>
-          <FontComponent style={{fontSize: 20,color: '#fff',fontFamily: 'dosis-bold'}} text="Login"/>
+          <FontComponent style={{fontSize: FONT_BACK_20,color: '#fff',fontFamily: 'dosis-bold'}} text="Login"/>
       	</TouchableOpacity>
       	<TouchableOpacity style={styles.last2}>
-          <FontComponent style={{fontSize: 20,color: '#fff',fontFamily: 'dosis-bold'}} text="Register"/>
+          <FontComponent style={{fontSize: FONT_BACK_20,color: '#fff',fontFamily: 'dosis-bold'}} text="Register"/>
       	</TouchableOpacity>
       </View>
 		)

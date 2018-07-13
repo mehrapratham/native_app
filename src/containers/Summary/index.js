@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, StatusBar, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, StatusBar, ScrollView, PixelRatio } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -13,6 +13,15 @@ import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
 import FontComponent from '../../components/FontComponent'
 var timekit = require('timekit-sdk');
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+var FONT_BACK_18   = 16;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+  FONT_BACK_18 = 18;
+}
 class Summary extends React.Component{
 	constructor(props){
 		super(props);
@@ -78,7 +87,7 @@ class Summary extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.headingView}>
-							<FontComponent className="mainHeadingTop" style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} text="Order Summary"/>
 						</View>
 						<View style={styles.view}>
 							<ScrollView style={{height: 100}}>
@@ -186,17 +195,14 @@ const styles = StyleSheet.create({
 	},
 	innerCon: {
 		width: '50%',
-		paddingLeft: 30
-	},
-	lastCon2: {
-		fontSize: 18,fontWeight: 'bold'
+		paddingLeft: 15
 	},
 	endFlex: {
 		alignSelf: 'flex-end'
 	},
 	innerCon3: {
 		width: '50%',
-		paddingRight: 30
+		paddingRight: 15
 	},
 	last4: {
 		width: '50%', 

@@ -1,11 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, StatusBar, ScrollView, TouchableOpacity} from 'react-native'
+import { View, Text, StyleSheet, StatusBar, ScrollView, TouchableOpacity, PixelRatio } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import { connect } from 'react-redux'
 import {getFromLocalStorage,saveToLocalStorage,removeLocalStorage} from '../../components/localStorage'
 import FontComponent from '../../components/FontComponent'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
+import moment from 'moment'
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+var FONT_BACK_18   = 16;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+  FONT_BACK_18 = 18;
+}
 class FinalStep extends React.Component{
 
   constructor(props){
@@ -32,35 +42,35 @@ class FinalStep extends React.Component{
                     backgroundColor="blue"
                   />
                   <View style={styles.headingview}>
-                    <FontComponent className="mainHeadingTop" style={{fontSize: 22,textAlign: 'center',fontFamily: 'dosis-bold', paddingTop: 10, paddingBottom:30}} text="Congratulations Your Oil service Has been scheduled"/>
+                    <FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center',fontFamily: 'dosis-bold', paddingTop: 10, paddingBottom:30}} text="Congratulations Your Oil service Has been scheduled"/>
                   </View>
                   <View style={styles.view}>
                     <ScrollView style={{height: 100}}>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-                        <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil type"/></View>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.oilType}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-                        <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="filter type"/></View>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="filter type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.filterType}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-                        <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-                        <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.date + ' ' + orderData.time}/></View>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={moment(orderData.date).format('LL') + ' ' + orderData.time}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
-                        <View style={styles.innerCon}><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}/></View>
                       </TouchableOpacity>
                     </ScrollView>
                   </View>
                   <View style={styles.btnview}>
                     <View style={styles.address}>
-                      <FontComponent style={{textAlign: 'center',fontSize: 20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
+                      <FontComponent style={{textAlign: 'center',fontSize: FONT_BACK_20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
                     </View>
                     <View style={styles.text}> 
                       <ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)}/>
@@ -113,9 +123,6 @@ const styles = StyleSheet.create({
   	flex: 1,
   	width: '100%'
   },
-  text2: {
-  	textAlign: 'center',fontSize: 20
-  },
   lastCon: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -127,10 +134,10 @@ const styles = StyleSheet.create({
   },
   innerCon: {
     width: '50%',
-    paddingLeft: 30
+    paddingLeft: 15
   },
   innerCon3: {
     width: '50%',
-    paddingRight: 30
+    paddingRight: 15
   },
 });

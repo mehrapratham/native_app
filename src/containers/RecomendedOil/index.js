@@ -10,12 +10,18 @@ import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
-var FONT_BACK_26   = 26;
-var FONT_BACK_20   = 20;
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+var FONT_BACK_WIDTH = 50;
+var FONT_BACK_HEIGHT = 70;
+var FONT_BACK_JUSTIFYCONTENT = 'center';
 
-if (PixelRatio.get() <= 2) {
-  FONT_BACK_26 = 15;
-  FONT_BACK_20 = 14;
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+  FONT_BACK_WIDTH = 70;
+  FONT_BACK_HEIGHT = 100;
+  FONT_BACK_JUSTIFYCONTENT = 'flex-start'
 }
 class RecomendedOil extends React.Component{
 	constructor(props){
@@ -41,6 +47,8 @@ class RecomendedOil extends React.Component{
 				this.setState({ loading: false})
 			})
 		}
+		let font = PixelRatio.get()
+		console.log(font,55555)
 	}
 	onButtonPress() {
 		if(this.state.selectedOilType){
@@ -105,7 +113,7 @@ class RecomendedOil extends React.Component{
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
-					{this.state.selectedOilPrice.length != 0 &&<FontComponent style={{textAlign: 'center', fontSize: FONT_BACK_20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/>}
+					{this.state.selectedOilPrice.length != 0 ?<View style={styles.imgView}><FontComponent style={{textAlign: 'center', fontSize: FONT_BACK_20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/></View>: <View style={styles.imgView}></View>}
 					<View style={styles.innerOil}>
 						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
 					</View>
@@ -198,16 +206,14 @@ const styles = StyleSheet.create({
 	},
 	img: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'flex-end'
-	},
-	labelText: {
-		fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10	
+		alignItems: 'center'
 	},
 	innerOil: {
-		width: 50,
-		height: 70,
-		overflow: 'hidden'
+		width: FONT_BACK_WIDTH,
+		height: FONT_BACK_HEIGHT,
+		overflow: 'hidden',
+		justifyContent: 'flex-end',
+		flex: 1
 	},
 	imgSize: {
 		width: '100%',
@@ -217,5 +223,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'flex-end'
 	},
+	imgView: {
+		flex: 1,
+		justifyContent: FONT_BACK_JUSTIFYCONTENT
+	}
 	
 })

@@ -1,8 +1,16 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Keyboard, StatusBar,PixelRatio } from 'react-native'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import FontComponent from '../../components/FontComponent'
+var FONT_BACK_22   = 20;
+var FONT_BACK_36   = 28;
+var FONT_BACK_40   = 30;
+if (PixelRatio.get() == 1) {
+  FONT_BACK_22 = 26;
+  FONT_BACK_40 = 40;
+  FONT_BACK_36 = 36;
+}
 export default class Login extends React.Component{
 	onButtonPress() {
 	  	this.props.history.push('/vehicle-form');
@@ -32,7 +40,7 @@ export default class Login extends React.Component{
 	              }}
 	          	/>
 	          	<View style={styles.last4}>
-								<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" style={styles.icon} icon={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
+								<FontAwesomeIcon iconClass="fas fa-user" nativeBaseIconName="ios-contact-outline" style={styles.icon} icon={styles.icon} styles={{fontSize: FONT_BACK_22,color: '#fff', opacity: 1}}/>
 							</View>
 						</View>
 						<View style={styles.last2}>
@@ -48,7 +56,7 @@ export default class Login extends React.Component{
 		            }}
 					    />
 					    <View style={styles.last4}>
-								<FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" style={styles.icon} styles={{fontSize: 22,color: '#fff', opacity: 1}}/>
+								<FontAwesomeIcon iconClass="fas fa-unlock-alt" nativeBaseIconName="unlock" style={styles.icon} styles={{fontSize: FONT_BACK_22,color: '#fff', opacity: 1}}/>
 							</View>
 						</View>
 						<View style={styles.last5}>
@@ -78,10 +86,10 @@ export default class Login extends React.Component{
 						<View style={styles.last14}>
 							<View style={styles.last15}>
 								<TouchableOpacity style={styles.last16}>
-									<FontAwesomeIcon iconClass="fab fa-facebook-f" nativeBaseIconName="logo-facebook" style={styles.iconStyle2} styles={{fontSize: 40,color: '#fff', opacity: 1}}/>
+									<FontAwesomeIcon iconClass="fab fa-facebook-f" nativeBaseIconName="logo-facebook" style={styles.iconStyle2} styles={{fontSize: FONT_BACK_40,color: '#fff', opacity: 1}}/>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.last17}>
-									<FontAwesomeIcon iconClass="fab fa-google-plus-g" nativeBaseIconName="logo-googleplus" style={styles.iconStyle} styles={{fontSize: 40,color: '#fff', opacity: 1,alignSelf: 'flex-end'}}/>
+									<FontAwesomeIcon iconClass="fab fa-google-plus-g" nativeBaseIconName="logo-googleplus" style={styles.iconStyle} styles={{fontSize: FONT_BACK_40,color: '#fff', opacity: 1,alignSelf: 'flex-end'}}/>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -116,18 +124,18 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: '#d6edf8',
-    fontSize: 22,
+    fontSize: FONT_BACK_22,
     opacity: 1
   },
   iconStyle: {
     color: '#d6edf8',
-    fontSize: 36,
+    fontSize: FONT_BACK_36,
     opacity: 1,
     alignSelf: 'flex-end'
   },
   iconStyle2: {
     color: '#d6edf8',
-    fontSize: 36,
+    fontSize: FONT_BACK_36,
     opacity: 1
   },
   last2: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar, ScrollView, KeyboardAvoidingView, PixelRatio } from 'react-native'
 import SelectBox from '../../components/SelectBox'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
@@ -12,6 +12,10 @@ import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import FontComponent from '../../components/FontComponent'
+var FONT_BACK_26   = 22;
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+}
 class Vehicleform extends React.Component{
 	constructor(props){
 		super(props);
@@ -95,7 +99,7 @@ class Vehicleform extends React.Component{
 					      backgroundColor="#fff"
 					    />
 						<View style={styles.headingCon}>
-							<FontComponent className="mainHeadingTop" style={{fontSize: 26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
 						</View>
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
@@ -161,11 +165,6 @@ const styles = StyleSheet.create({
   },
   oil: {
   	width: 30
-  },
-  icon: {
-    color: '#d6edf8',
-    fontSize: 22,
-    marginLeft: 20
   },
   last2: {
   	width: '50%', 

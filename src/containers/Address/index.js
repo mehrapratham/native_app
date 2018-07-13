@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar, ScrollView } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, KeyboardAvoidingView, StatusBar, ScrollView, PixelRatio } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -14,6 +14,15 @@ import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ToastComponent from '../../components/ToastComponent'
 import FontComponent from '../../components/FontComponent'
 import state from '../../json/state.js'
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+var FONT_BACK_18   = 16;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+  FONT_BACK_18 = 18;
+}
 
 class Address extends React.Component{
 	constructor(){
@@ -111,32 +120,32 @@ class Address extends React.Component{
 	render(){
 		let subChild = <View>	
 							<View style={styles.arrow}>
-								<FontComponent style={{fontSize: 26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
+								<FontComponent style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
 							</View>					
 							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Street"/>
+								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Street"/>
 								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)}/>
 							</View>
 							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="City"/>
+								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="City"/>
 								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next"/>
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
 									<View style={styles.text3}>
-										<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Zip"/>
+										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Zip"/>
 										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric'/>
 									</View>
 								</View>
 								<View style={styles.text4}>
 									<View style={styles.text3}>
-										<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="State"/>
+										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="State"/>
 										<StateSelectBox placeholder="State" list={state.state} selectedValue={this.state.address.state} onValueChange={this.onChangeText.bind(this,'state')}/>
 									</View>
 								</View>
 							</View>
 							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: 18,fontFamily: 'dosis-medium'}} text="Phone"/>
+								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
 								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done"/>
 							</View>
 						</View>
@@ -192,9 +201,6 @@ const styles = StyleSheet.create({
   	alignItems: 'center',
   	justifyContent: 'center',
 	paddingTop: 10,
-  },
-  heading: {
-  	fontSize: 26
   },
   address: {
   	marginBottom: 1,

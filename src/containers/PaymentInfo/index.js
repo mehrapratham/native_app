@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, StatusBar, KeyboardAvoidingView } from 'react-native'
+import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, StatusBar, KeyboardAvoidingView, PixelRatio } from 'react-native'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
@@ -11,6 +11,11 @@ import PaymentForm from './PaymentForm'
 import {payAmount,confirmBookingOrder} from '../../actions/VehicleForm'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
+var FONT_BACK_26   = 22;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+}
 class PaymentInfo extends React.Component{
 	async componentWillMount()	{
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
@@ -38,7 +43,7 @@ class PaymentInfo extends React.Component{
 					    />
 					    	<View style={{flex: 1}}>
 								<View style={styles.arrow}>
-									<FontComponent style={{fontSize: 20,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
+									<FontComponent style={{fontSize: FONT_BACK_26,paddingLeft: 15,paddingRight: 15,textAlign: 'center',fontFamily: 'dosis-bold'}} text="Enter card info to confirm booking, ( you won't be charged until after service completion )"/>
 								</View>
 								<View style={styles.view}>
 									<PaymentForm payAmount={this.payAmount.bind(this)} history={this.props.history} />

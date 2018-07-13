@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar, PixelRatio } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -13,6 +13,13 @@ import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
 import FontComponent from '../../components/FontComponent'
 var timekit = require('timekit-sdk');
+var FONT_BACK_26   = 22;
+var FONT_BACK_20   = 18;
+
+if (PixelRatio.get() == 1) {
+  FONT_BACK_26 = 26;
+  FONT_BACK_20 = 20;
+}
 
 class TimeSlot extends React.Component{
 
@@ -98,7 +105,6 @@ class TimeSlot extends React.Component{
 		this.setState({filterTime})
 	}
 	render(){
-		console.log(this.props,22222)
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		let child = <View style={styles.container}>
 						<StatusBar
@@ -106,7 +112,7 @@ class TimeSlot extends React.Component{
 					      backgroundColor="blue"
 					    />
 						<View style={styles.view}>
-							<FontComponent className="mainHeadingTop" style={{fontSize: 26,fontFamily: 'dosis-bold'}} text="Select Time slot"/>
+							<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} text="Select Time slot"/>
 						</View>
 						<View style={styles.oilss}>
 							<View style={styles.left}>
@@ -262,7 +268,7 @@ const styles = StyleSheet.create({
 	center:{
 	  	textAlign: 'center',
 	  	marginTop: 20,
-	  	fontSize: 20,
+	  	fontSize: FONT_BACK_20,
 	  	color: '#fff'
 	},
 	last2: {
