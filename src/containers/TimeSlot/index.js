@@ -80,8 +80,9 @@ class TimeSlot extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/address');
 	}
-	booking(item, bookingIndex){
-		if (bookingIndex == -1) {
+	booking(item, isClickAble){
+		console.log(isClickAble,777)
+		if (!isClickAble) {
 			this.setState({ selectedTime: item })
 		}
 		
@@ -136,8 +137,10 @@ class TimeSlot extends React.Component{
 
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index) =>{
 								const bookingIndex = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.findIndex(bookingItem => bookingItem.date == item.start);
-								return  <TouchableOpacity activeOpacity={bookingIndex != -1 ? 1 : 0} style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : (bookingIndex != -1 ? styles.booked : styles.full)} key={index} onPress={this.booking.bind(this,item, bookingIndex)}>
-											<Text className="timeSlot" style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : (bookingIndex != -1 ? styles.fullSelectedText : null)}>{this.formatDate(item)}</Text>
+								const bookingObject = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.find(bookingItem => bookingItem.date == item.start);
+								let isClickAble = bookingObject && bookingObject.token && bookingObject.token != 'undefined' && (bookingIndex != -1);
+								return  <TouchableOpacity activeOpacity={bookingIndex != -1 ? 1 : 0} style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelected : (isClickAble ? styles.booked : styles.full)} key={index} onPress={this.booking.bind(this,item, isClickAble)}>
+											<Text className="timeSlot" style={((this.state.selectedTime.start == item.start) && (this.state.selectedTime.end == item.end)) ? styles.fullSelectedText : (isClickAble ? styles.fullSelectedText : null)}>{this.formatDate(item)}</Text>
 										</TouchableOpacity>
 								})
 							}

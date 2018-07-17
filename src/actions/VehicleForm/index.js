@@ -218,7 +218,7 @@ return dispatch => {
 }
 }
 export const getBookings = () => {
-let query = {query: '{ bookings {date} }'}
+let query = {query: '{ bookings {date,token} }'}
  return dispatch => {
    return axios
      .post(`${GRAPHQL_URL}`, query)
