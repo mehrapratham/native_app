@@ -6,10 +6,12 @@ import FontComponent from '../../components/FontComponent'
 var FONT_BACK_22   = 20;
 var FONT_BACK_36   = 28;
 var FONT_BACK_40   = 30;
+var FONT_BACK_20   = 18;
 if (PixelRatio.get() == 1) {
-  FONT_BACK_22 = 26;
+  FONT_BACK_22 = 22;
   FONT_BACK_40 = 40;
   FONT_BACK_36 = 36;
+  FONT_BACK_20 = 20;
 }
 export default class Login extends React.Component{
 	onButtonPress() {
@@ -61,18 +63,18 @@ export default class Login extends React.Component{
 						</View>
 						<View style={styles.last5}>
 							<TouchableOpacity style={styles.last6}>
-                <FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="SIGN IN"/>
+                <FontComponent style={{color: '#fff', fontFamily: 'dosis-medium',fontSize: FONT_BACK_22}} text="SIGN IN"/>
 							</TouchableOpacity>
 						</View>
 						<View style={styles.last7}>
 							<View style={styles.last8}>
 								<TouchableOpacity style={styles.last9}>
-									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="Register"/>
+									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium',fontSize: FONT_BACK_20}} text="Register"/>
 								</TouchableOpacity>
 							</View>
 							<View style={styles.last10}>
 								<TouchableOpacity style={styles.last9}>
-									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="Forgot Password"/>
+									<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium',fontSize: FONT_BACK_20}} text="Forgot Password"/>
 								</TouchableOpacity>
 							</View>
 						</View>
@@ -95,7 +97,7 @@ export default class Login extends React.Component{
 						</View>
 						<View style={styles.last18}>
 							<TouchableOpacity style={styles.last9} onPress={this.onButtonPress.bind(this)} ref="guest">
-								<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium'}} text="continue as a guest"/>
+								<FontComponent style={{color: '#fff', fontFamily: 'dosis-medium',fontSize: FONT_BACK_20}} text="continue as a guest"/>
 							</TouchableOpacity>
 						</View>
 					</View>
@@ -149,7 +151,8 @@ const styles = StyleSheet.create({
   	textAlign: 'center',
   	width: '100%',
   	paddingLeft: 35,
-  	paddingRight: 35
+  	paddingRight: 35,
+    fontSize: FONT_BACK_20  
   },
   last4: {
   	position: 'absolute',

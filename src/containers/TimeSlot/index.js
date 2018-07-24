@@ -127,7 +127,7 @@ class TimeSlot extends React.Component{
 									<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
 								</TouchableOpacity>
 							</View>
-							<ScrollView style={styles.last2} showsVerticalScrollIndicator={true} showsHorizontalScrollIndicator={true} indicatorStyle={'black'}>
+							<ScrollView style={styles.last2} showsVerticalScrollIndicator={true} indicatorStyle={'black'}  >
 
 							{this.state.loading && <View style={styles.loading}>
 									<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last3} /></Text>
