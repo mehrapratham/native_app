@@ -10,19 +10,19 @@ export default class SelectBox extends React.Component{
 	render(){		
 		return(
 			<Picker
-              iosHeader="Select one"
-              mode="dropdown"
-              selectedValue={this.props.selectedValue}
-              onValueChange={this.onChange.bind(this)}
-              style={styles.container}
-              placeholder={this.props.placeholder}
-              placeholderStyle={{color: "#646262"}}
-              iosIcon={<Icon name="ios-arrow-down-outline" />}
-            >
-              {this.props.list && this.props.list.map((item, key) => {
-              	return <Picker.Item label={item.name} value={item.name} key={key}/>
-              })}
-            </Picker>
+        iosHeader="Select one"
+        mode="dropdown"
+        selectedValue={this.props.selectedValue}
+        onValueChange={this.onChange.bind(this)}
+        style={styles.container}
+        placeholder={this.props.placeholder}
+        placeholderStyle={{color: "#646262"}}
+        iosIcon={<Icon name="ios-arrow-down-outline" />}
+      >
+        {this.props.list && this.props.list.map((item, key) => {
+        	return <Picker.Item label={item.abbreviation} value={item.abbreviation} key={key}/>
+        })}
+      </Picker>
 		)
 	}
 }
