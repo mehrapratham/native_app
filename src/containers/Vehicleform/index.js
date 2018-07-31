@@ -32,7 +32,9 @@ class Vehicleform extends React.Component{
 	}
 	 async componentWillMount(){
 		
-		this.props.dispatch(getVehicleYears())
+		this.props.dispatch(getVehicleYears()).then(res =>{
+			console.log(res,444444)
+		})
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		if (data != null) {
