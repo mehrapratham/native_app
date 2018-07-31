@@ -4,7 +4,7 @@ var https = require('https')
 var app=express();
 app.use(bodyParser.urlencoded({extended:false}))
 var fs = require('fs')
-const port = 3002
+const port = 3001
 /*
    Here we are configuring our SMTP Server details.
    STMP is mail server which is responsible for sending and recieving email.
@@ -25,17 +25,17 @@ app.get('/*', function(req, res){
 });
 
 
-// const httpsOptions = {
-//  key: fs.readFileSync('./key.pem'),
-//  cert: fs.readFileSync('./cert.pem')
-// }
+const httpsOptions = {
+ key: fs.readFileSync('./key.pem'),
+ cert: fs.readFileSync('./cert.pem')
+}
 
-// const server = https.createServer(httpsOptions, app).listen(port, () => {
-//  console.log('server running at ' + port)
-// })
+const server = https.createServer(httpsOptions, app).listen(port, () => {
+ console.log('server running at ' + port)
+})
 
 /*--------------------Routing Over----------------------------*/
 
-app.listen(3001,function(){
+/*app.listen(3001,function(){
    console.log("Express Started on Port 3000");
-});
+});*/
