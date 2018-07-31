@@ -31,7 +31,7 @@ class Vehicleform extends React.Component{
 		}
 	}
 	 async componentWillMount(){
-		
+		console.log(33)
 		this.props.dispatch(getVehicleYears()).then(res =>{
 			console.log(res,444444)
 		})
