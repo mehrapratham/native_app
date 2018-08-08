@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 43503,
-  "expoServerNgrokUrl": "https://bs-85d.lovetrivedi.customer-app-frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.bs-85d.lovetrivedi.customer-app-frontend.exp.direct",
-  "ngrokPid": 43399
+  "expoServerPort": 19003,
+  "packagerPort": 19005,
+  "packagerPid": 47219,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

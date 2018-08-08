@@ -24,7 +24,6 @@ let query = {query: '{ years }'}
      })
  }
 }
-
 export const getVehicleMakes = (year) => {
 let query = {query: '{make(year:"'+year+'")}'}
  return dispatch => {
