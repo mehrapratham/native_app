@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar, PixelRatio } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image,ScrollView, StatusBar, PixelRatio,Dimensions } from 'react-native'
 import {Link } from '../../Routing'
 import ConfirmButton from '../../components/Buttons/ConfirmButton'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
@@ -11,6 +11,7 @@ import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
+import Shadow from '../../components/Shadow'
 import FontComponent from '../../components/FontComponent'
 var timekit = require('timekit-sdk');
 var FONT_BACK_26   = 22;
@@ -106,6 +107,8 @@ class TimeSlot extends React.Component{
 		this.setState({filterTime})
 	}
 	render(){
+		const miniCardStyle = {shadowColor: '#000000',shadowOpacity: 19.9,shadowRadius: 5,backgroundColor: '#ffffff',borderWidth: 2,elevation:20,borderColor: 'transparent'
+    };
 		let curAvailbility = this.props.VehicleForm.availabilityList && this.props.VehicleForm.availabilityList.filter(item=> this.filterDate(item) )
 		let child = <View style={styles.container}>
 						<StatusBar
@@ -127,6 +130,7 @@ class TimeSlot extends React.Component{
 									<FontAwesomeIcon iconClass="fas fa-arrow-right" nativeBaseIconName="ios-arrow-dropright" />
 								</TouchableOpacity>
 							</View>
+							{/*<View style={{flex: 2,borderWidth: 1,shadowOpacity: 1, shadowRadius: 4,shadowColor: 'grey'}}>*/}
 							<ScrollView style={styles.last2} showsVerticalScrollIndicator={true} indicatorStyle={'black'}  >
 
 							{this.state.loading && <View style={styles.loading}>
@@ -134,7 +138,7 @@ class TimeSlot extends React.Component{
 								</View>
 							}
 							{!this.state.loading && curAvailbility && curAvailbility.length == 0 && <Text style={styles.center}>No time slot available</Text>}
-
+							
 							{!this.state.loading && curAvailbility && curAvailbility.map((item, index) =>{
 								const bookingIndex = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.findIndex(bookingItem => bookingItem.date == item.start);
 								const bookingObject = this.props.VehicleForm && this.props.VehicleForm.bookingList && this.props.VehicleForm.bookingList.find(bookingItem => bookingItem.date == item.start);
@@ -144,7 +148,10 @@ class TimeSlot extends React.Component{
 										</TouchableOpacity>
 								})
 							}
-							</ScrollView>					
+							</ScrollView>
+							{!this.state.loading &&<View>
+								<Shadow />
+							</View>}
 						</View>
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
@@ -276,7 +283,6 @@ const styles = StyleSheet.create({
 	},
 	last2: {
 		height: 150,
-		marginBottom: 20,
 		marginTop: 20
 	},
 	last3: {
