@@ -36,6 +36,7 @@ class FinalStep extends React.Component{
 
 	render(){
     let {orderData} = this.state;
+    console.log(orderData.time,555)
     let child = <View style={styles.container}>
                   <StatusBar
                     barStyle="light-content"
@@ -60,7 +61,7 @@ class FinalStep extends React.Component{
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={moment(orderData && orderData.date).format('LL') + ' ' + orderData && orderData.time}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={(orderData && orderData.date && (moment(orderData.date).format('LL') + ' ' + orderData.time))}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
