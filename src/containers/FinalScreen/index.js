@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     paddingLeft: 20,
     paddingRight: 20,
-    flex: 1
   },
   address: {
   	flex: 1,
