@@ -25,17 +25,17 @@ app.get('/*', function(req, res){
 });
 
 
-const httpsOptions = {
- key: fs.readFileSync('./key.pem'),
- cert: fs.readFileSync('./cert.pem')
-}
+// const httpsOptions = {
+//  key: fs.readFileSync('./key.pem'),
+//  cert: fs.readFileSync('./cert.pem')
+// }
 
-const server = https.createServer(httpsOptions, app).listen(port, () => {
- console.log('server running at ' + port)
-})
+// const server = https.createServer(httpsOptions, app).listen(port, () => {
+//  console.log('server running at ' + port)
+// })
 
 /*--------------------Routing Over----------------------------*/
 
-/*app.listen(3001,function(){
+app.listen(3003,function(){
    console.log("Express Started on Port 3000");
-});*/
+});
