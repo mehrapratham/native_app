@@ -65,6 +65,33 @@ class Summary extends React.Component{
 		})
 		this.props.history.push('/payment-info');
 	}
+	onButtonPressWeb() {
+		const { vehicleData, addressData } = this.state;
+		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ vehicleData.timeslot.start +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'",phone:"' + addressData.phone +'"}'
+		this.props.dispatch(confirmOrder(data)).then(res =>{
+			let confirmOrder = JSON.stringify(res)
+			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
+			return res
+		})
+		let bookingData = {
+			start : vehicleData.timeslot.start, 
+			end: vehicleData.timeslot.end, 
+			what: 'test', 
+			description: 'hi, this is description', 
+			resource_id: defaultResourceId,
+			graph: 'confirm_decline',
+			customer: {
+				name: vehicleData.make + ' ' +vehicleData.model,
+				email: "shamubarak@hotmail.com",
+			},
+			where: "Courthouse, Hill Valley, CA 95420, USA"
+		}
+		timekit.createBooking(bookingData).then(res=>{
+			let bookingDetail = JSON.stringify(res.data)
+			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
+		})
+		this.props.history.push('/final-screen');
+	}
 	onButtonPress2() {
 	  	this.props.history.push('/time-slot');
 	}
@@ -72,9 +99,6 @@ class Summary extends React.Component{
 		if (date) {
 			return (moment(date.start).format('hh')+ ':' +moment(date.start).format('mm') +' '+ moment(date.start).format('a')+ ' - ' + moment(date.end).format('hh')+ ':' +moment(date.end).format('mm') + ' ' + moment(date.start).format('a'))
 		}
-	}
-	backButton(){
-		this.props.history.push('/time-slot')
 	}
 	render(){
 		const { vehicleData,addressData } = this.state;
@@ -95,14 +119,14 @@ class Summary extends React.Component{
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
 								</TouchableOpacity>
-								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								{vehicleData.oilType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
-								</TouchableOpacity>
-								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								</TouchableOpacity>:null}
+								{vehicleData.filterType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
-								</TouchableOpacity>
+								</TouchableOpacity>:null}
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={text}/></View>
@@ -124,11 +148,11 @@ class Summary extends React.Component{
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
 								<View>
-									<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)}/>
+									<ConfirmButton label="CONFIRM ORDER" onButtonPress={this.onButtonPress.bind(this)} onButtonPressWeb={this.onButtonPressWeb.bind(this)}/>
 								</View>
 								<View style={styles.last5}>
 									<View style={styles.last4}>
-										<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+										<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} onPressWeb={this.onButtonPress2.bind(this)} />
 									</View>
 								</View>
 							</View>

@@ -156,10 +156,10 @@ class TimeSlot extends React.Component{
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
 								<View style={styles.last4}>
-									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} onPressWeb={this.onButtonPress2.bind(this)} />
 								</View>
 								<View style={styles.last4}>
-									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} onPressWeb={this.onButtonPress.bind(this)} disabled={this.state.selectedTime && !this.state.selectedTime.start} />
 								</View>
 							</View>
 						</View>

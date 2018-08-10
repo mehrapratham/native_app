@@ -26,7 +26,7 @@ class FinalStep extends React.Component{
   }
   async componentWillMount(){
     let orderData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
-    this.setState({ orderData : orderData })
+    this.setState({ orderData })
     this.props.dispatch(removeLocalStorage('vehicleData'))
     this.props.dispatch(removeLocalStorage('addressData'))
   }
@@ -46,14 +46,14 @@ class FinalStep extends React.Component{
                   </View>
                   <View style={styles.view}>
                     <ScrollView style={{height: 100}}>
-                      <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                      {orderData.oilType != 'undefined'? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.oilType}/></View>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                      </TouchableOpacity>:null}
+                      {orderData.filterType != 'undefined' ? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="filter type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.filterType}/></View>
-                      </TouchableOpacity>
+                      </TouchableOpacity>:null}
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year}/></View>
@@ -73,7 +73,7 @@ class FinalStep extends React.Component{
                       <FontComponent style={{textAlign: 'center',fontSize: FONT_BACK_20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
                     </View>
                     <View style={styles.text}> 
-                      <ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)}/>
+                      <ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)} onButtonPressWeb={this.onButtonPress.bind(this)}/>
                     </View>
                   </View>
                 </View>

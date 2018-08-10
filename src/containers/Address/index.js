@@ -90,6 +90,10 @@ class Address extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/recomended-filter');
 	}
+	onButtonPress2Web() {
+	  	this.props.history.push('/');
+	}
+
 	validatePhoneNumber(elementValue){
 		var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 		return phoneNumberPattern.test(elementValue);
@@ -163,10 +167,10 @@ class Address extends React.Component{
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
 								<View style={styles.last2}>
-									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} onPressWeb={this.onButtonPress2Web.bind(this)} />
 								</View>
 								<View style={styles.last2}>
-									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} onPressWeb={this.onButtonPress.bind(this)} disabled={this.state.loading} />
 								</View>
 							</View>
 						</View>

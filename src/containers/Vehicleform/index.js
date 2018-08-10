@@ -90,6 +90,21 @@ class Vehicleform extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/');
 	}
+	onButtonPressWeb() {
+  		this.setState({loading: true})
+  		let fields = ['year', 'make', 'model']
+      	let formValidation = IsValidForm(fields, this.state.vehicle)
+      	this.setState({ errors: formValidation.errors })
+      	if (formValidation.validate) {
+      		let data = JSON.stringify(this.state.vehicle)
+	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
+  			this.setState({loading: false})
+		  	this.props.history.push('/address');
+      	}
+	}
+	onButtonPress2Web() {
+	  	this.props.history.push('/');
+	}
 
 	render(){
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
@@ -112,10 +127,10 @@ class Vehicleform extends React.Component{
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
 								<View style={styles.last2}>
-									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+									<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} onPressWeb={this.onButtonPress2Web.bind(this)} />
 								</View>
 								<View style={styles.last2}>
-									<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={this.state.loading} />
+									<ArrowRightButton onPress={this.onButtonPress.bind(this)} onPressWeb={this.onButtonPressWeb.bind(this)} disabled={this.state.loading} />
 								</View>
 							</View>
 						</View>
