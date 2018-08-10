@@ -44,7 +44,9 @@ class Summary extends React.Component{
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
+			this.props.history.push('/payment-info');
 			return res
+
 		})
 		let bookingData = {
 			start : vehicleData.timeslot.start, 
@@ -63,7 +65,7 @@ class Summary extends React.Component{
 			let bookingDetail = JSON.stringify(res.data)
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
-		this.props.history.push('/payment-info');
+		
 	}
 	onButtonPressWeb() {
 		const { vehicleData, addressData } = this.state;
@@ -71,6 +73,7 @@ class Summary extends React.Component{
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
+			this.props.history.push('/final-screen');
 			return res
 		})
 		let bookingData = {
@@ -90,7 +93,7 @@ class Summary extends React.Component{
 			let bookingDetail = JSON.stringify(res.data)
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
-		this.props.history.push('/final-screen');
+		
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/time-slot');
