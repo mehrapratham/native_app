@@ -60,11 +60,11 @@ class FinalStep extends React.Component{
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={moment(orderData.date).format('LL') + ' ' + orderData.time}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={moment(orderData && orderData.date).format('LL') + ' ' + orderData && orderData.time}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData && orderData.street + ', ' +orderData && orderData.city + ', ' +orderData && orderData.state + ', ' +orderData && orderData.zip}/></View>
                       </TouchableOpacity>
                     </ScrollView>
                   </View>
