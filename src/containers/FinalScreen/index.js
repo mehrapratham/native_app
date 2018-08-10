@@ -46,11 +46,11 @@ class FinalStep extends React.Component{
                   </View>
                   <View style={styles.view}>
                     <ScrollView style={{height: 100}}>
-                      {orderData.oilType != 'undefined'? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                      {orderData.oilType != 'undefined' && orderData.oilType != 'null' ? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.oilType}/></View>
                       </TouchableOpacity>:null}
-                      {orderData.filterType != 'undefined' ? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                      {orderData.filterType != 'undefined' && orderData.filterType != 'null' ? <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="filter type"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.filterType}/></View>
                       </TouchableOpacity>:null}
