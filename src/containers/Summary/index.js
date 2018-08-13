@@ -118,10 +118,10 @@ class Summary extends React.Component{
 						</View>
 						<View style={styles.view}>
 							<ScrollView style={{height: 100}}>
-								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								{vehicleData.oilPrice ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
-								</TouchableOpacity>
+								</TouchableOpacity>:null}
 								{vehicleData.oilType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
@@ -141,6 +141,10 @@ class Summary extends React.Component{
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressText}/></View>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Email"/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.email}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>

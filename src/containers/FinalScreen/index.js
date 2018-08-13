@@ -58,7 +58,7 @@ class FinalStep extends React.Component{
                       </TouchableOpacity>:null}
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData && orderData.make + ' ' +orderData && orderData.model + ' ' +orderData && orderData.year}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>
@@ -66,7 +66,7 @@ class FinalStep extends React.Component{
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData && orderData.street + ', ' +orderData && orderData.city + ', ' +orderData && orderData.state + ', ' +orderData && orderData.zip}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}/></View>
                       </TouchableOpacity>
                     </ScrollView>
                   </View>
@@ -75,7 +75,7 @@ class FinalStep extends React.Component{
                       <FontComponent style={{textAlign: 'center',fontSize: FONT_BACK_20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
                     </View>
                     <View style={styles.text}> 
-                      <ConfirmButton label="Sign Up" onButtonPress={this.onButtonPress.bind(this)} onButtonPressWeb={this.onButtonPress.bind(this)}/>
+                      <ConfirmButton label="Book another appointment" onButtonPress={this.onButtonPress.bind(this)} onButtonPressWeb={this.onButtonPress.bind(this)}/>
                     </View>
                   </View>
                 </View>

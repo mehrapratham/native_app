@@ -14,14 +14,24 @@ export default class InputBox extends React.Component{
     this.props.onChange(event)
   }
   setFocus (hasFocus, e) {
-    console.log(222)
+    console.log(this.props.hitOnFocus,222)
       this.setState({hasFocus});
+
       if (hasFocus && this.props.disableAnimate) {
         this.props.disableAnimate(true)
       } 
       else if(!hasFocus && this.props.disableAnimate){
         this.props.disableAnimate(false)
       }
+
+      if (hasFocus && this.props.hitOnFocus) {
+        console.log(this.props.hitOnFocus,33333)
+        this.props.hitOnFocus(true);
+      }
+      else if(!hasFocus && this.props.hitOnFocus){
+        this.props.hitOnFocus(false)
+      }
+
   }
 
   
@@ -30,7 +40,6 @@ export default class InputBox extends React.Component{
 			<TextInput
       	placeholder={this.props.placeholder}
       	placeholderTextColor="#646262"
-      	style={styles.container}
         style={this.state.hasFocus ? styles.focusedTextInput : styles.container}
         onChangeText={this.onChange.bind(this)}
         type={this.props.type}

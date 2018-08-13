@@ -33,13 +33,15 @@ class Address extends React.Component{
 				city: '',
 				zip: '',
 				state: '',
+				email: '',
 				phone: ''
 			},
 			errors:{},
 			loading: true,
 			showToast: false,
 			toastmsg: '',
-			disableKeyboardView: false
+			disableKeyboardView: false,
+			blur: false
 		}
 	}
 	async componentWillMount(){
@@ -59,7 +61,7 @@ class Address extends React.Component{
 
 	onButtonPress() {
 		this.setState({loading: true})
-		let fields = ['street', 'city', 'zip', 'state', 'phone']
+		let fields = ['street', 'city', 'zip', 'state', 'phone','email']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -115,31 +117,44 @@ class Address extends React.Component{
 
 	onFocusTextBox(bool){
 		if (bool) {
+			console.log(333)
 			this.setState({disableKeyboardView: true})
 		}
 		else{
 			this.setState({disableKeyboardView: false})
 		}
 	}
+	onFocusTextBox2(bool){
+		if(bool){
+			console.log(bool,999)
+			console.log(this.refs.scroll)
+		// this.refs.scroll.scrollToEnd()
+		}
+		
+	}
+	hitOnFocus(){
+		console.log(this.refs.scroll,33333)
+	}
 	render(){
-		console.log(state.state)
-		let subChild = <View>	
+		// console.log(state.state)
+		let subChild = <ScrollView ref="scroll">
+						<View>	
 							<View style={styles.arrow}>
 								<FontComponent style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
 							</View>					
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Street"/>
-								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)}/>
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)} />
 							</View>
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="City"/>
-								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next"/>
+								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" />
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
 									<View style={styles.text3}>
 										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Zip"/>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric'/>
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric' />
 									</View>
 								</View>
 								<View style={styles.text4}>
@@ -150,18 +165,24 @@ class Address extends React.Component{
 								</View>
 							</View>
 							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
-								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done"/>
+								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Email"/>
+								<InputBox value={this.state.address.email} onChange={this.onChangeText.bind(this,'email')}  nextkey="next" />
 							</View>
+							<View style={styles.address}>
+								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done"  disableAnimate={this.onFocusTextBox2.bind(this)}/>
+							</View>
+							
 						</View>
+						</ScrollView>
 		let child = 
-					<View style={styles.container} >
+					<View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
 					      backgroundColor="blue"
 					    />
 					<View style={{flex: 1}}>
-							<KeyboardAvoidingView style={styles.view} behavior={this.state.disableKeyboardView ? '': 'position'} enabled>
+							<KeyboardAvoidingView style={styles.view} behavior={this.state.disableKeyboardView ? '': 'position'} enabled>				
 								{subChild}
 							</KeyboardAvoidingView>					
 						<View style={styles.lastss}>
@@ -239,5 +260,34 @@ const styles = StyleSheet.create({
 	},
 	lastss: {
 		justifyContent: 'flex-end'
-	}
+	},
+	containers: {
+    backgroundColor: '#fff',
+    height: 45, 
+    width: "100%", 
+    paddingLeft: 15, 
+    borderRadius: 5,
+    borderBottomWidth: 4,
+    borderColor: '#c5c3c4'
+  },
+  focusedTextInput: {
+    backgroundColor: '#fff',
+    height: 45, 
+    width: "100%", 
+    paddingLeft: 15, 
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#9df441',
+    marginBottom: 100
+  },
+  focusedTextInput2: {
+    backgroundColor: '#fff',
+    height: 45, 
+    width: "100%", 
+    paddingLeft: 15, 
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#9df441',
+    marginBottom: 100
+  }
 });
