@@ -3,6 +3,8 @@
 }
 #root{
 	width: 100%;
+	max-width: 600px;
+	margin: auto;
 }
 .body{
 	padding-top: 92px;
