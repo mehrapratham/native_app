@@ -68,6 +68,14 @@ class FinalStep extends React.Component{
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Address"/></View>
                         <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.street + ', ' +orderData.city + ', ' +orderData.state + ', ' +orderData.zip}/></View>
                       </TouchableOpacity>
+                      <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Email"/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.email}/></View>
+                      </TouchableOpacity>
+                      <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+                        <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.phone}/></View>
+                      </TouchableOpacity>
                     </ScrollView>
                   </View>
                   <View style={styles.btnview}>
