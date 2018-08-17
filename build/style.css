@@ -360,6 +360,13 @@
 .banner img{
 	opacity: 0;
 }
+.close.closeBtn{
+	position: fixed;
+	right: 50%;
+	margin-right: -296px;
+	top: 24px;
+}
+
 
 @media (max-width: 1300px){
 	.banner .container{
@@ -399,6 +406,12 @@
 	}
 	.footer ul li a{
 		padding: 10px 20px;
+	}
+	.close.closeBtn {
+	    position: fixed;
+	    right: 50%;
+	    margin-right: -226px;
+	    top: 24px;
 	}
 }
 @media (max-width: 767px){
@@ -471,6 +484,10 @@
 		font-size: 15px;
 		top: 10px;
 		right: 10px;
+	}
+	.close.closeBtn{
+		 margin-right: 140px;
+		 top: 10px;
 	}
 
 }
@@ -588,4 +605,24 @@
 	.arrowView > div > i{
 		font-size: 20px !important;
 	}
+	.close.closeBtn{
+		 margin-right: 40px;
+		 top: 10px;
+	}
+}
+@media (max-width: 320px){
+	.close.closeBtn{
+		 margin-right: 0px;
+		 top: 15px;
+	}
+	.popupCon .close {
+    width: 22px;
+    height: 22px;
+    font-size: 13px;
+    
+}
+}
+input:focus{
+	border: solid 2px #aaf442 !important;
+	border-bottom-width: 4px !important; 
 }
