@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html">
   <head>
     <meta charset="utf-8">
     <meta name="theme-color" content="#000000">
@@ -28,7 +28,7 @@
     -->
     <title>React App</title>
   </head>
-  <body class="body">
+  <body class="body" id="body">
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
@@ -95,10 +95,10 @@
         </ul>
       </div>
     </div>
-    <div class="popupCon">
-      <button class="close" onclick="togglePopup()">
+    <div class="popupCon" id="rootElement">
+      <!-- <button class="close" onclick="togglePopup()">
         <i class="fa fa-times"></i>
-      </button>
+      </button> -->
       <div id="root"></div>
     </div>
 
@@ -143,10 +143,6 @@ Our goal is to serve our customer by providing the best oil change service at th
             <h6>Now Serving:</h6>
             <ul class="serving">
               <li>Seattle</li>
-              <li>New York</li>
-              <li>Los Angles</li>
-              <li>Chicago</li>
-              <li>Miami</li>
             </ul>
           </div>
           <div class="col-md-6">
@@ -281,6 +277,9 @@ Our goal is to serve our customer by providing the best oil change service at th
     if($('.popupCon').hasClass('opened')){
       $('.popupCon').removeClass('opened')
       $('html,body').css({'overflow': ''})
+      localStorage.removeItem('vehicleData')
+      localStorage.removeItem('addressData')
+
     }
     else{
       $('.popupCon').addClass('opened')

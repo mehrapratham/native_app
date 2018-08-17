@@ -1,3 +1,4 @@
 export default {
- VehicleForm: {}
+ VehicleForm: {},
+ TogglePopup: false
 };

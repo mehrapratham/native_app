@@ -20,6 +20,7 @@ class App extends React.Component{
   }
   render(){
     console.disableYellowBox = true;
+    console.log(this.props,44)
     let child = (
       <Router>
         <Switch>
@@ -40,7 +41,7 @@ class App extends React.Component{
     )
     return(
       <View style={{flex: 1}}>
-        <Gradient child = {child}/>
+        <Gradient child = {child} history={this.props.history}/>
       </View>
     )
   }

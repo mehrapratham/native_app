@@ -48,6 +48,19 @@ class Vehicleform extends React.Component{
 		}
 		this.onValueChange()
 	}
+	componentWillReceiveProps(nextProps){
+		let {vehicle} = this.state;
+		if(this.props.TogglePopup !== nextProps.TogglePopup){
+			vehicle = {
+				year: '',
+				make: '',
+				model: '',
+				mileage: ''
+			}
+			this.setState({vehicle})
+			this.setState({loading: true})
+		}
+	}
 	onValueChange(key, event) {
 		let { vehicle } = this.state;
 		vehicle[key] = event;
@@ -110,6 +123,7 @@ class Vehicleform extends React.Component{
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
+		console.log(this.props,'this.props')
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"

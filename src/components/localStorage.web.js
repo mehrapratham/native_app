@@ -13,5 +13,6 @@ export const getFromLocalStorage = (key) => {
 export const removeLocalStorage = (key) => {
    return dispatch => {
      localStorage.removeItem(key)
+     
    }
 }

@@ -79,9 +79,9 @@ class FinalStep extends React.Component{
                     </ScrollView>
                   </View>
                   <View style={styles.btnview}>
-                    <View style={styles.address}>
+                    {/*<View style={styles.address}>
                       <FontComponent style={{textAlign: 'center',fontSize: FONT_BACK_20,fontFamily: 'dosis-medium'}} text="Sign up and create Profile and recieve 50% off next oil change"/>
-                    </View>
+                    </View>*/}
                     <View style={styles.text}> 
                       <ConfirmButton label="Book another appointment" onButtonPress={this.onButtonPress.bind(this)} onButtonPressWeb={this.onButtonPress.bind(this)}/>
                     </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     paddingRight: 20
   },
   view: {
-  	flex: 2,
+  	flex: 3,
   	paddingLeft: 20,
   	paddingRight: 20,
   },
@@ -131,7 +131,8 @@ const styles = StyleSheet.create({
   },
   text: {
   	flex: 1,
-  	width: '100%'
+  	width: '100%',
+    justifyContent: 'flex-end'
   },
   lastCon: {
     flexDirection: 'row',

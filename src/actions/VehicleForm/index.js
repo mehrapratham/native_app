@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS } from '../types'
+import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS } from '../types'
+import store from '../../store'
 var qs = require('qs');
-
+let {getState} = store;
 export const getVehicleYears = () => {
 let query = {query: '{ years }'}
  return dispatch => {
@@ -236,6 +237,16 @@ let query = {query: '{ bookings {date,token} }'}
        return error
      })
  }
+}
+export const togglePopUpStatus = () => {
+  let currentStatus = getState().TogglePopup
+  console.log(currentStatus)
+  return dispatch => {
+  return dispatch({
+      type: GET_TOGGLE_POPUP_STATUS,
+      data: currentStatus
+   })
+  }
 }
 
 

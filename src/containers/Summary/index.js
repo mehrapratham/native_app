@@ -37,6 +37,9 @@ class Summary extends React.Component{
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
 		this.setState({ vehicleData,addressData })
+		if(vehicleData == null && addressData == null){
+			this.props.history.push('/')
+		}
 	}
 	onButtonPress() {
 		const { vehicleData, addressData } = this.state;
@@ -107,9 +110,9 @@ class Summary extends React.Component{
 	}
 	render(){
 		const { vehicleData,addressData } = this.state;
-		const text = vehicleData.make+' '+vehicleData.model+' '+vehicleData.year
+		const text = vehicleData ? vehicleData.make+' '+vehicleData.model+' '+vehicleData.year : ""
 		const timeText = vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())+' '+this.formatDate(vehicleData && vehicleData.timeslot)
-		const addressText = addressData.street+' '+addressData.city+' '+addressData.zip+' '+addressData.state
+		const addressText = addressData ? addressData.street+' '+addressData.city+' '+addressData.zip+' '+addressData.state : ""
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
@@ -120,15 +123,15 @@ class Summary extends React.Component{
 						</View>
 						<View style={styles.view}>
 							<ScrollView style={{height: 100}}>
-								{vehicleData.oilPrice ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								{vehicleData &&vehicleData.oilPrice ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Price"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={' ($' + vehicleData.oilPrice+')'}/></View>
 								</TouchableOpacity>:null}
-								{vehicleData.oilType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								{vehicleData && vehicleData.oilType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Oil Type"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.oilType}/></View>
 								</TouchableOpacity>:null}
-								{vehicleData.filterType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
+								{vehicleData &&vehicleData.filterType ?<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Filter Type"/></View>
 									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={vehicleData.filterType}/></View>
 								</TouchableOpacity>:null}
@@ -146,11 +149,11 @@ class Summary extends React.Component{
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Email"/></View>
-									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.email}/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData && addressData.email}/></View>
 								</TouchableOpacity>
 								<TouchableOpacity style={styles.lastCon} activeOpacity={1}>
 									<View style={styles.innerCon} className="labelText"><FontComponent style={{fontSize: 18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Phone"/></View>
-									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData.phone}/></View>
+									<View style={styles.innerCon3} className="infoText"><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={addressData && addressData.phone}/></View>
 								</TouchableOpacity>
 							</ScrollView>
 						</View>

@@ -35,7 +35,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e13530', end
 #root > div{
 	max-width: 500px;
 	margin: auto;
-  overflow: hidden
 }
 #root > div{
 	

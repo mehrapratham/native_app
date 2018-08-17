@@ -14,6 +14,8 @@ import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ToastComponent from '../../components/ToastComponent'
 import FontComponent from '../../components/FontComponent'
 import state from '../../json/state.js'
+import zip from '../../json/zip.js'
+
 var FONT_BACK_26   = 22;
 var FONT_BACK_20   = 18;
 var FONT_BACK_18   = 16;
@@ -41,7 +43,7 @@ class Address extends React.Component{
 			showToast: false,
 			toastmsg: '',
 			disableKeyboardView: false,
-			blur: false
+			bottomToEnd: false
 		}
 	}
 	async componentWillMount(){
@@ -70,7 +72,18 @@ class Address extends React.Component{
 	  		let isvalidZip = this.isValidUSZip()
 			let isValidPhn = this.validatePhoneNumber(this.state.address.phone)
 			if (isvalidZip && isValidPhn) {
-				this.props.history.push('/time-slot');
+				console.log(this.state.address.zip,6767)
+				let isZipAvailable = zip.zip.indexOf(this.state.address.zip)
+				console.log(isZipAvailable,7676)
+				if(isZipAvailable == -1){
+					this.setState({ showToast: true,toastmsg: "Service not available at your address"})
+					setTimeout(() => {
+						this.setState({ showToast: false})
+					}, 3000)
+				}else{
+					console.log('burrraaaaaaaahhhhhhhh')
+				}
+				//this.props.history.push('/time-slot');
 			}
 			else{
 				if(!isvalidZip){
@@ -125,19 +138,29 @@ class Address extends React.Component{
 		}
 	}
 	onFocusTextBox2(bool){
-		if(bool){
-			console.log(bool,999)
-			console.log(this.refs.scroll)
-		// this.refs.scroll.scrollToEnd()
+		if (bool) {
+			// console.log(this,66)
+			console.log(333)
+
+			this.setState({bottomToEnd: true})
+			// console.log(this.scroll, 2211)
+		}
+		else{
+			this.setState({bottomToEnd: false})
 		}
 		
 	}
 	hitOnFocus(){
+
 		console.log(this.refs.scroll,33333)
 	}
 	render(){
+		console.log(this.state.bottomToEnd, 111)
+		console.log(zip,33333)
+		
+		
 		// console.log(state.state)
-		let subChild = <ScrollView ref="scroll">
+		let subChild = <ScrollView ref={(node) => {this.scroll = node}} style={this.state.bottomToEnd ? {paddingBottom: 180}:{marginBottom: 0}}>
 						<View>	
 							<View style={styles.arrow}>
 								<FontComponent style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
@@ -168,9 +191,9 @@ class Address extends React.Component{
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Email"/>
 								<InputBox value={this.state.address.email} onChange={this.onChangeText.bind(this,'email')}  nextkey="next" />
 							</View>
-							<View style={styles.address}>
+							<View style={this.state.bottomToEnd ? styles.address2 : styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
-								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done"  disableAnimate={this.onFocusTextBox2.bind(this)}/>
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done" />
 							</View>
 							
 						</View>
@@ -231,6 +254,11 @@ const styles = StyleSheet.create({
   address: {
   	marginBottom: 1,
   	width: '100%'
+  },
+  address2: {
+  	marginBottom: 1,
+  	width: '100%',
+  	marginBottom: 100
   },
   text: {
   	marginBottom: 1,
