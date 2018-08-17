@@ -277,13 +277,13 @@ Our goal is to serve our customer by providing the best oil change service at th
     if($('.popupCon').hasClass('opened')){
       $('.popupCon').removeClass('opened')
       $('html,body').css({'overflow': ''})
-      localStorage.removeItem('vehicleData')
-      localStorage.removeItem('addressData')
 
     }
     else{
       $('.popupCon').addClass('opened')
       $('html,body').css({'overflow': 'hidden'})
+      localStorage.removeItem('vehicleData')
+      localStorage.removeItem('addressData')
     }
   }
   </script>

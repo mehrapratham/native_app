@@ -46,13 +46,13 @@ class TimeSlot extends React.Component{
 					length : '1 hour',
 					"filters": {
 					  "or":[
-					    { "specific_day_and_time": {"day": "Sunday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Monday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Tuesday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Wednesday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Thursday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Friday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }},
-					    { "specific_day_and_time": {"day": "Saturday", "start": 9, "end": 22, "timezone": "America/Los_Angeles" }}
+					    { "specific_day_and_time": {"day": "Sunday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Monday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Tuesday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Wednesday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Thursday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Friday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }},
+					    { "specific_day_and_time": {"day": "Saturday", "start": 6, "end": 22, "timezone": "America/Los_Angeles" }}
 					  ]
 					}
 				}

@@ -81,9 +81,8 @@ class Address extends React.Component{
 						this.setState({ showToast: false})
 					}, 3000)
 				}else{
-					console.log('burrraaaaaaaahhhhhhhh')
+					this.props.history.push('/time-slot');
 				}
-				//this.props.history.push('/time-slot');
 			}
 			else{
 				if(!isvalidZip){
