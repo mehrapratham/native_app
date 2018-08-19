@@ -47,12 +47,22 @@ class Address extends React.Component{
 		}
 	}
 	async componentWillMount(){
+		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
+		if(vehicleData == null){
+			console.log(vehicleData,2222222)
+			this.props.history.push('/')
+		}
+		
 		let data = await this.props.dispatch(getFromLocalStorage('addressData'))
 		if(data){
 			this.setState({ address: data })
 		}
 		this.onChangeText()
+
 		
+	}
+	componentWillRecieveProps(){
+		console.log(2222222)
 	}
 	isValidUSZip() {
 	   var postcode = require('postcode-validator');
