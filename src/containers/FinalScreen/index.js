@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
   view: {
   	flex: 3,
   	paddingLeft: 20,
-  	paddingRight: 20,
-    borderWidth: 3
+  	paddingRight: 20
   },
   btnview:{
     paddingBottom: 30,
