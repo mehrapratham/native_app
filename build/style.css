@@ -358,7 +358,7 @@
 	background-attachment: fixed;
 }
 .banner img{
-	
+	opacity: 0;
 }
 .close.closeBtn{
 	position: fixed;
