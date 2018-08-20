@@ -609,11 +609,17 @@
 		 margin-right: 40px;
 		 top: 10px;
 	}
+	.banner{
+		background-size: cover;
+	}
 }
 @media (max-width: 375px){
 	.close.closeBtn{
 		 margin-right: 10px;
 		 top: 10px;
+	}
+	.banner{
+		background-size: cover;
 	}
 }
 @media (max-width: 320px){
@@ -626,6 +632,9 @@
 	    height: 22px;
 	    font-size: 13px;
 	    
+	}
+	.banner{
+		background-size: cover;
 	}
 }
 input:focus{
