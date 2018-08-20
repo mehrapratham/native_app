@@ -26,6 +26,9 @@ class FinalStep extends React.Component{
   }
   async componentWillMount(){
     let orderData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+    if(orderData == null){
+      this.props.history.push('/')
+    }
     console.log(orderData, 1234)
     this.setState({ orderData: orderData })
     this.props.dispatch(removeLocalStorage('vehicleData'))

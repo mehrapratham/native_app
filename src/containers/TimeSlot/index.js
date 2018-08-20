@@ -35,6 +35,10 @@ class TimeSlot extends React.Component{
 	}
 	
 	async componentWillMount(){
+		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
+		if(addressData == null){
+			this.props.history.push('/')
+		}
 		timekit.configure({
 		  appKey: timekitAPI,
 		 

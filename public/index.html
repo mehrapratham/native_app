@@ -282,11 +282,12 @@ Our goal is to serve our customer by providing the best oil change service at th
     else{
       $('.popupCon').addClass('opened')
       $('html,body').css({'overflow': 'hidden'})
-      
-      
+      localStorage.removeItem('vehicleData')
+      localStorage.removeItem('addressData')
+      localStorage.removeItem('confirmOrder')
+      localStorage.removeItem('currentBookingDetail')  
     }
   }
- 
   </script>
 
   </body>

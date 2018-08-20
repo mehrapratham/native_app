@@ -31,11 +31,15 @@ class Summary extends React.Component{
 		}
 	}
 	async componentWillMount(){
+		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
+		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
+		if(addressData == null && vehicleData == null){
+			this.props.history.push('/')
+		}
 		timekit.configure({
 		  appKey: timekitAPI,
 		})
-		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
-		let addressData = await this.props.dispatch(getFromLocalStorage('addressData'))
+		
 		this.setState({ vehicleData,addressData })
 		if(vehicleData == null && addressData == null){
 			this.props.history.push('/')

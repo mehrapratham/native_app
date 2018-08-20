@@ -49,7 +49,6 @@ class Address extends React.Component{
 	async componentWillMount(){
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		if(vehicleData == null){
-			console.log(vehicleData,2222222)
 			this.props.history.push('/')
 		}
 		
