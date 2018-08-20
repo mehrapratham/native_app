@@ -619,7 +619,7 @@
 		 top: 10px;
 	}
 	.banner{
-		background-size: cover;
+		background-size: 100% 100%;
 	}
 }
 @media (max-width: 320px){
@@ -634,7 +634,7 @@
 	    
 	}
 	.banner{
-		background-size: cover;
+		background-size: 100% 100%;
 	}
 }
 input:focus{
