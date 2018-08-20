@@ -610,17 +610,23 @@
 		 top: 10px;
 	}
 }
+@media (max-width: 375px){
+	.close.closeBtn{
+		 margin-right: 10px;
+		 top: 10px;
+	}
+}
 @media (max-width: 320px){
 	.close.closeBtn{
 		 margin-right: 0px;
 		 top: 15px;
 	}
 	.popupCon .close {
-    width: 22px;
-    height: 22px;
-    font-size: 13px;
-    
-}
+	    width: 22px;
+	    height: 22px;
+	    font-size: 13px;
+	    
+	}
 }
 input:focus{
 	border: solid 2px #aaf442 !important;
