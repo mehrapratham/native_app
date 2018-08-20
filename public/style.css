@@ -609,12 +609,20 @@
 		 margin-right: 40px;
 		 top: 10px;
 	}
+	.banner {
+    	background-size: auto 100%;
+   		background-position: 50%;
+	}
 	
 }
 @media (max-width: 375px){
 	.close.closeBtn{
 		 margin-right: 10px;
 		 top: 10px;
+	}
+	.banner {
+    	background-size: auto 100%;
+   		background-position: 50%;
 	}
 	
 }
@@ -628,6 +636,10 @@
 	    height: 22px;
 	    font-size: 13px;
 	    
+	}
+	.banner {
+    	background-size: auto 100%;
+   		background-position: 50%;
 	}
 	
 }
