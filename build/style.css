@@ -471,6 +471,7 @@
 	}
 	.banner{
 		background-size: auto;
+		background-attachment: inherit;
 	}
 	#root > div{
 		overflow: auto !important;
@@ -623,6 +624,7 @@
 	.banner {
     	background-size: auto 100%;
    		background-position: 50%;
+   		background-attachment: inherit;
 	}
 	
 }
@@ -640,6 +642,7 @@
 	.banner {
     	background-size: auto 100%;
    		background-position: 50%;
+   		background-attachment: inherit;
 	}
 	
 }
