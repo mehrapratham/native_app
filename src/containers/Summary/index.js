@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 		paddingRight: 20,
 		paddingTop: 10,
-		paddingBottom: 10
+		paddingBottom: 0
 	},
 	view: {
 		flex: 4,
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
 	lasts: {
 	  	paddingRight: 20,
 	  	paddingLeft: 20,
-	  	marginBottom: 30
+	  	
 	  },
 	lastCon: {
 		flexDirection: 'row',
@@ -250,10 +250,9 @@ const styles = StyleSheet.create({
 	},
 	last5: {
 		flexDirection: 'row', 
-		marginTop: 10
+		
 	},
 	lastss: {
-		flex: 1,
 		justifyContent: 'flex-end'
 	}
 	
