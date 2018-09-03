@@ -5,13 +5,16 @@ import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
-import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
+import {getVehicleYears,getVehicleMakes,getVehicleModels,getYears} from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { IsValidForm } from '../../components/Common/validation'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import FontComponent from '../../components/FontComponent'
+import {CarQuery} from 'car-query'
+import axios from 'axios'
+
 var FONT_BACK_26   = 22;
 if (PixelRatio.get() == 1) {
   FONT_BACK_26 = 26;
@@ -47,6 +50,10 @@ class Vehicleform extends React.Component{
 			}
 		}
 		this.onValueChange()
+		axios.get('http://209.97.142.219:3002/years').then(response => {
+		    console.log(response,121)
+		    // res.json(response.data);
+		})
 	}
 	componentWillReceiveProps(nextProps){
 		let {vehicle} = this.state;
@@ -120,6 +127,7 @@ class Vehicleform extends React.Component{
 	}
 
 	render(){
+		
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
