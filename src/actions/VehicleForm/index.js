@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS } from '../types'
+import { GRAPHQL_URL, CAR_QUERY_API } from '../apiConstant'
+import { HAS_ERROR,GET_CARQUERY_MODELS, GET_VEHICLE_YEARS,GET_CARQUERY_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS, GET_CARQUERY_MAKES } from '../types'
 import store from '../../store'
 var qs = require('qs');
 let {getState} = store;
@@ -154,8 +154,6 @@ let query = {query: 'mutation{payment(input:{paymentToken:"'+token+ '",id:"' + i
      })
  }
 }
-
-
 export const payAmount = (token, amount) => {
 let query = {query: '{payment(paymentToken:"'+token+'",amount:"'+amount+'"){msz}}'}
  return dispatch => {
@@ -248,6 +246,73 @@ export const togglePopUpStatus = () => {
    })
   }
 }
+
+export const getCarQueryYears = () => {
+   return dispatch => {
+     return axios
+     .get(`${CAR_QUERY_API}years`)
+       .then(res => {
+         dispatch({
+           type: GET_CARQUERY_YEARS,
+           data: res.data.Years
+         })
+         return res.data.Years
+       })
+       .catch(function(error) {
+         dispatch({
+           type: HAS_ERROR,
+           data: error,
+         })
+         return error
+       })
+   }
+}
+
+
+export const getCarQueryMakes = (year,sold_in_us) => {
+   return dispatch => {
+     return axios
+     .get(`${CAR_QUERY_API}getmakes?year=`+year+'&sold_in_us='+ sold_in_us)
+       .then(res => {
+         console.log(res.data.Makes,4444)
+         dispatch({
+           type: GET_CARQUERY_MAKES,
+           data: res.data.Makes
+         })
+         return res.data.Makes
+       })
+       .catch(function(error) {
+         dispatch({
+           type: HAS_ERROR,
+           data: error,
+         })
+         return error
+       })
+   }
+}
+
+export const getCarQueryModels = (year,make,sold_in_us) => {
+   return dispatch => {
+     return axios
+     .get(`${CAR_QUERY_API}getmodels?year=`+year+'&make='+ make+'&sold_in_us='+ sold_in_us)
+       .then(res => {
+         console.log(res.data.Makes,4444)
+         dispatch({
+           type: GET_CARQUERY_MODELS,
+           data: res.data.Models
+         })
+         return res.data.Models
+       })
+       .catch(function(error) {
+         dispatch({
+           type: HAS_ERROR,
+           data: error,
+         })
+         return error
+       })
+   }
+}
+
 
 
 

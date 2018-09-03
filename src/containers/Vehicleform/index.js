@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, Picker, TextInput, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, StatusBar, ScrollView, KeyboardAvoidingView, PixelRatio } from 'react-native'
 import SelectBox from '../../components/SelectBox'
+import SelectBoxObject from '../../components/SelectBoxObject'
 import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
-import {getVehicleYears,getVehicleMakes,getVehicleModels} from '../../actions/VehicleForm'
+import { getVehicleYears, getCarQueryMakes, getVehicleMakes, getVehicleModels, getCarQueryYears, getCarQueryModels } from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { IsValidForm } from '../../components/Common/validation'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
@@ -27,14 +28,26 @@ class Vehicleform extends React.Component{
 				mileage: ''
 			},
 			errors:{},
-			loading: true
+			loading: true,
+			
+			yearData:[]
 		}
 	}
 	 async componentWillMount(){
 		console.log(33)
-		this.props.dispatch(getVehicleYears()).then(res =>{
+		const {yearData} = this.state
+		this.props.dispatch(getCarQueryYears()).then(res =>{
 			console.log(res,444444)
+			this.setState({years:res})
+			for (let i = res.min_year; i <= res.max_year; i++) {
+				yearData.push(i)
+			}
+			this.setState({yearData})
 		})
+
+	
+		
+		
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		if (data != null) {
@@ -66,13 +79,16 @@ class Vehicleform extends React.Component{
 		vehicle[key] = event;
 	    this.setState({vehicle});
 	    if(key == 'year'){
-	    	this.props.dispatch(getVehicleMakes(event))
+	    	console.log(key,"666")
+	    	//this.props.dispatch(getVehicleMakes(event))
+	    	this.props.dispatch(getCarQueryMakes(event,1))
 	    	vehicle.make = '';
 	    	vehicle.model = '';
 	    	this.setState({vehicle})
 	    }
 	    if(key == 'make'){
-	    	this.props.dispatch(getVehicleModels(event))
+	    	//this.props.dispatch(getVehicleModels(event))
+	    	this.props.dispatch(getCarQueryModels(event,"honda",1))
 	    	vehicle.model = '';
 	    	this.setState({vehicle})
 	    }
@@ -118,12 +134,13 @@ class Vehicleform extends React.Component{
 	onButtonPress2Web() {
 	  	this.props.history.push('/');
 	}
-
 	render(){
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
-		const makes = (this.props.VehicleForm && this.props.VehicleForm.makeList) || [];
-		const models = (this.props.VehicleForm && this.props.VehicleForm.modelList) || [];
-		console.log(this.props,'this.props')
+		const models = (this.props.VehicleForm && this.props.VehicleForm.modelsList) || [];
+		const makes = (this.props.VehicleForm && this.props.VehicleForm.makesList) || [];
+		console.log(this.props.VehicleForm,123)
+		// console.log(this.props,'this.props')
+		console.log(this.state.vehicle,444)
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
@@ -133,9 +150,9 @@ class Vehicleform extends React.Component{
 							<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center', fontFamily: 'dosis-bold',paddingTop: 10,paddingBottom: 30}} text="Enter Vehicle Details"/>
 						</View>
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
-							<SelectBox placeholder="Year" list={years} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')}/>
-							<SelectBox placeholder="Make" list={makes} selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
-							<SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
+							<SelectBox placeholder="Year" list={this.state.yearData} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')} /> 
+				        	<SelectBoxObject placeholder="Make" list={makes} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
+						    <SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/> 
 							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>
