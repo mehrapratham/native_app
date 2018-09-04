@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { GRAPHQL_URL, CAR_QUERY_API } from '../apiConstant'
-import { HAS_ERROR,GET_CARQUERY_MODELS, GET_VEHICLE_YEARS,GET_CARQUERY_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS, GET_CARQUERY_MAKES } from '../types'
+import { HAS_ERROR,GET_CARQUERY_MODELS, GET_VEHICLE_YEARS,GET_CARQUERY_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS, GET_CARQUERY_MAKES, GET_CARQUERY_TRIMS } from '../types'
 import store from '../../store'
 var qs = require('qs');
 let {getState} = store;
@@ -302,6 +302,28 @@ export const getCarQueryModels = (year,make,sold_in_us) => {
            data: res.data.Models
          })
          return res.data.Models
+       })
+       .catch(function(error) {
+         dispatch({
+           type: HAS_ERROR,
+           data: error,
+         })
+         return error
+       })
+   }
+}
+
+export const getCarQueryTrims = (year,make,model) => {
+   return dispatch => {
+     return axios
+     .get(`${CAR_QUERY_API}trims?year=`+year+'&make='+ make+'&model='+ model)
+       .then(res => {
+         console.log(res.data.Makes,4444)
+         dispatch({
+           type: GET_CARQUERY_TRIMS,
+           data: res.data.Trims
+         })
+         return res.data.Trims
        })
        .catch(function(error) {
          dispatch({

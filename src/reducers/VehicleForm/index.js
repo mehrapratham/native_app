@@ -1,5 +1,5 @@
 import initialState from '../initialState'
-import { GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_VEHICLE_BOOKINGS, GET_CARQUERY_MAKES, GET_CARQUERY_MODELS} from '../../actions/types'
+import { GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_VEHICLE_BOOKINGS, GET_CARQUERY_MAKES, GET_CARQUERY_MODELS, GET_CARQUERY_TRIMS } from '../../actions/types'
 export default (state = initialState.VehicleForm, action) => {
  switch (action.type) {
    case GET_VEHICLE_YEARS:
@@ -19,7 +19,9 @@ export default (state = initialState.VehicleForm, action) => {
    case GET_CARQUERY_MAKES:
      return { ...state, makesList: action.data } 
     case GET_CARQUERY_MODELS:
-     return { ...state, modelsList: action.data } 
+     return { ...state, modelsList: action.data }
+    case GET_CARQUERY_TRIMS:
+     return { ...state, trimList: action.data } 
    default:
      return state
  }

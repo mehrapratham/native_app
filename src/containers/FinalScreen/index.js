@@ -147,11 +147,11 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   innerCon: {
-    width: '50%',
+    width: '30%',
     paddingLeft: 15
   },
   innerCon3: {
-    width: '50%',
+    width: '70%',
     paddingRight: 15
   },
 });

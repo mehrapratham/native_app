@@ -114,7 +114,7 @@ class Summary extends React.Component{
 	}
 	render(){
 		const { vehicleData,addressData } = this.state;
-		const text = vehicleData ? vehicleData.make+' '+vehicleData.model+' '+vehicleData.year : ""
+		const text = vehicleData ? vehicleData.make+' '+vehicleData.model+' '+vehicleData.year+ ' '+vehicleData.trim : ""
 		const timeText = vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())+' '+this.formatDate(vehicleData && vehicleData.timeslot)
 		const addressText = addressData ? addressData.street+' '+addressData.city+' '+addressData.zip+' '+addressData.state : ""
 		let child = <View style={styles.container}>
@@ -234,14 +234,14 @@ const styles = StyleSheet.create({
 		borderRadius: 5
 	},
 	innerCon: {
-		width: '50%',
+		width: '30%',
 		paddingLeft: 15
 	},
 	endFlex: {
 		alignSelf: 'flex-end'
 	},
 	innerCon3: {
-		width: '50%',
+		width: '70%',
 		paddingRight: 15
 	},
 	last4: {

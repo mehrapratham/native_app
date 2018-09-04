@@ -6,7 +6,7 @@ import InputBox from '../../components/InputBox'
 import {Link } from '../../Routing'
 import FontAwesomeIcon from '../../components/Icon/FontAwesomeIcon'
 import { connect } from 'react-redux'
-import { getVehicleYears, getCarQueryMakes, getVehicleMakes, getVehicleModels, getCarQueryYears, getCarQueryModels } from '../../actions/VehicleForm'
+import { getVehicleYears, getCarQueryMakes, getVehicleMakes, getVehicleModels, getCarQueryYears, getCarQueryModels, getCarQueryTrims } from '../../actions/VehicleForm'
 import {saveToLocalStorage,getFromLocalStorage} from '../../components/localStorage'
 import { IsValidForm } from '../../components/Common/validation'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
@@ -28,7 +28,8 @@ class Vehicleform extends React.Component{
 				year: '',
 				make: '',
 				model: '',
-				mileage: ''
+				mileage: '',
+				trim: ''
 			},
 			errors:{},
 			loading: true,
@@ -71,7 +72,8 @@ class Vehicleform extends React.Component{
 				year: '',
 				make: '',
 				model: '',
-				mileage: ''
+				mileage: '',
+				trim: ''
 			}
 			this.setState({vehicle})
 			this.setState({loading: true})
@@ -87,19 +89,29 @@ class Vehicleform extends React.Component{
 	    	this.props.dispatch(getCarQueryMakes(event,1))
 	    	vehicle.make = '';
 	    	vehicle.model = '';
+	    	vehicle.trim = '';
 	    	this.setState({vehicle})
 	    }
 	    if(key == 'make'){
 	    	//this.props.dispatch(getVehicleModels(event))
-	    	console.log(event,"12111")
 	    	this.props.dispatch(getCarQueryModels(vehicle.year,event,1)).then(res => {
 	    		console.log(res,55)
 	    	})
 	    	vehicle.model = '';
+	    	vehicle.trim = '';
+	    	this.setState({vehicle})
+	    }
+	    if(key == 'model'){
+	    	//this.props.dispatch(getVehicleModels(event))
+	    	console.log(event,"12111")
+	    	this.props.dispatch(getCarQueryTrims(vehicle.year,vehicle.make,event)).then(res => {
+	    		console.log(res,5566)
+	    	})
+	    	vehicle.trim = '';
 	    	this.setState({vehicle})
 	    }
 
-	    let fields = ['year', 'make', 'model']
+	    let fields = ['year', 'make', 'model','trim']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -112,7 +124,7 @@ class Vehicleform extends React.Component{
 	  }
   	onButtonPress() {
   		this.setState({loading: true})
-  		let fields = ['year', 'make', 'model']
+  		let fields = ['year', 'make', 'model','trim']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -127,7 +139,7 @@ class Vehicleform extends React.Component{
 	}
 	onButtonPressWeb() {
   		this.setState({loading: true})
-  		let fields = ['year', 'make', 'model']
+  		let fields = ['year', 'make', 'model','trim']
       	let formValidation = IsValidForm(fields, this.state.vehicle)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -140,14 +152,13 @@ class Vehicleform extends React.Component{
 	onButtonPress2Web() {
 	  	this.props.history.push('/');
 	}
-	render(){
-		
+	render(){		
 		const years = (this.props.VehicleForm && this.props.VehicleForm.yearList) || [];
 		const models = (this.props.VehicleForm && this.props.VehicleForm.modelsList) || [];
 		const makes = (this.props.VehicleForm && this.props.VehicleForm.makesList) || [];
-		console.log(this.props.VehicleForm,123)
-		// console.log(this.props,'this.props')
-		console.log(this.state.vehicle,444)
+		const trims = (this.props.VehicleForm && this.props.VehicleForm.trimList) || [];
+		console.log(this.state.vehicle)
+		console.log(this.props)
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"
@@ -159,7 +170,8 @@ class Vehicleform extends React.Component{
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<SelectBox placeholder="Year" list={this.state.yearData} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')} /> 
 				        	<SelectBoxObject placeholder="Make" list={makes} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
-						    <SelectBoxObject placeholder="Model" list={models} valueToUse="model_make_id" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/> 
+						    <SelectBoxObject placeholder="Model" list={models} valueToUse="model_name" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
+						    <SelectBoxObject placeholder="Trim" list={trims} valueToUse="model_trim" valueToShow="model_trim" selectedValue={this.state.vehicle.trim} onValueChange={this.onValueChange.bind(this,'trim')}/> 
 							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>
