@@ -1,11 +1,6 @@
 import axios from 'axios'
-<<<<<<< HEAD
-import { GRAPHQL_URL } from '../apiConstant'
-import { HAS_ERROR, GET_VEHICLE_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS, GET_YEARS } from '../types'
-=======
 import { GRAPHQL_URL, CAR_QUERY_API } from '../apiConstant'
 import { HAS_ERROR,GET_CARQUERY_MODELS, GET_VEHICLE_YEARS,GET_CARQUERY_YEARS, GET_VEHICLE_MAKES, GET_VEHICLE_MODELS, GET_VEHICLE_OIL_TYPES, GET_VEHICLE_FILTER_TYPES, GET_AVAILABILITY, GET_STATE_LIST, GET_VEHICLE_BOOKINGS, GET_TOGGLE_POPUP_STATUS, GET_CARQUERY_MAKES } from '../types'
->>>>>>> e95736541d0d17202b68aac3bda8fdc2663a5238
 import store from '../../store'
 var qs = require('qs');
 let {getState} = store;
@@ -252,38 +247,6 @@ export const togglePopUpStatus = () => {
   }
 }
 
-<<<<<<< HEAD
-export const getYears = () => {
-// let query = {query: '{ bookings {date,token} }'}
- return dispatch => {
-   return axios
-     .get(`https://www.carqueryapi.com/api/0.3/?callback=?&cmd=getYears`,{
-      headers: { 
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-       }
-     })
-     .then(res => {
-      console.log(res,777)
-       dispatch({
-         type: GET_YEARS,
-         data: res
-       })
-       return res
-     })
-     .catch(function(error) {
-      console.log(error,888)
-       dispatch({
-         type: HAS_ERROR,
-         data: error,
-       })
-       return error
-     })
- }
-}
-
-
-=======
 export const getCarQueryYears = () => {
    return dispatch => {
      return axios
@@ -350,7 +313,7 @@ export const getCarQueryModels = (year,make,sold_in_us) => {
    }
 }
 
->>>>>>> e95736541d0d17202b68aac3bda8fdc2663a5238
+
 
 
 
