@@ -37,17 +37,13 @@ class Vehicleform extends React.Component{
 		console.log(33)
 		const {yearData} = this.state
 		this.props.dispatch(getCarQueryYears()).then(res =>{
-			console.log(res,444444)
 			this.setState({years:res})
 			for (let i = res.min_year; i <= res.max_year; i++) {
 				yearData.push(i)
 			}
 			this.setState({yearData})
 		})
-
 	
-		
-		
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 
 		if (data != null) {
@@ -88,7 +84,10 @@ class Vehicleform extends React.Component{
 	    }
 	    if(key == 'make'){
 	    	//this.props.dispatch(getVehicleModels(event))
-	    	this.props.dispatch(getCarQueryModels(event,"honda",1))
+	    	console.log(event,"12111")
+	    	this.props.dispatch(getCarQueryModels(vehicle.year,event,1)).then(res => {
+	    		console.log(res,55)
+	    	})
 	    	vehicle.model = '';
 	    	this.setState({vehicle})
 	    }
@@ -152,7 +151,7 @@ class Vehicleform extends React.Component{
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<SelectBox placeholder="Year" list={this.state.yearData} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')} /> 
 				        	<SelectBoxObject placeholder="Make" list={makes} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
-						    <SelectBox placeholder="Model" list={models} selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/> 
+						    <SelectBoxObject placeholder="Model" list={models} valueToUse="model_make_id" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/> 
 							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>

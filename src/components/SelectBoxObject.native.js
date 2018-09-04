@@ -20,7 +20,7 @@ export default class SelectBoxObject extends React.Component{
               placeholderStyle={{color: "#646262"}}
             >
               {this.props.list && this.props.list.map((item, key) => {
-              	return <Picker.Item label={item[this.props.valueToShow]} value={item[this.props.valueToUse]} key={key}/>
+              	return <Picker.Item label={item[this.props.valueToShow]} value={item[this.props.valueToShow]} key={key}/>
               })}
             </Picker>
 		)
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
     borderColor: '#c5c3c4',
   }
-});s
+});
