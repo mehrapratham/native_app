@@ -27,8 +27,8 @@ if (PixelRatio.get() == 1) {
 }
 
 class Address extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			address: {
 				street: '',
@@ -47,6 +47,7 @@ class Address extends React.Component{
 		}
 	}
 	async componentWillMount(){
+		// console.log(this.myRef,33333)
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		if(vehicleData == null){
 			this.props.history.push('/')
@@ -175,7 +176,7 @@ class Address extends React.Component{
 							</View>					
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Street"/>
-								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)} />
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)} autofocus="true" />
 							</View>
 							<View style={styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="City"/>
