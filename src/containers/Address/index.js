@@ -185,7 +185,7 @@ class Address extends React.Component{
 								<View style={styles.text2}>
 									<View style={styles.text3}>
 										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Zip"/>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric' />
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' />
 									</View>
 								</View>
 								<View style={styles.text4}>
@@ -201,7 +201,7 @@ class Address extends React.Component{
 							</View>
 							<View style={this.state.bottomToEnd ? styles.address2 : styles.address}>
 								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
-								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  keyboardType='numeric' nextkey="done" />
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' />
 							</View>
 							
 						</View>
