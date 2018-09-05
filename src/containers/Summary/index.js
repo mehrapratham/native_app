@@ -85,18 +85,21 @@ class Summary extends React.Component{
 			this.props.history.push('/final-screen');
 			return res
 		})
+		let what = 'year='+vehicleData.year+ ', make='+vehicleData.make+ ', model='+vehicleData.model+ ', trim='+vehicleData.trim;
+		let where = 'street='+addressData.street+ ', city='+addressData.city+', zip='+addressData.zip+', state='+addressData.state
+		console.log(where,what,3434)
 		let bookingData = {
 			start : vehicleData.timeslot.start, 
 			end: vehicleData.timeslot.end, 
-			what: 'test', 
+			what: what, 
 			description: 'hi, this is description', 
 			resource_id: defaultResourceId,
 			graph: 'confirm_decline',
 			customer: {
 				name: vehicleData.make + ' ' +vehicleData.model,
-				email: "shamubarak@hotmail.com",
+				email: addressData.email,
 			},
-			where: "Courthouse, Hill Valley, CA 95420, USA"
+			where: where,
 		}
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
