@@ -61,7 +61,7 @@ class FinalStep extends React.Component{
                       </TouchableOpacity>:null}
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Car / Model"/></View>
-                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year}/></View>
+                        <View style={styles.innerCon3}><FontComponent style={{alignSelf: 'flex-end',fontFamily: 'dosis-medium'}} text={orderData.make + ' ' +orderData.model + ' ' +orderData.year + ' ' +orderData.trim}/></View>
                       </TouchableOpacity>
                       <TouchableOpacity style={styles.lastCon} activeOpacity={1}>
                         <View style={styles.innerCon}><FontComponent style={{fontSize: FONT_BACK_18,fontWeight: 'bold',fontFamily: 'dosis-bold'}} text="Time"/></View>

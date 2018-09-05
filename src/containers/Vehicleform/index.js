@@ -33,12 +33,13 @@ class Vehicleform extends React.Component{
 			},
 			errors:{},
 			loading: true,
-			
+			currentLoader: false,
+			currentLoader2: false,
+			currentLoader3: false,
 			yearData:[]
 		}
 	}
 	 async componentWillMount(){
-		console.log(33)
 		const {yearData} = this.state
 		this.props.dispatch(getCarQueryYears()).then(res =>{
 			this.setState({years:res})
@@ -60,10 +61,6 @@ class Vehicleform extends React.Component{
 			}
 		}
 		this.onValueChange()
-		axios.get('http://209.97.142.219:3002/years').then(response => {
-		    console.log(response,121)
-		    // res.json(response.data);
-		})
 	}
 	componentWillReceiveProps(nextProps){
 		let {vehicle} = this.state;
@@ -84,28 +81,28 @@ class Vehicleform extends React.Component{
 		vehicle[key] = event;
 	    this.setState({vehicle});
 	    if(key == 'year'){
-	    	console.log(key,"666")
-	    	//this.props.dispatch(getVehicleMakes(event))
-	    	this.props.dispatch(getCarQueryMakes(event,1))
+	    	this.setState({currentLoader: true})
+	    	this.props.dispatch(getCarQueryMakes(event,1)).then(res => {
+	    		this.setState({currentLoader: false})
+	    	})
 	    	vehicle.make = '';
 	    	vehicle.model = '';
 	    	vehicle.trim = '';
 	    	this.setState({vehicle})
 	    }
 	    if(key == 'make'){
-	    	//this.props.dispatch(getVehicleModels(event))
+	    	this.setState({currentLoader2: true})
 	    	this.props.dispatch(getCarQueryModels(vehicle.year,event,1)).then(res => {
-	    		console.log(res,55)
+	    		this.setState({currentLoader2: false})
 	    	})
 	    	vehicle.model = '';
 	    	vehicle.trim = '';
 	    	this.setState({vehicle})
 	    }
 	    if(key == 'model'){
-	    	//this.props.dispatch(getVehicleModels(event))
-	    	console.log(event,"12111")
+	    	this.setState({currentLoader3: true})
 	    	this.props.dispatch(getCarQueryTrims(vehicle.year,vehicle.make,event)).then(res => {
-	    		console.log(res,5566)
+	    		this.setState({currentLoader3: false})
 	    	})
 	    	vehicle.trim = '';
 	    	this.setState({vehicle})
@@ -169,9 +166,9 @@ class Vehicleform extends React.Component{
 						</View>
 						<KeyboardAvoidingView style={styles.view} behavior="position" enabled>
 							<SelectBox placeholder="Year" list={this.state.yearData} selectedValue={this.state.vehicle.year} onValueChange={this.onValueChange.bind(this,'year')} /> 
-				        	<SelectBoxObject placeholder="Make" list={makes} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
-						    <SelectBoxObject placeholder="Model" list={models} valueToUse="model_name" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
-						    <SelectBoxObject placeholder="Trim" list={trims} valueToUse="model_trim" valueToShow="model_trim" selectedValue={this.state.vehicle.trim} onValueChange={this.onValueChange.bind(this,'trim')}/> 
+				        	<SelectBoxObject placeholder="Make" list={makes} isloading={this.state.currentLoader} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
+						    <SelectBoxObject placeholder="Model" list={models} isloading={this.state.currentLoader2} valueToUse="model_name" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
+						    <SelectBoxObject placeholder="Trim" list={trims} isloading={this.state.currentLoader3} valueToUse="model_trim" valueToShow="model_trim" selectedValue={this.state.vehicle.trim} onValueChange={this.onValueChange.bind(this,'trim')}/> 
 							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>

@@ -121,7 +121,7 @@ export const getAvailability = (data) => {
  }
 }
 export const confirmOrder = (data) => {
-let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id, make, oilType, filterType, model, street, mileage, time, message, city, zip, state, date, phone, email}}'}
+let query = {query: 'mutation{createServiceAppointment(input:'+data+'){year, _id, make, oilType, filterType, model, street, mileage, time, message, city, zip, state, date, phone, email, trim}}'}
  return dispatch => {
    return axios
      .post(`${GRAPHQL_URL}`, query)
