@@ -169,7 +169,7 @@ class Vehicleform extends React.Component{
 				        	<SelectBoxObject placeholder="Make" list={makes} isloading={this.state.currentLoader} valueToUse="make_id" valueToShow="make_display" selectedValue={this.state.vehicle.make} onValueChange={this.onValueChange.bind(this,'make')}/>
 						    <SelectBoxObject placeholder="Model" list={models} isloading={this.state.currentLoader2} valueToUse="model_name" valueToShow="model_name" selectedValue={this.state.vehicle.model} onValueChange={this.onValueChange.bind(this,'model')}/>
 						    <SelectBoxObject placeholder="Trim" list={trims} isloading={this.state.currentLoader3} valueToUse="model_trim" valueToShow="model_trim" selectedValue={this.state.vehicle.trim} onValueChange={this.onValueChange.bind(this,'trim')}/> 
-							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric'/>	
+							<InputBox type='number' placeholder="Mileage" value={this.state.vehicle.mileage} onChange={this.onValueChange.bind(this, 'mileage')} nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric"/>	
 						</KeyboardAvoidingView>
 						<View style={styles.lastss}>
 							<View style={styles.lasts}>
