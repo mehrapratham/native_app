@@ -81,10 +81,14 @@ class Address extends React.Component{
 	  		let cons = this.props.dispatch(saveToLocalStorage('addressData' , data))
 	  		let isvalidZip = this.isValidUSZip()
 			let isValidPhn = this.validatePhoneNumber(this.state.address.phone)
-			if (isvalidZip && isValidPhn) {
-				console.log(this.state.address.zip,6767)
+			if(this.state.address.email != this.state.address.confirm_email){
+				this.setState({ showToast: true,toastmsg: "Email or Confirm Email doesn't match"})
+				setTimeout(() => {
+					this.setState({ showToast: false})
+				}, 3000)
+			}
+			else if (isvalidZip && isValidPhn) {
 				let isZipAvailable = zip.zip.indexOf(this.state.address.zip)
-				console.log(isZipAvailable,7676)
 				if(isZipAvailable == -1){
 					this.setState({ showToast: true,toastmsg: "Service not available at your address"})
 					setTimeout(() => {
@@ -93,6 +97,7 @@ class Address extends React.Component{
 				}else{
 					this.props.history.push('/time-slot');
 				}
+				
 			}
 			else{
 				if(!isvalidZip){
