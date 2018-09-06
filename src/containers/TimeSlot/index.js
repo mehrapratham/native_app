@@ -71,7 +71,6 @@ class TimeSlot extends React.Component{
 			this.setState({selectedTime: vehicleData.timeslot})
 		}
 		const api = await this.props.dispatch(getBookings())
-		console.log(api,333)
 	}
 	onButtonPress() {
 		if(this.state.selectedTime.start){

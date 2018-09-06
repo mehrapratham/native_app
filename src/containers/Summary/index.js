@@ -86,7 +86,7 @@ class Summary extends React.Component{
 			return res
 		})
 		let what = 'year='+vehicleData.year+ ', make='+vehicleData.make+ ', model='+vehicleData.model+ ', trim='+vehicleData.trim;
-		let where = 'street='+addressData.street+ ', city='+addressData.city+', zip='+addressData.zip+', state='+addressData.state
+		let where =  'first_name='+addressData.first_name+ ', last_name='+addressData.last_name+ ', street='+addressData.street+ ', city='+addressData.city+', zip='+addressData.zip+', state='+addressData.state
 		console.log(where,what,3434)
 		let bookingData = {
 			start : vehicleData.timeslot.start, 
@@ -98,14 +98,13 @@ class Summary extends React.Component{
 			customer: {
 				name: vehicleData.make + ' ' +vehicleData.model,
 				email: addressData.email,
-			},
+			}, 
 			where: where,
 		}
 		timekit.createBooking(bookingData).then(res=>{
 			let bookingDetail = JSON.stringify(res.data)
 			this.props.dispatch(saveToLocalStorage('currentBookingDetail', bookingDetail))
 		})
-		
 	}
 	onButtonPress2() {
 	  	this.props.history.push('/time-slot');
@@ -119,7 +118,7 @@ class Summary extends React.Component{
 		const { vehicleData,addressData } = this.state;
 		const text = vehicleData ? vehicleData.make+' '+vehicleData.model+' '+vehicleData.year+ ' '+vehicleData.trim : ""
 		const timeText = vehicleData && vehicleData.timeslot && (moment(vehicleData.timeslot.start).format('M') + '/'+moment(vehicleData.timeslot.start).date())+' '+this.formatDate(vehicleData && vehicleData.timeslot)
-		const addressText = addressData ? addressData.street+' '+addressData.city+' '+addressData.zip+' '+addressData.state : ""
+		const addressText = addressData ? addressData.first_name+ ' '+addressData.last_name+ ' '+addressData.street+' '+addressData.street2+' '+addressData.city+' '+addressData.zip+' '+addressData.state : ""
 		let child = <View style={styles.container}>
 						<StatusBar
 					      barStyle="light-content"

@@ -36,7 +36,11 @@ class Address extends React.Component{
 				zip: '',
 				state: '',
 				email: '',
-				phone: ''
+				phone: '',
+				first_name: '',
+				last_name: '',
+				street2: '',
+				confirm_email: ''
 			},
 			errors:{},
 			loading: true,
@@ -47,7 +51,6 @@ class Address extends React.Component{
 		}
 	}
 	async componentWillMount(){
-		// console.log(this.myRef,33333)
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('vehicleData'))
 		if(vehicleData == null){
 			this.props.history.push('/')
@@ -61,9 +64,6 @@ class Address extends React.Component{
 
 		
 	}
-	componentWillRecieveProps(){
-		console.log(2222222)
-	}
 	isValidUSZip() {
 	   var postcode = require('postcode-validator');
 	   let isValid = postcode.validate(this.state.address.zip, 'US')
@@ -73,7 +73,7 @@ class Address extends React.Component{
 
 	onButtonPress() {
 		this.setState({loading: true})
-		let fields = ['street', 'city', 'zip', 'state', 'phone','email']
+		let fields = ['street', 'city', 'zip', 'state', 'phone','email','first_name', 'last_name', 'confirm_email']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -126,7 +126,7 @@ class Address extends React.Component{
 	    let { address } = this.state;
 	    address[key] = event;
 		this.setState({ address })
-		let fields = ['street', 'city', 'zip', 'state', 'phone']
+		let fields = ['street', 'city', 'zip', 'state', 'phone', 'email', 'first_name', 'last_name', 'confirm_email']
       	let formValidation = IsValidForm(fields, this.state.address)
       	this.setState({ errors: formValidation.errors })
       	if (formValidation.validate) {
@@ -139,70 +139,59 @@ class Address extends React.Component{
 
 	onFocusTextBox(bool){
 		if (bool) {
-			console.log(333)
 			this.setState({disableKeyboardView: true})
 		}
 		else{
 			this.setState({disableKeyboardView: false})
 		}
 	}
-	onFocusTextBox2(bool){
-		if (bool) {
-			// console.log(this,66)
-			console.log(333)
-
-			this.setState({bottomToEnd: true})
-			// console.log(this.scroll, 2211)
-		}
-		else{
-			this.setState({bottomToEnd: false})
-		}
-		
-	}
-	hitOnFocus(){
-
-		console.log(this.refs.scroll,33333)
-	}
 	render(){
-		console.log(this.state.bottomToEnd, 111)
-		console.log(zip,33333)
-		
-		
-		// console.log(state.state)
-		let subChild = <ScrollView ref={(node) => {this.scroll = node}} style={this.state.bottomToEnd ? {paddingBottom: 180}:{marginBottom: 0}}>
+		let subChild = <ScrollView ref={(node) => {this.scroll = node}}>
 						<View>	
 							<View style={styles.arrow}>
 								<FontComponent style={{fontSize: FONT_BACK_26,fontFamily: 'dosis-bold'}} className="mainHeadingTop" text="Enter Service Address"/>
-							</View>					
-							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Street"/>
-								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" disableAnimate={this.onFocusTextBox.bind(this)} autofocus="true" />
-							</View>
-							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="City"/>
-								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" />
 							</View>
 							<View style={styles.text}>
 								<View style={styles.text2}>
 									<View style={styles.text3}>
-										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Zip"/>
-										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' />
+										<InputBox value={this.state.address.first_name} onChange={this.onChangeText.bind(this,'first_name')} nextkey="next" placeholder="First Name" autofocus="true"/>
 									</View>
 								</View>
 								<View style={styles.text4}>
 									<View style={styles.text3}>
-										<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="State"/>
-										<StateSelectBox placeholder="State" list={state.state} selectedValue={this.state.address.state} onValueChange={this.onChangeText.bind(this,'state')}/>
+										<InputBox value={this.state.address.last_name} onChange={this.onChangeText.bind(this,'last_name')} nextkey="next" placeholder="Last Name"/>
+									</View>
+								</View>
+							</View>					
+							<View style={styles.address}>
+								<InputBox value={this.state.address.street} onChange={this.onChangeText.bind(this,'street')} nextkey="next" placeholder="Street address"/>
+							</View>
+							<View style={styles.address}>
+								<InputBox value={this.state.address.street2} onChange={this.onChangeText.bind(this,'street2')} nextkey="next" placeholder="Street address 2 (optional)"/>
+							</View>
+							<View style={styles.address}>
+								<InputBox value={this.state.address.city} onChange={this.onChangeText.bind(this,'city')} nextkey="next" placeholder="City"/>
+							</View>
+							<View style={styles.text}>
+								<View style={styles.text2}>
+									<View style={styles.text3}>
+										<InputBox value={this.state.address.zip} onChange={this.onChangeText.bind(this,'zip')} nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' placeholder="Zip Code"/>
+									</View>
+								</View>
+								<View style={styles.text4}>
+									<View style={styles.text3}>
+										<StateSelectBox placeholder="State" list={state.state} selectedValue={this.state.address.state} onValueChange={this.onChangeText.bind(this,'state')} placeholder="State"/>
 									</View>
 								</View>
 							</View>
 							<View style={styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Email"/>
-								<InputBox value={this.state.address.email} onChange={this.onChangeText.bind(this,'email')}  nextkey="next" />
+								<InputBox value={this.state.address.email} onChange={this.onChangeText.bind(this,'email')}  nextkey="next" placeholder="Email"/>
 							</View>
-							<View style={this.state.bottomToEnd ? styles.address2 : styles.address}>
-								<FontComponent style={{marginBottom: 10,fontSize: FONT_BACK_18,fontFamily: 'dosis-medium'}} text="Phone"/>
-								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' />
+							<View style={styles.address}>
+								<InputBox value={this.state.address.confirm_email} onChange={this.onChangeText.bind(this,'confirm_email')}  nextkey="next" placeholder="Confirm Email"/>
+							</View>
+							<View style={styles.address}>
+								<InputBox value={this.state.address.phone} onChange={this.onChangeText.bind(this,'phone')}  nextkey="done" keyboardType='numeric' pattern="[0-9]*" inputmode="numeric" type='number' placeholder="Phone"/>
 							</View>
 							
 						</View>
@@ -263,11 +252,6 @@ const styles = StyleSheet.create({
   address: {
   	marginBottom: 1,
   	width: '100%'
-  },
-  address2: {
-  	marginBottom: 1,
-  	width: '100%',
-  	marginBottom: 100
   },
   text: {
   	marginBottom: 1,
