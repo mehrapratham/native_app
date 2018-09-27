@@ -78,7 +78,7 @@ class TimeSlot extends React.Component{
 			vehicleData.timeslot = this.state.selectedTime
 			let data = JSON.stringify(vehicleData)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-		  	this.props.history.push('/summary');
+		  	this.props.history.push('/recomended-oil');
 		}
 	}
 	onButtonPress2() {

@@ -21,6 +21,7 @@ class _CardForm extends React.Component {
         this.props.stripe
           .createToken()
           .then(async(payload) => {
+            console.log(payload,1212)
              if (payload.token) {
               let response = await this.props.payAmount(payload.token.id)
               if (response) {
@@ -32,6 +33,7 @@ class _CardForm extends React.Component {
         console.log("Stripe.js hasn't loaded yet.");
       }
     };
+
 
     onButtonPress2() {
       this.props.history.push('/summary');
@@ -52,7 +54,7 @@ class _CardForm extends React.Component {
             <button disabled={this.state.loading} style={{backgroundColor: '#f5b443', height: 50,fontFamily: 'dosis-bold'}}>Confirm Booking</button>
             <View style={{flexDirection: 'row', marginTop: 10}}>
               <View>
-                <ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+                <ArrowLeftButton onPressWeb={this.onButtonPress2.bind(this)} />
               </View>
             </View>
           </View>

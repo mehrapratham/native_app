@@ -11,6 +11,9 @@ import PaymentForm from './PaymentForm'
 import {payAmount,confirmBookingOrder} from '../../actions/VehicleForm'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
+import {timekitAPI, defaultResourceId} from '../../actions/remoteAPIKeys'
+var timekit = require('timekit-sdk');
+
 var FONT_BACK_26   = 22;
 
 if (PixelRatio.get() == 1) {
@@ -19,6 +22,9 @@ if (PixelRatio.get() == 1) {
 class PaymentInfo extends React.Component{
 	async componentWillMount()	{
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+		timekit.configure({
+		  appKey: timekitAPI,
+		})
 	}
 	onButtonPress() {
 	  	this.props.history.push('/final-screen');
@@ -26,11 +32,19 @@ class PaymentInfo extends React.Component{
 	onButtonPress2() {
 	  	this.props.history.push('/summary');
 	}
+
 	async payAmount(token){
 		let vehicleData = await this.props.dispatch(getFromLocalStorage('confirmOrder'))
+		let currentBookingDetail = await this.props.dispatch(getFromLocalStorage('currentBookingDetail'))
+		let data = {
+	        action: 'confirm',
+	        id: currentBookingDetail.id
+	      }
 		this.props.dispatch(confirmBookingOrder(token,vehicleData._id)).then(res => {
 			if(res.msz == 'success'){
-				this.props.history.push('/final-screen')
+				timekit.updateBooking(data).then(res=>{
+					this.props.history.push('/final-screen')
+				})	
 			}
 		})
 	}

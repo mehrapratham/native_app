@@ -10,6 +10,7 @@ import ArrowRightButton from '../../components/Buttons/ArrowRightButton'
 import ArrowLeftButton from '../../components/Buttons/ArrowLeftButton'
 import ReactNativeDrawer from '../../components/Common/ReactNativeDrawer'
 import FontComponent from '../../components/FontComponent'
+import InputBox from '../../components/InputBox'
 var FONT_BACK_26   = 22;
 var FONT_BACK_20   = 18;
 var FONT_BACK_WIDTH = 50;
@@ -33,7 +34,7 @@ class RecomendedOil extends React.Component{
 			vehicleData: {},
 			loading: false,
 			errors: {},
-			oilGrade: ['Conventional', 'Synthetic Blend', 'Full Synthetic']
+			oilGrade: ['Conventional', 'Full Synthetic', 'Full Synthetic High Mileage']
 		}
 	}
 	async componentDidMount(){
@@ -51,19 +52,18 @@ class RecomendedOil extends React.Component{
 		console.log(font,55555)
 	}
 	onButtonPress() {
-		if(this.state.selectedOilType){
+		if(this.state.selectedOilGrade){
 			let vehicleData = this.state.vehicleData
-			vehicleData.oilType = this.state.selectedOilType;
 			vehicleData.oilGrade = this.state.selectedOilGrade;
 			vehicleData.oilPrice = this.state.selectedOilPrice
 
 			let data = JSON.stringify(vehicleData)
 	  		this.props.dispatch(saveToLocalStorage('vehicleData' , data))
-		  	this.props.history.push('/recomended-filter');
+		  	this.props.history.push('/summary');
 		}
 	}
 	onButtonPress2() {
-	  	this.props.history.push('/vehicle-form');
+	  	this.props.history.push('/time-slot');
 	}
 	onChange(event){
 		this.setState({ selectedOilType: event });
@@ -71,13 +71,13 @@ class RecomendedOil extends React.Component{
 	onChangeGrade(event){
 		let {selectedOilPrice} = this.state;
 		if (event == 'Conventional') {
-			selectedOilPrice = '29.99';
-		}
-		else if (event == 'Synthetic Blend') {
-			selectedOilPrice = '49.99';
+			selectedOilPrice = '69.99';
 		}
 		else if (event == 'Full Synthetic') {
-			selectedOilPrice = '79.99';
+			selectedOilPrice = '89.99';
+		}
+		else if (event == 'Full Synthetic High Mileage') {
+			selectedOilPrice = '89.99';
 		}
 		this.setState({ selectedOilGrade: event, selectedOilPrice });
 	}
@@ -86,52 +86,52 @@ class RecomendedOil extends React.Component{
 		const {vehicleData} = this.state;
 		const text = "Recomended oil For "+vehicleData.make+" "+vehicleData.model+" "+vehicleData.year
 		const total = 'Total $'+this.state.selectedOilPrice
-		let child = <View style={styles.container}>
+		return(
+			<View style={styles.container}>
 			<StatusBar
 		      barStyle="light-content"
 		      backgroundColor="blue"
 		    />
 			<View style={styles.headingCon}>
-				<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={text}/>
-				<FontComponent className="mainSubHeading" style={{fontSize: FONT_BACK_20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>
+				<FontComponent className="mainHeadingTop" style={{fontSize: FONT_BACK_26,textAlign: 'center',fontFamily: 'dosis-bold'}} text={'Select Oil Grade'}/>
+				{/*<FontComponent className="mainSubHeading" style={{fontSize: FONT_BACK_20,textAlign: 'center',fontFamily: 'dosis-medium'}} text="( Select one )"/>*/}
 			</View>
 			<View style={styles.radiobttn}>
 				<ScrollView style={styles.radio}>
 					<View style={{flexDirection: 'row'}}>
-						<View style={{flex: 1}} className="radioCon" >
+						{/*<View style={{flex: 1}} className="radioCon" >
 							<FontComponent className="mainHeading" style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Type"/>
 							{this.state.loading ? <View style={styles.loading}>
 								<Text style={styles.innerLoader}><Image source={require('../../img/loading.gif')} style={styles.last2} /></Text>
 							</View>:<RadioButton list={types} name="oilType" value={this.state.selectedOilType} onSelectValue={this.onChange.bind(this)} className="radioBtn"/>
 							}
 							{types && types.length == 0 && <FontComponent style={{textAlign: 'center',color: '#fff',fontSize: 22,fontFamily: 'dosis-bold'}} text="No OilType to show"/>}
-						</View>
+						</View>*/}
 						<View style={{flex: 1}}>
-							<FontComponent style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>
+							{/*<FontComponent style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>*/}
 							<RadioButton list={this.state.oilGrade} name="oilGrade" value={this.state.selectedOilGrade} onSelectValue={this.onChangeGrade.bind(this)}/>
+							<InputBox placeholder="Oil Grade" />
 						</View>
 					</View>
 				</ScrollView>
 				<View style={styles.img}>
 					{this.state.selectedOilPrice.length != 0 ?<View style={styles.imgView}><FontComponent style={{textAlign: 'center', fontSize: FONT_BACK_20, marginBottom: 10,fontFamily: 'dosis-bold'}} text={total}/></View>: <View style={styles.imgView}></View>}
-					<View style={styles.innerOil}>
+					{/*<View style={styles.innerOil}>
 						<Image source={require('../../img/oiltype.jpeg')} style={styles.imgSize}/>
-					</View>
+					</View>*/}
 				</View>
 			</View>
 			<View style={styles.lastss}>
 				<View style={styles.lasts}>
 					<View style={styles.last4}>
-						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} />
+						<ArrowLeftButton onPress={this.onButtonPress2.bind(this)} onPressWeb={this.onButtonPress2.bind(this)}/>
 					</View>
 					<View style={styles.last4}>
-						<ArrowRightButton onPress={this.onButtonPress.bind(this)} disabled={(this.state.selectedOilType == '') || (this.state.selectedOilGrade == '')} />
+						<ArrowRightButton onPress={this.onButtonPress.bind(this)} onPressWeb={this.onButtonPress.bind(this)} disabled={this.state.selectedOilGrade == ''} />
 					</View>
 				</View>
 			</View>
 		</View>
-		return(
-			<ReactNativeDrawer child={child} history={this.props.history}/>
 		)
 	}
 }

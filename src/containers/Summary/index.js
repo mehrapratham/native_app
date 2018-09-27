@@ -48,6 +48,7 @@ class Summary extends React.Component{
 	onButtonPress() {
 		const { vehicleData, addressData } = this.state;
 		let data = '{year:"'+vehicleData.year+'",make:"'+vehicleData.make+'",model:"'+vehicleData.model+'",mileage:"'+vehicleData.mileage+'",oilType:"'+vehicleData.oilType+'",filterType:"'+vehicleData.filterType+'",street:"'+addressData.street+'",city:"'+addressData.city+'",zip:"'+addressData.zip+'",state:"'+addressData.state+'",time:"'+this.formatDate(vehicleData && vehicleData.timeslot)+ '",date:"'+ vehicleData.timeslot.start +'",oilGrade:"' +vehicleData.oilGrade +'",oilPrice:"' +vehicleData.oilPrice +'",phone:"' + addressData.phone +'"}'
+		console.log(data,4545)
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
@@ -82,7 +83,7 @@ class Summary extends React.Component{
 		this.props.dispatch(confirmOrder(data)).then(res =>{
 			let confirmOrder = JSON.stringify(res)
 			this.props.dispatch(saveToLocalStorage('confirmOrder' , confirmOrder))
-			this.props.history.push('/final-screen');
+			this.props.history.push('/payment-info');
 			return res
 		})
 		let what = 'year='+vehicleData.year+ ', make='+vehicleData.make+ ', model='+vehicleData.model+ ', trim='+vehicleData.trim;
@@ -107,7 +108,7 @@ class Summary extends React.Component{
 		})
 	}
 	onButtonPress2() {
-	  	this.props.history.push('/time-slot');
+	  	this.props.history.push('/recomended-oil');
 	}
 	formatDate(date){
 		if (date) {
