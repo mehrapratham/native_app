@@ -10,7 +10,8 @@ class _CardForm extends React.Component {
     constructor(props) {
     super(props);
       this.state={
-        loading: false
+        loading: false,
+        errormsg: ''
       }
     }
 
@@ -22,8 +23,13 @@ class _CardForm extends React.Component {
           .createToken()
           .then(async(payload) => {
             console.log(payload,1212)
+            if(payload.error){
+              this.setState({loading: false,errormsg: payload.error.message})
+            }
+            this.setState({loading: false})
              if (payload.token) {
               let response = await this.props.payAmount(payload.token.id)
+              this.setState({loading: false})
               if (response) {
                 this.setState({loading: false})
               }
@@ -48,6 +54,7 @@ class _CardForm extends React.Component {
               <CardNumberElement style={{base: {fontSize: '18px', height: 50}}} />
               <CardExpiryElement style={{base: {fontSize: '18px'}}} />
               <CardCVCElement style={{base: {fontSize: '18px'}}} />
+              {this.state.errormsg ?<p style={{textAlign: 'center'}}>{this.state.errormsg}</p>: null}
             </label>
           </View>
           <View>

@@ -34,7 +34,10 @@ class RecomendedOil extends React.Component{
 			vehicleData: {},
 			loading: false,
 			errors: {},
-			oilGrade: ['Conventional', 'Full Synthetic', 'Full Synthetic High Mileage']
+			oilGrade: ['Conventional', 'Full Synthetic', 'Full Synthetic High Mileage'],
+			oilgrade: {
+				inputOilGrade: ''
+			},
 		}
 	}
 	async componentDidMount(){
@@ -81,6 +84,11 @@ class RecomendedOil extends React.Component{
 		}
 		this.setState({ selectedOilGrade: event, selectedOilPrice });
 	}
+	onValueChange(key, event) {
+		let { oilgrade } = this.state;
+		oilgrade[key] = event;
+    this.setState({oilgrade})
+	  }
 	render(){
 		const types = this.props.VehicleForm && this.props.VehicleForm.oilTypeList;
 		const {vehicleData} = this.state;
@@ -110,7 +118,7 @@ class RecomendedOil extends React.Component{
 						<View style={{flex: 1}}>
 							{/*<FontComponent style={{fontSize: FONT_BACK_20, marginLeft: 15, marginBottom: 10,fontFamily: 'dosis-medium'}} text="Select Oil Grade"/>*/}
 							<RadioButton list={this.state.oilGrade} name="oilGrade" value={this.state.selectedOilGrade} onSelectValue={this.onChangeGrade.bind(this)}/>
-							<InputBox placeholder="Oil Grade" />
+							<InputBox type='text' placeholder="Oil Grade" value={this.state.oilgrade.inputOilGrade} onChange={this.onValueChange.bind(this, 'inputOilGrade')} nextkey="done" />
 						</View>
 					</View>
 				</ScrollView>

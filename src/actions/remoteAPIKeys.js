@@ -8,4 +8,4 @@ let stripeLiveKey = 'pk_live_tkGbF6SbHLpyEEuzLiIKAOig'
 
 export const timekitAPI = timekitLive;
 export const defaultResourceId = timekitLiveResource;
-export const stripeKey = stripeTestKey;
+export const stripeKey = stripeLiveKey;

@@ -47,6 +47,8 @@ class Vehicleform extends React.Component{
 				yearData.push(i)
 			}
 			this.setState({yearData})
+			yearData.sort((a, b) => a - b).reverse()
+    		this.setState({ yearData })
 		})
 	
 		let data = await this.props.dispatch(getFromLocalStorage('vehicleData'))
@@ -89,6 +91,7 @@ class Vehicleform extends React.Component{
 	    	vehicle.model = '';
 	    	vehicle.trim = '';
 	    	this.setState({vehicle})
+	    	
 	    }
 	    if(key == 'make'){
 	    	this.setState({currentLoader2: true})
